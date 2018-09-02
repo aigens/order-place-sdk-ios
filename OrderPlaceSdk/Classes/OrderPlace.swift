@@ -1,6 +1,6 @@
 //
 //  OrderPlace.swift
-//  Pods
+//  OrderPlaceSdk
 //
 //  Created by Peter Liu on 2/9/2018.
 //
@@ -12,5 +12,5 @@ public class OrderPlace {
     public static func hello() {
         print("hello world")
     }
-   
+    
 }
