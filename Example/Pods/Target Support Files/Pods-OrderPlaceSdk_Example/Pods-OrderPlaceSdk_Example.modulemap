@@ -1,0 +1,6 @@
+framework module Pods_OrderPlaceSdk_Example {
+  umbrella header "Pods-OrderPlaceSdk_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

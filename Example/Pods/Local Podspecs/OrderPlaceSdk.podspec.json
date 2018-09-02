@@ -1,0 +1,22 @@
+{
+  "name": "OrderPlaceSdk",
+  "version": "0.1.0",
+  "summary": "A short description of OrderPlaceSdk.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Peter Liu/OrderPlaceSdk",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Peter Liu": "peter.liu@aigens.com"
+  },
+  "source": {
+    "git": "https://github.com/Peter Liu/OrderPlaceSdk.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "OrderPlaceSdk/Classes/**/*"
+}
