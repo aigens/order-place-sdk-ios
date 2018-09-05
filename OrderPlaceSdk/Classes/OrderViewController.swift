@@ -15,6 +15,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var webView: WKWebView!;
     var url: String!;
     var features: String!;
+    
+    var configService: ConfigService!;
    
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style")
@@ -40,9 +42,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         let userContentController = WKUserContentController()
         
-        
-        //TODO user better object name
-        userContentController.add(self, name: "test")
+        self.configService = ConfigService()
+        userContentController.add(self, name: "ConfigService")
         
         webConfiguration.userContentController = userContentController
         
@@ -79,6 +80,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         print("message", message.body)
+        
+        if("ConfigService" == message.name){
+            
+            self.configService.handleMessage(method: "back", body: message.body, callback: nil);
+            
+        }
         
     }
 }
