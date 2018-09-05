@@ -32,9 +32,9 @@ OrderPlaceSdk for embed Mobile Ordering into your apps.
 
   s.source_files = 'OrderPlaceSdk/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'OrderPlaceSdk' => ['OrderPlaceSdk/Assets/*.png']
-  # }
+  s.resource_bundles = {
+      'OrderPlaceSdk' => ['OrderPlaceSdk/Classes/**/*.{storyboard,xib}']
+  }
 
   s.swift_version = '4.1'
 

@@ -142,6 +142,8 @@
 		CC115D17662ACC4FD75BF5B2E1C4246E /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3240723E01763156474E22F05498557E /* Predicate.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		CE79A578AE36B501D9152516EB4D0BCF /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB91EE2B34BCD507A8EAF07F231C380 /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05CAE45213C1DA500521975 /* OrderPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05CAE44213C1DA500521975 /* OrderPlace.swift */; };
+		D0A1A091213FA690003074EA /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A1A090213FA690003074EA /* OrderPlaceStoryboard.storyboard */; };
+		D0A1A094213FA72D003074EA /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1A093213FA72D003074EA /* OrderViewController.swift */; };
 		D376D83966E540E41BEBBEE5CE533268 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 40BD6C92C04852276647CF58AD53276A /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D52E05E2535A1F75E8A6600BDE20B5D4 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0899F1B4CA18747F7A62B6CA14F9ED /* Configuration.swift */; };
 		D749C5676EBDDDFE68A4A335989501FC /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB37EB7FD8BBAE989114934A1AABD6C7 /* BeLessThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -400,6 +402,8 @@
 		CCE425BCFF433709EF78844B6E3F6B53 /* BeAKindOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeAKindOf.swift; path = Sources/Nimble/Matchers/BeAKindOf.swift; sourceTree = "<group>"; };
 		CF88E6735205FFA9E084C8F4CE1EE2A9 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05CAE44213C1DA500521975 /* OrderPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderPlace.swift; path = OrderPlaceSdk/Classes/OrderPlace.swift; sourceTree = "<group>"; };
+		D0A1A090213FA690003074EA /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = OrderPlaceStoryboard.storyboard; path = OrderPlaceSdk/Classes/OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
+		D0A1A093213FA72D003074EA /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderViewController.swift; path = OrderPlaceSdk/Classes/OrderViewController.swift; sourceTree = "<group>"; };
 		D18C2A53134FEDDD80B6D431CA482157 /* UIImage+Snapshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Snapshot.h"; path = "FBSnapshotTestCase/Categories/UIImage+Snapshot.h"; sourceTree = "<group>"; };
 		D20712BF889E8F3E37D4075A45B3047E /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
 		D23B667DFD8E75D7AB4C30355EA4EFB0 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Quick/Filter.swift; sourceTree = "<group>"; };
@@ -746,6 +750,8 @@
 		903B2542DA2034A7A675B86FB04CDE46 /* OrderPlaceSdk */ = {
 			isa = PBXGroup;
 			children = (
+				D0A1A092213FA704003074EA /* ViewControllers */,
+				D0A1A08F213FA62D003074EA /* UI */,
 				D05CAE43213C1D3300521975 /* Base */,
 				A2EF0F3D22138E12491301135BE7B6F3 /* ReplaceMe.swift */,
 				9B76CF5FF198FA9415F31421ECC3854F /* Pod */,
@@ -803,6 +809,22 @@
 				D05CAE44213C1DA500521975 /* OrderPlace.swift */,
 			);
 			name = Base;
+			sourceTree = "<group>";
+		};
+		D0A1A08F213FA62D003074EA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D0A1A090213FA690003074EA /* OrderPlaceStoryboard.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		D0A1A092213FA704003074EA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D0A1A093213FA72D003074EA /* OrderViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		E57B0B627473253F6AB1D52E7E2088D9 /* SwiftSupport */ = {
@@ -1185,6 +1207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A1A091213FA690003074EA /* OrderPlaceStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,6 +1329,7 @@
 				D05CAE45213C1DA500521975 /* OrderPlace.swift in Sources */,
 				1280B0960D823700153826D2848FC988 /* OrderPlaceSdk-dummy.m in Sources */,
 				6CE73A96C140949336DBA498E41C09BD /* ReplaceMe.swift in Sources */,
+				D0A1A094213FA72D003074EA /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
