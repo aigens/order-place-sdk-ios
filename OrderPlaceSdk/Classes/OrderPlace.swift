@@ -14,6 +14,10 @@ public class OrderPlace {
         print("hello world")
     }
     
+    public static func hello2() {
+        print("hello world2")
+    }
+    
     public static func openUrl(caller:UIViewController, url: String){
     
         let podBundle = Bundle(for: OrderPlace.self)
@@ -22,9 +26,15 @@ public class OrderPlace {
         //let bundle = Bundle(url: bundleURL!)!
         
         let storyboard = UIStoryboard(name: "OrderPlaceStoryboard", bundle: podBundle)
-        let controller = storyboard.instantiateViewController(withIdentifier: "OrderViewController")
-        caller.present(controller, animated: true, completion: nil)
+        
+        //let controller = storyboard.instantiateViewController(withIdentifier: "OrderViewController")
+        //caller.present(controller, animated: true, completion: nil)
     
+        let controller = storyboard.instantiateInitialViewController()!;
+        caller.present(controller, animated: true, completion: nil)
+        
+        
+        print("presented open url")
     
     
     

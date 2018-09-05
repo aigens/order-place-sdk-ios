@@ -143,7 +143,7 @@
 		CE79A578AE36B501D9152516EB4D0BCF /* QCKDSL.h in Headers */ = {isa = PBXBuildFile; fileRef = BFB91EE2B34BCD507A8EAF07F231C380 /* QCKDSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D05CAE45213C1DA500521975 /* OrderPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05CAE44213C1DA500521975 /* OrderPlace.swift */; };
 		D0A1A091213FA690003074EA /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A1A090213FA690003074EA /* OrderPlaceStoryboard.storyboard */; };
-		D0A1A094213FA72D003074EA /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1A093213FA72D003074EA /* OrderViewController.swift */; };
+		D0A1A098213FB84A003074EA /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1A093213FA72D003074EA /* OrderViewController.swift */; };
 		D376D83966E540E41BEBBEE5CE533268 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 40BD6C92C04852276647CF58AD53276A /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D52E05E2535A1F75E8A6600BDE20B5D4 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0899F1B4CA18747F7A62B6CA14F9ED /* Configuration.swift */; };
 		D749C5676EBDDDFE68A4A335989501FC /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB37EB7FD8BBAE989114934A1AABD6C7 /* BeLessThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -1329,7 +1329,7 @@
 				D05CAE45213C1DA500521975 /* OrderPlace.swift in Sources */,
 				1280B0960D823700153826D2848FC988 /* OrderPlaceSdk-dummy.m in Sources */,
 				6CE73A96C140949336DBA498E41C09BD /* ReplaceMe.swift in Sources */,
-				D0A1A094213FA72D003074EA /* OrderViewController.swift in Sources */,
+				D0A1A098213FB84A003074EA /* OrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

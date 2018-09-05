@@ -6,13 +6,59 @@
 //
 
 import Foundation
+import UIKit
+import WebKit
 
-
-class OrderViewController: UIViewController {
+public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
-    override func viewDidAppear(_ animated: Bool) {
+    @IBOutlet weak var viewContainer: UIView!
+    var webView: WKWebView!;
+    
+    public static func hello() {
+        print("hello OrderViewController")
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        print("init coder style")
+        super.init(coder: aDecoder)
+       
+    }
+    
+    @IBAction func exitClicked(_ sender: Any) {
+    
+        print("exit clicked2")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
         
-        print("OrderViewController viewDidAppear")
+        print("OrderViewController viewDidLoad")
         
+        
+        let webConfiguration = WKWebViewConfiguration()
+        let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
+        self.webView = WKWebView (frame: customFrame , configuration: webConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        print(customFrame)
+        
+        self.viewContainer.addSubview(webView)
+       
+        
+        webView.uiDelegate = self
+        webView.navigationDelegate = self;
+        
+        let myURL = URL(string:"https://aigens-sdk-demo.firebaseapp.com/")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+        
+        print("loading url")
+ 
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+        print("finish url");
     }
 }
