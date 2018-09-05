@@ -13,11 +13,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
-    
-    public static func hello() {
-        print("hello OrderViewController")
-    }
-    
+    var url: String!;
+   
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style")
         super.init(coder: aDecoder)
@@ -54,11 +51,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.uiDelegate = self
         webView.navigationDelegate = self;
         
-        let myURL = URL(string:"https://aigens-sdk-demo.firebaseapp.com/")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
+        if(self.url != nil){
+            let myURL = URL(string:url)
+            let myRequest = URLRequest(url: myURL!)
+            webView.load(myRequest)
+            print("loading url")
+        }
         
-        print("loading url")
  
     }
     

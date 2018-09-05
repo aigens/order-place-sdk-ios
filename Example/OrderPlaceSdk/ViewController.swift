@@ -15,9 +15,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        OrderPlace.hello()
-        OrderPlace.hello2()
-        OrderViewController.hello();
     }
 
     override func didReceiveMemoryWarning() {
