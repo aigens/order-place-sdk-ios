@@ -27,7 +27,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     @IBAction func exitClicked(_ sender: Any) {
     
         print("exit clicked2")
-        self.navigationController?.popViewController(animated: true)
+        //self.navigationController?.popViewController(animated: true)
+        self.navigationController?.dismiss(animated: true)
     }
     
     
