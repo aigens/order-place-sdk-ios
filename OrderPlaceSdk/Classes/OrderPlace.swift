@@ -11,7 +11,7 @@ import UIKit
 public class OrderPlace {
     
 
-    public static func openUrl(caller:UIViewController, url: String){
+    public static func openUrl(caller:UIViewController, url: String, features: String){
     
         let podBundle = Bundle(for: OrderPlace.self)
         
@@ -22,10 +22,11 @@ public class OrderPlace {
         let orderVC = controller.topViewController as! OrderViewController;
         
         orderVC.url = url;
+        orderVC.features = features;
         
         caller.present(controller, animated: true, completion: nil)
         
-        print("presented open url")
+        print("presented open url", url, features)
     
     
     

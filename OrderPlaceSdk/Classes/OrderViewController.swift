@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 import WebKit
 
-public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
     var url: String!;
+    var features: String!;
    
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style")
@@ -36,6 +37,16 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         
         let webConfiguration = WKWebViewConfiguration()
+        
+        let userContentController = WKUserContentController()
+        
+        
+        //TODO user better object name
+        userContentController.add(self, name: "test")
+        
+        webConfiguration.userContentController = userContentController
+        
+        
         let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
         self.webView = WKWebView (frame: customFrame , configuration: webConfiguration)
         
@@ -63,5 +74,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         print("finish url");
+    }
+    
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
+        print("message", message.body)
+        
     }
 }
