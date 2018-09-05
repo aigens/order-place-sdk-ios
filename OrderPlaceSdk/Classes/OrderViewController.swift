@@ -40,6 +40,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         let webConfiguration = WKWebViewConfiguration()
         let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
         self.webView = WKWebView (frame: customFrame , configuration: webConfiguration)
+        
+        self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
         webView.translatesAutoresizingMaskIntoConstraints = false
         
         print(customFrame)
