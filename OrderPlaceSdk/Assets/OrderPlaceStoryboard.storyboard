@@ -52,7 +52,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rQZ-rL-dUC">
             <objects>
-                <navigationController id="Ohi-ae-13O" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OrderPlaceStoryboard" id="Ohi-ae-13O" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fet-uS-pCE">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
