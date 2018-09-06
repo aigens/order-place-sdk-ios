@@ -19,7 +19,19 @@ public class OrderPlace {
         
         print("podBundle", podBundle.bundlePath)
         
-        let storyboard = UIStoryboard(name: "OrderPlaceStoryboard", bundle: podBundle)
+        let bundleURL = podBundle.url(forResource: "OrderPlaceSdk", withExtension: "bundle")
+        
+        print("bundleURL", bundleURL)
+        
+        var bundle = podBundle
+        
+        if(bundleURL != nil){
+            bundle = Bundle(url: bundleURL!)!
+        }
+        
+        //let bundle = Bundle(url: bundleURL!)
+        
+        let storyboard = UIStoryboard(name: "OrderPlaceStoryboard", bundle: bundle)
       
         print("storyboard", storyboard)
         
