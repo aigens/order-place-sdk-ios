@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         
         var url = "https://aigens-sdk-demo.firebaseapp.com/";
         
-        url = "http://192.168.86.30:8100/";
+        url = "http://192.168.86.52:8100/";
         
         OrderPlace.openUrl(caller: self, url: url, features:"gps,scan");
     }

@@ -8,6 +8,18 @@
 import Foundation
 import WebKit
 
-protocol OrderPlaceService {
-    func handleMessage(method: String, body: Any, callback: CallbackHandler?) 
+public class OrderPlaceService {
+    
+    public var vc: UIViewController!;
+    
+    func getServiceName() -> String{
+        preconditionFailure("This method getServiceName must be overridden")
+        //return "";
+    }
+    
+    
+    func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?){
+        preconditionFailure("This method handleMessage must be overridden")
+        //return;
+    }
 }

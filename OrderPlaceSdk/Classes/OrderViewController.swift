@@ -16,12 +16,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var url: String!;
     var features: String!;
     
-    var configService: ConfigService!;
-   
+    //var configService: ConfigService!;
+    var serciceMap: [String: OrderPlaceService] = [:]
+    
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style")
         super.init(coder: aDecoder)
-       
     }
     
     @IBAction func exitClicked(_ sender: Any) {
@@ -42,8 +42,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         let userContentController = WKUserContentController()
         
-        self.configService = ConfigService()
-        userContentController.add(self, name: "ConfigService")
+        //self.configService = ConfigService()
+        //userContentController.add(self, name: "ConfigService")
+        self.addService(service: ConfigService(), controller: userContentController)
+        
         
         webConfiguration.userContentController = userContentController
         
@@ -73,6 +75,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
  
     }
     
+    func addService(service: OrderPlaceService, controller: WKUserContentController){
+        let serviceName = service.getServiceName();
+        self.serciceMap[serviceName] = service;
+        service.vc = self;
+        
+        controller.add(self, name: serviceName)
+    }
+    
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         print("finish url");
     }
@@ -81,11 +91,79 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         print("message", message.body)
         
+        /*
         if("ConfigService" == message.name){
             
             self.configService.handleMessage(method: "back", body: message.body, callback: nil);
             
+        }*/
+        let serviceName = message.name;
+        let service = self.serciceMap[serviceName];
+        if(service != nil){
+            let body = message.body as! NSDictionary;
+            let method = body["_method"] as! String;
+            let handler = CallbackHandler()
+            let callback = body["_callback"] as? String;
+            handler.callback = callback;
+            handler.webView = webView;
+            handler.cc = userContentController;
+            service?.handleMessage(method: method, body: body, callback: handler)
+        }else{
+            print("service not registered", serviceName)
         }
         
+    }
+    
+    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping () -> Void) {
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            completionHandler()
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (Bool) -> Void) {
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            completionHandler(true)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            completionHandler(false)
+        }))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (String?) -> Void) {
+        
+        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .actionSheet)
+        
+        alertController.addTextField { (textField) in
+            textField.text = defaultText
+        }
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+            if let text = alertController.textFields?.first?.text {
+                completionHandler(text)
+            } else {
+                completionHandler(defaultText)
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
+            completionHandler(nil)
+        }))
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
