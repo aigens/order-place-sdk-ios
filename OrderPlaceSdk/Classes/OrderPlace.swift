@@ -35,7 +35,8 @@ public class OrderPlace {
       
         print("storyboard", storyboard)
         
-        let controller = storyboard.instantiateInitialViewController() as! UINavigationController;
+        //let controller = storyboard.instantiateInitialViewController() as! UINavigationController;
+        let controller = storyboard.instantiateViewController(withIdentifier: "OrderViewControllerNav") as! UINavigationController;
         
         let orderVC = controller.topViewController as! OrderViewController;
         
