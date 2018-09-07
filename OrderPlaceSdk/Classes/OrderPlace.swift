@@ -10,10 +10,7 @@ import UIKit
 
 public class OrderPlace {
     
-
-    public static func openUrl(caller:UIViewController, url: String, features: String){
-    
-        print("open url")
+    private static func makeViewController(vcId: String) -> UIViewController{
         
         let podBundle = Bundle(for: OrderPlace.self)
         
@@ -21,36 +18,54 @@ public class OrderPlace {
         
         let bundleURL = podBundle.url(forResource: "OrderPlaceSdk", withExtension: "bundle")
         
-        print("bundleURL", bundleURL)
-        
         var bundle = podBundle
         
         if(bundleURL != nil){
             bundle = Bundle(url: bundleURL!)!
         }
         
-        //let bundle = Bundle(url: bundleURL!)
-        
         let storyboard = UIStoryboard(name: "OrderPlaceStoryboard", bundle: bundle)
-      
+        
         print("storyboard", storyboard)
         
-        //let controller = storyboard.instantiateInitialViewController() as! UINavigationController;
-        let controller = storyboard.instantiateViewController(withIdentifier: "OrderViewControllerNav") as! UINavigationController;
+        let controller = storyboard.instantiateViewController(withIdentifier: vcId);
+        
+        
+        return controller;
+        
+    }
+
+    public static func openUrl(caller:UIViewController, url: String, features: String){
+    
+        print("open url")
+        
+        let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
         
         let orderVC = controller.topViewController as! OrderViewController;
         
         orderVC.url = url;
         orderVC.features = features;
         
-        print("before open url", url, features)
+        caller.present(controller, animated: true, completion: nil)
+        
+    }
+    
+    public static func scan(caller:UIViewController, features: String){
+        
+        print("open url")
+        
+        let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
+        
+        /*
+        let orderVC = controller.topViewController as! OrderViewController;
+        
+        orderVC.url = url;
+        orderVC.features = features;
+        */
+        
         
         caller.present(controller, animated: true, completion: nil)
         
-        print("presented open url", url, features)
-    
-    
-    
     }
     
 }

@@ -30,5 +30,10 @@ class ViewController: UIViewController {
         OrderPlace.openUrl(caller: self, url: url, features:"gps,scan");
     }
     
+    @IBAction func scanClicked(_ sender: Any) {
+        
+        OrderPlace.scan(caller: self, features:"gps,scan");
+    }
+    
 }
 
