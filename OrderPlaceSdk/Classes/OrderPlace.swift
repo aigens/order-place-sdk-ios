@@ -52,17 +52,11 @@ public class OrderPlace {
     
     public static func scan(caller:UIViewController, features: String){
         
-        print("open url")
-        
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
         
-        /*
-        let orderVC = controller.topViewController as! OrderViewController;
+        let scanVC = controller.topViewController as! ScannerViewController;
         
-        orderVC.url = url;
-        orderVC.features = features;
-        */
-        
+        scanVC.features = features;
         
         caller.present(controller, animated: true, completion: nil)
         

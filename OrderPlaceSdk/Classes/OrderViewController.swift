@@ -166,4 +166,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
 }

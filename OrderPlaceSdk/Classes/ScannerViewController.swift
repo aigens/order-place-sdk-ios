@@ -10,8 +10,11 @@ import AVFoundation
 import UIKit
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var features: String!
+    var url: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,13 +122,36 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             found(code: readableObject.stringValue!);
         }
         
-        dismiss(animated: true)
+        //dismiss(animated: true)
     }
 
     
     
     func found(code: String) {
         print(code)
+        
+        if(code.starts(with: "http")){
+            self.url = code
+            self.performSegue(withIdentifier: "Scan2Order", sender: self)
+        }
+        
+        
+        
+        //orderVC.url = url;
+        //orderVC.features = features;
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)  {
+        
+        if(self.url == nil){
+            return
+        }
+        
+        if segue.identifier == "Scan2Order" {
+            let controller = segue.destination as! OrderViewController
+            controller.url = self.url
+            controller.features = self.features
+        }
     }
     
     override var prefersStatusBarHidden: Bool {

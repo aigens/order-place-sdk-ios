@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdH-ti-H6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1138.4000000000001" y="777.66116941529242"/>
+            <point key="canvasLocation" x="-604" y="796"/>
         </scene>
         <!--Scanner View Controller-->
         <scene sceneID="pn4-t0-k9s">
@@ -69,10 +69,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="paw-ot-egZ" kind="show" identifier="Scan2Order" id="fwc-AE-945"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kl0-2f-gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1138" y="1457"/>
+            <point key="canvasLocation" x="-1138" y="1502"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rQZ-rL-dUC">
@@ -106,7 +109,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9P-Cc-141" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2015" y="1457"/>
+            <point key="canvasLocation" x="-2015" y="1502"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fwc-AE-945"/>
+    </inferredMetricsTieBreakers>
 </document>
