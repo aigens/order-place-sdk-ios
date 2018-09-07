@@ -148,6 +148,7 @@
 		D0A1A09F213FE58C003074EA /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1A09E213FE58C003074EA /* ConfigService.swift */; };
 		D0A1A0A1213FE69D003074EA /* CallbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A1A0A0213FE69D003074EA /* CallbackHandler.swift */; };
 		D0E3607E214226E200A7EF6C /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E3607D214226E200A7EF6C /* ScannerViewController.swift */; };
+		D0E3608021423BF100A7EF6C /* GpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E3607F21423BF100A7EF6C /* GpsService.swift */; };
 		D376D83966E540E41BEBBEE5CE533268 /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = 40BD6C92C04852276647CF58AD53276A /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D52E05E2535A1F75E8A6600BDE20B5D4 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0899F1B4CA18747F7A62B6CA14F9ED /* Configuration.swift */; };
 		D749C5676EBDDDFE68A4A335989501FC /* BeLessThan.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB37EB7FD8BBAE989114934A1AABD6C7 /* BeLessThan.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -412,6 +413,7 @@
 		D0A1A09E213FE58C003074EA /* ConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfigService.swift; path = OrderPlaceSdk/Classes/ConfigService.swift; sourceTree = "<group>"; };
 		D0A1A0A0213FE69D003074EA /* CallbackHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CallbackHandler.swift; path = OrderPlaceSdk/Classes/CallbackHandler.swift; sourceTree = "<group>"; };
 		D0E3607D214226E200A7EF6C /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScannerViewController.swift; path = OrderPlaceSdk/Classes/ScannerViewController.swift; sourceTree = "<group>"; };
+		D0E3607F21423BF100A7EF6C /* GpsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GpsService.swift; path = OrderPlaceSdk/Classes/GpsService.swift; sourceTree = "<group>"; };
 		D18C2A53134FEDDD80B6D431CA482157 /* UIImage+Snapshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Snapshot.h"; path = "FBSnapshotTestCase/Categories/UIImage+Snapshot.h"; sourceTree = "<group>"; };
 		D20712BF889E8F3E37D4075A45B3047E /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
 		D23B667DFD8E75D7AB4C30355EA4EFB0 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Quick/Filter.swift; sourceTree = "<group>"; };
@@ -843,6 +845,7 @@
 				D0A1A09C213FE571003074EA /* OrderPlaceService.swift */,
 				D0A1A09E213FE58C003074EA /* ConfigService.swift */,
 				D0A1A0A0213FE69D003074EA /* CallbackHandler.swift */,
+				D0E3607F21423BF100A7EF6C /* GpsService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1346,6 +1349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E3608021423BF100A7EF6C /* GpsService.swift in Sources */,
 				D05CAE45213C1DA500521975 /* OrderPlace.swift in Sources */,
 				D0A1A0A1213FE69D003074EA /* CallbackHandler.swift in Sources */,
 				D0A1A09D213FE571003074EA /* OrderPlaceService.swift in Sources */,

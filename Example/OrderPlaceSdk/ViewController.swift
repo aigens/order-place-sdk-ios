@@ -27,6 +27,9 @@ class ViewController: UIViewController {
         
         url = "http://192.168.86.52:8100/";
         
+        //var services = [GpsService()]
+        
+        //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
         OrderPlace.openUrl(caller: self, url: url, features:"gps,scan");
     }
     

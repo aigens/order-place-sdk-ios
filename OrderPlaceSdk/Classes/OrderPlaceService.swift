@@ -8,7 +8,7 @@
 import Foundation
 import WebKit
 
-public class OrderPlaceService {
+public class OrderPlaceService : NSObject {
     
     public var vc: UIViewController!;
     
@@ -17,6 +17,9 @@ public class OrderPlaceService {
         //return "";
     }
     
+    func initialize(){
+        
+    }
     
     func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?){
         preconditionFailure("This method handleMessage must be overridden")

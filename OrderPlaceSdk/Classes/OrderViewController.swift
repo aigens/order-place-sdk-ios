@@ -16,8 +16,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var url: String!;
     var features: String!;
     
-    //var configService: ConfigService!;
     var serciceMap: [String: OrderPlaceService] = [:]
+    var extraServices: Array<OrderPlaceService>!;
     
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style")
@@ -45,6 +45,15 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         //self.configService = ConfigService()
         //userContentController.add(self, name: "ConfigService")
         self.addService(service: ConfigService(), controller: userContentController)
+        
+        self.addFeatures(controller: userContentController)
+        
+        if(self.extraServices != nil){
+            for service in self.extraServices{
+                self.addService(service: service, controller: userContentController)
+            }
+        }
+        
         
         
         webConfiguration.userContentController = userContentController
@@ -80,7 +89,40 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         self.serciceMap[serviceName] = service;
         service.vc = self;
         
+        service.initialize()
+        
         controller.add(self, name: serviceName)
+    }
+    
+    func addFeatures(controller: WKUserContentController){
+        
+        let fs = self.features.split(separator: ",")
+        
+        for f in fs{
+            
+            let service = self.makeService(feature: String(f))
+            if(service != nil){
+                self.addService(service: service!, controller: controller)
+            }
+            
+        }
+        
+        
+    }
+    
+    func makeService(feature: String) -> OrderPlaceService!{
+        
+        switch(feature){
+            
+            case "gps":
+                return GpsService()
+            
+            default:
+                break;
+        }
+        
+        return nil;
+        
     }
     
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){

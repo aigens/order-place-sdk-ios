@@ -50,6 +50,25 @@ public class OrderPlace {
         
     }
     
+    public static func openUrl(caller:UIViewController, url: String, features: String, services: Array<OrderPlaceService>){
+        
+        print("open url")
+        
+        let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
+        
+        let orderVC = controller.topViewController as! OrderViewController;
+        
+        orderVC.url = url;
+        orderVC.features = features;
+        orderVC.extraServices = services;
+        
+        caller.present(controller, animated: true, completion: nil)
+        
+        
+        openUrl(caller: caller, url: url, features: features)
+        
+    }
+    
     public static func scan(caller:UIViewController, features: String){
         
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
@@ -61,5 +80,7 @@ public class OrderPlace {
         caller.present(controller, animated: true, completion: nil)
         
     }
+    
+    
     
 }

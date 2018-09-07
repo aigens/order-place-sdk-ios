@@ -52,15 +52,6 @@ class ConfigService: OrderPlaceService {
         
         print("getPref", name, value)
         
-        /*
-        do{
-            var data = try JSONSerialization.data(withJSONObject: value, options: JSONSerialization.WritingOptions.prettyPrinted)
-            var str = String(data: data, encoding: String.Encoding.utf8)!
-            print("json", str)
-            callback?.success(string: str)
-        }catch{
-            print("json serialization error")
-        }*/
         
         callback?.success(response: value)
         
