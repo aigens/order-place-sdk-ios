@@ -13,7 +13,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-    var features: String!
+    var options: [String:Any]!
     var url: String!
     
     override func viewDidLoad() {
@@ -150,7 +150,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if segue.identifier == "Scan2Order" {
             let controller = segue.destination as! OrderViewController
             controller.url = self.url
-            controller.features = self.features
+            controller.options = self.options
         }
     }
     

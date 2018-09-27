@@ -11,7 +11,7 @@ import WebKit
 
 class ConfigService: OrderPlaceService {
     
-
+    var options: [String: Any]!;
     
     override func getServiceName() -> String{
         return "ConfigService";
@@ -19,7 +19,7 @@ class ConfigService: OrderPlaceService {
     
     override func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
         
-        print("ConfigService", method, body)
+        print("ConfigService2", method, body)
         
         switch method{
             case "back":
@@ -30,6 +30,9 @@ class ConfigService: OrderPlaceService {
                 break;
             case "getConfig":
                 getConfig(callback: callback);
+                break;
+            case "getParams":
+                getParams(callback: callback);
                 break;
             case "putPreference":
                 putPreference(pref:"default", name:body["name"] as! String, value:body["value"] as Any, callback: callback);
@@ -50,10 +53,21 @@ class ConfigService: OrderPlaceService {
         
         let value = UserDefaults.standard.object(forKey: name)
         
-        print("getPref", name, value)
+        print("getPref", name, value as Any)
         
         
-        callback?.success(response: value)
+        callback?.success(response: value as Any)
+        
+        
+    }
+    
+    func getParams(callback: CallbackHandler?){
+        
+        let value = self.options;
+        
+        print("getParams2", value as Any)
+        
+        callback?.success(response: value as Any)
         
         
     }

@@ -35,7 +35,7 @@ public class OrderPlace {
         
     }
 
-    public static func openUrl(caller:UIViewController, url: String, features: String){
+    public static func openUrl(caller:UIViewController, url: String, options: [String:Any]){
     
         print("open url")
         
@@ -44,13 +44,13 @@ public class OrderPlace {
         let orderVC = controller.topViewController as! OrderViewController;
         
         orderVC.url = url;
-        orderVC.features = features;
+        orderVC.options = options;
         
         caller.present(controller, animated: true, completion: nil)
         
     }
     
-    public static func openUrl(caller:UIViewController, url: String, features: String, services: Array<OrderPlaceService>){
+    public static func openUrl(caller:UIViewController, url: String, options: [String:Any], services: Array<OrderPlaceService>){
         
         print("open url")
         
@@ -59,23 +59,23 @@ public class OrderPlace {
         let orderVC = controller.topViewController as! OrderViewController;
         
         orderVC.url = url;
-        orderVC.features = features;
+        orderVC.options = options;
         orderVC.extraServices = services;
         
         caller.present(controller, animated: true, completion: nil)
         
         
-        openUrl(caller: caller, url: url, features: features)
+        openUrl(caller: caller, url: url, options: options)
         
     }
     
-    public static func scan(caller:UIViewController, features: String){
+    public static func scan(caller:UIViewController, options: [String:Any]){
         
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
         
         let scanVC = controller.topViewController as! ScannerViewController;
         
-        scanVC.features = features;
+        scanVC.options = options;
         
         caller.present(controller, animated: true, completion: nil)
         

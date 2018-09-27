@@ -14,13 +14,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
     var url: String!;
-    var features: String!;
+    var options: [String: Any]!;
     
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
     
     public required init?(coder aDecoder: NSCoder) {
-        print("init coder style")
+        print("init coder style2")
         super.init(coder: aDecoder)
     }
     
@@ -35,16 +35,17 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("OrderViewController viewDidLoad")
-        
+        print("OrderViewController viewDidLoad2")
+        print("options", self.options)
         
         let webConfiguration = WKWebViewConfiguration()
         
         let userContentController = WKUserContentController()
         
-        //self.configService = ConfigService()
-        //userContentController.add(self, name: "ConfigService")
-        self.addService(service: ConfigService(), controller: userContentController)
+        let configService = ConfigService()
+        configService.options = self.options;
+        
+        self.addService(service: configService, controller: userContentController)
         
         self.addFeatures(controller: userContentController)
         
@@ -96,7 +97,17 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     
     func addFeatures(controller: WKUserContentController){
         
-        let fs = self.features.split(separator: ",")
+        if(self.options == nil){
+            return;
+        }
+        
+        let features = self.options["features"] as? String;
+        
+        if(features == nil){
+            return;
+        }
+        
+        let fs = features!.split(separator: ",")
         
         for f in fs{
             
