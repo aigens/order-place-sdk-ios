@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         
         //var services = [GpsService()]
         
-        let options = ["features": "gps,scan"];
+        let options = ["features": "gps,scan,alipay,wechatpay"];
         
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
         OrderPlace.openUrl(caller: self, url: url, options:options);

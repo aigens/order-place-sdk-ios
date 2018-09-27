@@ -22,23 +22,23 @@ class ConfigService: OrderPlaceService {
         print("ConfigService2", method, body)
         
         switch method{
-            case "back":
-                back();
-                break;
-            case "getPreference":
-                getPreference(pref:"default", name:body["name"] as! String, callback: callback);
-                break;
-            case "getConfig":
-                getConfig(callback: callback);
-                break;
-            case "getParams":
-                getParams(callback: callback);
-                break;
-            case "putPreference":
-                putPreference(pref:"default", name:body["name"] as! String, value:body["value"] as Any, callback: callback);
-                break;
-            default:
-                break;
+        case "back":
+            back();
+            break;
+        case "getPreference":
+            getPreference(pref:"default", name:body["name"] as! String, callback: callback);
+            break;
+        case "getConfig":
+            getConfig(callback: callback);
+            break;
+        case "getParams":
+            getParams(callback: callback);
+            break;
+        case "putPreference":
+            putPreference(pref:"default", name:body["name"] as! String, value:body["value"] as Any, callback: callback);
+            break;
+        default:
+            break;
             
         }
         
@@ -87,6 +87,7 @@ class ConfigService: OrderPlaceService {
         print("putPreference", name, value)
         
     }
-
+    
     
 }
+

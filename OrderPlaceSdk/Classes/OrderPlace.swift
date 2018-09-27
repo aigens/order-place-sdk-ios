@@ -8,9 +8,19 @@
 import Foundation
 import UIKit
 
+
+protocol OrderPlaceDelegate :AnyObject{
+    
+    func applicationOpenUrl(_ app: UIApplication, url: URL)
+    //@objc optional func clicked() //optional
+}
+
+
 public class OrderPlace {
     
-    private static func makeViewController(vcId: String) -> UIViewController{
+    static weak var OPDelegate: OrderPlaceDelegate?
+    
+    public static func makeViewController(vcId: String) -> UIViewController{
         
         let podBundle = Bundle(for: OrderPlace.self)
         
@@ -38,13 +48,14 @@ public class OrderPlace {
     public static func openUrl(caller:UIViewController, url: String, options: [String:Any]){
     
         print("open url")
-        
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
         
         let orderVC = controller.topViewController as! OrderViewController;
         
         orderVC.url = url;
         orderVC.options = options;
+        
+        self.OPDelegate = orderVC
         
         caller.present(controller, animated: true, completion: nil)
         
@@ -61,6 +72,8 @@ public class OrderPlace {
         orderVC.url = url;
         orderVC.options = options;
         orderVC.extraServices = services;
+
+        self.OPDelegate = orderVC
         
         caller.present(controller, animated: true, completion: nil)
         
@@ -69,7 +82,7 @@ public class OrderPlace {
         
     }
     
-    public static func scan(caller:UIViewController, options: [String:Any]){
+    public static func scan(caller:UIViewController, options: [String:Any]) {
         
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
         
@@ -81,6 +94,17 @@ public class OrderPlace {
         
     }
     
+    public static func application(_ app: UIApplication, open url: URL) {
+        if let del = OPDelegate {
+            del.applicationOpenUrl(app, url: url)
+        }
+    }
+    public static func applicationDidFinishLaunching(_ application: UIApplication, launchOptions: [UIApplicationLaunchOptionsKey: Any]?, appId: String?) {
+        print("appId:\(appId) ")
+        if (appId != nil) {
+            WXApi.registerApp(appId!)
+        }
+    }
     
     
 }
