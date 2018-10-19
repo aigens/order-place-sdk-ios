@@ -10,14 +10,12 @@ PODS:
   - Nimble-Snapshots/Core (6.3.0):
     - FBSnapshotTestCase (~> 2.0)
     - Nimble (~> 7.0)
-  - OrderPlaceSdk (0.1.0)
   - Quick (1.2.0)
 
 DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
   - Nimble (~> 7.0.2)
   - Nimble-Snapshots (~> 6.3.0)
-  - OrderPlaceSdk (from `../`)
   - Quick (~> 1.2.0)
 
 SPEC REPOS:
@@ -27,17 +25,12 @@ SPEC REPOS:
     - Nimble-Snapshots
     - Quick
 
-EXTERNAL SOURCES:
-  OrderPlaceSdk:
-    :path: "../"
-
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Nimble-Snapshots: f5459b5b091678dc942d03ec4741cacb58ba4a52
-  OrderPlaceSdk: 031fb080da00766ff594e1e0f39404ee63426180
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
 
-PODFILE CHECKSUM: 710f4f17bb7caa43c5198b1e7a50089d3aad4d1b
+PODFILE CHECKSUM: 4e8de68d780e0cfce79c6ca074a890c971954f2c
 
 COCOAPODS: 1.5.3

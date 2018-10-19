@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import OrderPlaceSdk
 
 class ViewController: UIViewController {
 
@@ -17,19 +16,18 @@ class ViewController: UIViewController {
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     @IBAction func openClicked(_ sender: Any) {
         
-        let url = "https://aigens-sdk-demo.firebaseapp.com/";
+        //let url = "https://aigens-sdk-demo.firebaseapp.com/";
+        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
+//        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
+        
         
         //url = "http://192.168.86.52:8100/";
         
         //var services = [GpsService()]
         
-        let options = ["features": "gps,scan,alipay,wechatpay"];
+        let options = ["features": "gps,scan,alipay"];
         
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
         OrderPlace.openUrl(caller: self, url: url, options:options);

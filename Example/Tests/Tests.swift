@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-import OrderPlaceSdk
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {

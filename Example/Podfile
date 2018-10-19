@@ -1,7 +1,7 @@
 use_frameworks!
 
 target 'OrderPlaceSdk_Example' do
-  pod 'OrderPlaceSdk', :path => '../'
+    #pod 'OrderPlaceSdk', :path => '../'
 
   target 'OrderPlaceSdk_Tests' do
     inherit! :search_paths

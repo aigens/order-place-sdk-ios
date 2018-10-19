@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5275F88A2179B449007248AB /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5275F8882179B448007248AB /* AlipaySDK.bundle */; };
+		5275F88B2179B449007248AB /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8892179B449007248AB /* AlipaySDK.framework */; };
+		5275F8912179B51C007248AB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8902179B51C007248AB /* libc++.tbd */; };
+		5275F8932179B529007248AB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8922179B528007248AB /* libz.tbd */; };
+		5275F8952179B531007248AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8942179B531007248AB /* SystemConfiguration.framework */; };
+		5275F8972179B53D007248AB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8962179B53D007248AB /* CoreTelephony.framework */; };
+		5275F8992179B549007248AB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8982179B549007248AB /* QuartzCore.framework */; };
+		5275F89B2179B54E007248AB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F89A2179B54E007248AB /* CoreText.framework */; };
+		5275F89D2179B557007248AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F89C2179B557007248AB /* CoreGraphics.framework */; };
+		5275F89F2179B560007248AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F89E2179B560007248AB /* UIKit.framework */; };
+		5275F8A12179B569007248AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8A02179B569007248AB /* Foundation.framework */; };
+		5275F8A32179B573007248AB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8A22179B573007248AB /* CFNetwork.framework */; };
+		5275F8A52179B57C007248AB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8A42179B57C007248AB /* CoreMotion.framework */; };
+		5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F8FF2179C53A007248AB /* OrderPlace.swift */; };
+		5275F90F2179C53B007248AB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
+		5275F9102179C53B007248AB /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9012179C53A007248AB /* ConfigService.swift */; };
+		5275F9112179C53B007248AB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 5275F9022179C53A007248AB /* .gitkeep */; };
+		5275F9122179C53B007248AB /* AlipayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9042179C53A007248AB /* AlipayService.swift */; };
+		5275F9132179C53B007248AB /* ScannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9062179C53A007248AB /* ScannerService.swift */; };
+		5275F9142179C53B007248AB /* GpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9072179C53A007248AB /* GpsService.swift */; };
+		5275F9152179C53B007248AB /* CallbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9082179C53A007248AB /* CallbackHandler.swift */; };
+		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
+		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
+		5275F9182179C53B007248AB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90C2179C53A007248AB /* .gitkeep */; };
+		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -30,6 +55,32 @@
 /* Begin PBXFileReference section */
 		050486A825AED2C4BBD9DD4E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5275F8882179B448007248AB /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		5275F8892179B449007248AB /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		5275F8902179B51C007248AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		5275F8922179B528007248AB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		5275F8942179B531007248AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5275F8962179B53D007248AB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		5275F8982179B549007248AB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5275F89A2179B54E007248AB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		5275F89C2179B557007248AB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5275F89E2179B560007248AB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5275F8A02179B569007248AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5275F8A22179B573007248AB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5275F8A42179B57C007248AB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		5275F8FF2179C53A007248AB /* OrderPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlace.swift; sourceTree = "<group>"; };
+		5275F9002179C53A007248AB /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		5275F9012179C53A007248AB /* ConfigService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
+		5275F9022179C53A007248AB /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		5275F9042179C53A007248AB /* AlipayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlipayService.swift; sourceTree = "<group>"; };
+		5275F9062179C53A007248AB /* ScannerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerService.swift; sourceTree = "<group>"; };
+		5275F9072179C53A007248AB /* GpsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpsService.swift; sourceTree = "<group>"; };
+		5275F9082179C53A007248AB /* CallbackHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackHandler.swift; sourceTree = "<group>"; };
+		5275F9092179C53A007248AB /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
+		5275F90C2179C53A007248AB /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
+		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +105,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5275F8A52179B57C007248AB /* CoreMotion.framework in Frameworks */,
+				5275F8A32179B573007248AB /* CFNetwork.framework in Frameworks */,
+				5275F8A12179B569007248AB /* Foundation.framework in Frameworks */,
+				5275F89F2179B560007248AB /* UIKit.framework in Frameworks */,
+				5275F89D2179B557007248AB /* CoreGraphics.framework in Frameworks */,
+				5275F89B2179B54E007248AB /* CoreText.framework in Frameworks */,
+				5275F8992179B549007248AB /* QuartzCore.framework in Frameworks */,
+				5275F8972179B53D007248AB /* CoreTelephony.framework in Frameworks */,
+				5275F8952179B531007248AB /* SystemConfiguration.framework in Frameworks */,
+				5275F8932179B529007248AB /* libz.tbd in Frameworks */,
+				5275F8912179B51C007248AB /* libc++.tbd in Frameworks */,
 				679C40D1A9E0C6FB0684C540 /* Pods_OrderPlaceSdk_Example.framework in Frameworks */,
+				5275F88B2179B449007248AB /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +132,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5275F8872179B402007248AB /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				5275F8FD2179C53A007248AB /* OrderPlace */,
+				5275F8882179B448007248AB /* AlipaySDK.bundle */,
+				5275F8892179B449007248AB /* AlipaySDK.framework */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
+		5275F8FD2179C53A007248AB /* OrderPlace */ = {
+			isa = PBXGroup;
+			children = (
+				5275F8FE2179C53A007248AB /* Classes */,
+				5275F90B2179C53A007248AB /* Assets */,
+			);
+			path = OrderPlace;
+			sourceTree = "<group>";
+		};
+		5275F8FE2179C53A007248AB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
+				5275F9002179C53A007248AB /* OrderViewController.swift */,
+				5275F9012179C53A007248AB /* ConfigService.swift */,
+				5275F9022179C53A007248AB /* .gitkeep */,
+				5275F9032179C53A007248AB /* alipay */,
+				5275F9052179C53A007248AB /* scan */,
+				5275F9072179C53A007248AB /* GpsService.swift */,
+				5275F9082179C53A007248AB /* CallbackHandler.swift */,
+				5275F9092179C53A007248AB /* ScannerViewController.swift */,
+				5275F90A2179C53A007248AB /* OrderPlaceService.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		5275F9032179C53A007248AB /* alipay */ = {
+			isa = PBXGroup;
+			children = (
+				5275F9042179C53A007248AB /* AlipayService.swift */,
+			);
+			path = alipay;
+			sourceTree = "<group>";
+		};
+		5275F9052179C53A007248AB /* scan */ = {
+			isa = PBXGroup;
+			children = (
+				5275F9062179C53A007248AB /* ScannerService.swift */,
+			);
+			path = scan;
+			sourceTree = "<group>";
+		};
+		5275F90B2179C53A007248AB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				5275F90C2179C53A007248AB /* .gitkeep */,
+				5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for OrderPlaceSdk */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -93,6 +218,7 @@
 		607FACD21AFB9204008FA782 /* Example for OrderPlaceSdk */ = {
 			isa = PBXGroup;
 			children = (
+				5275F8872179B402007248AB /* Example */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -153,6 +279,17 @@
 		A2F9398A79F9DE5206E56727 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5275F8A42179B57C007248AB /* CoreMotion.framework */,
+				5275F8A22179B573007248AB /* CFNetwork.framework */,
+				5275F8A02179B569007248AB /* Foundation.framework */,
+				5275F89E2179B560007248AB /* UIKit.framework */,
+				5275F89C2179B557007248AB /* CoreGraphics.framework */,
+				5275F89A2179B54E007248AB /* CoreText.framework */,
+				5275F8982179B549007248AB /* QuartzCore.framework */,
+				5275F8962179B53D007248AB /* CoreTelephony.framework */,
+				5275F8942179B531007248AB /* SystemConfiguration.framework */,
+				5275F8922179B528007248AB /* libz.tbd */,
+				5275F8902179B51C007248AB /* libc++.tbd */,
 				1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */,
 				BF92C9F466A64E51E7BD7D83 /* Pods_OrderPlaceSdk_Tests.framework */,
 			);
@@ -170,7 +307,6 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				F973315964D78FA1F7621548 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,7 +350,7 @@
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 36RXHYW79N;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0920;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -249,7 +385,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				5275F9112179C53B007248AB /* .gitkeep in Resources */,
+				5275F9182179C53B007248AB /* .gitkeep in Resources */,
+				5275F88A2179B449007248AB /* AlipaySDK.bundle in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,24 +464,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F973315964D78FA1F7621548 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OrderPlaceSdk_Example/Pods-OrderPlaceSdk_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/OrderPlaceSdk/OrderPlaceSdk.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OrderPlaceSdk.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OrderPlaceSdk_Example/Pods-OrderPlaceSdk_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -349,8 +471,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5275F9152179C53B007248AB /* CallbackHandler.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */,
+				5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */,
+				5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
+				5275F90F2179C53B007248AB /* OrderViewController.swift in Sources */,
+				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
+				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
+				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,12 +627,20 @@
 			baseConfigurationReference = BA70002BDD5955EEBE371429 /* Pods-OrderPlaceSdk_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OrderPlaceSdk",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -512,12 +651,19 @@
 			baseConfigurationReference = 72809CBB793C3FE10084D2BE /* Pods-OrderPlaceSdk_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OrderPlaceSdk",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
