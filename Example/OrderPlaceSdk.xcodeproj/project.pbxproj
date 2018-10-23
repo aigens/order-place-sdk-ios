@@ -23,21 +23,18 @@
 		5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F8FF2179C53A007248AB /* OrderPlace.swift */; };
 		5275F90F2179C53B007248AB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		5275F9102179C53B007248AB /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9012179C53A007248AB /* ConfigService.swift */; };
-		5275F9112179C53B007248AB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 5275F9022179C53A007248AB /* .gitkeep */; };
 		5275F9122179C53B007248AB /* AlipayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9042179C53A007248AB /* AlipayService.swift */; };
 		5275F9132179C53B007248AB /* ScannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9062179C53A007248AB /* ScannerService.swift */; };
 		5275F9142179C53B007248AB /* GpsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9072179C53A007248AB /* GpsService.swift */; };
 		5275F9152179C53B007248AB /* CallbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9082179C53A007248AB /* CallbackHandler.swift */; };
 		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
-		5275F9182179C53B007248AB /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90C2179C53A007248AB /* .gitkeep */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		679C40D1A9E0C6FB0684C540 /* Pods_OrderPlaceSdk_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */; };
 		F3F609EFA07A41D0DD81C4A3 /* Pods_OrderPlaceSdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF92C9F466A64E51E7BD7D83 /* Pods_OrderPlaceSdk_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -71,14 +68,12 @@
 		5275F8FF2179C53A007248AB /* OrderPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlace.swift; sourceTree = "<group>"; };
 		5275F9002179C53A007248AB /* OrderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		5275F9012179C53A007248AB /* ConfigService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigService.swift; sourceTree = "<group>"; };
-		5275F9022179C53A007248AB /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		5275F9042179C53A007248AB /* AlipayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlipayService.swift; sourceTree = "<group>"; };
 		5275F9062179C53A007248AB /* ScannerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerService.swift; sourceTree = "<group>"; };
 		5275F9072179C53A007248AB /* GpsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GpsService.swift; sourceTree = "<group>"; };
 		5275F9082179C53A007248AB /* CallbackHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallbackHandler.swift; sourceTree = "<group>"; };
 		5275F9092179C53A007248AB /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
-		5275F90C2179C53A007248AB /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +85,6 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* OrderPlaceSdk_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrderPlaceSdk_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		698BA980E68B4CEFFFC056B8 /* OrderPlaceSdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = OrderPlaceSdk.podspec; path = ../OrderPlaceSdk.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		72809CBB793C3FE10084D2BE /* Pods-OrderPlaceSdk_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrderPlaceSdk_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrderPlaceSdk_Example/Pods-OrderPlaceSdk_Example.release.xcconfig"; sourceTree = "<group>"; };
 		91B560CF1385DD42A41BCD57 /* Pods-OrderPlaceSdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrderPlaceSdk_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OrderPlaceSdk_Tests/Pods-OrderPlaceSdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,7 +151,6 @@
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
 				5275F9012179C53A007248AB /* ConfigService.swift */,
-				5275F9022179C53A007248AB /* .gitkeep */,
 				5275F9032179C53A007248AB /* alipay */,
 				5275F9052179C53A007248AB /* scan */,
 				5275F9072179C53A007248AB /* GpsService.swift */,
@@ -187,7 +180,6 @@
 		5275F90B2179C53A007248AB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				5275F90C2179C53A007248AB /* .gitkeep */,
 				5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */,
 			);
 			path = Assets;
@@ -241,7 +233,6 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -325,7 +316,6 @@
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				702EB983F1F2F3BF06D5690A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -387,8 +377,6 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				5275F9112179C53B007248AB /* .gitkeep in Resources */,
-				5275F9182179C53B007248AB /* .gitkeep in Resources */,
 				5275F88A2179B449007248AB /* AlipaySDK.bundle in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -420,30 +408,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		702EB983F1F2F3BF06D5690A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OrderPlaceSdk_Tests/Pods-OrderPlaceSdk_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/Nimble-Snapshots/Nimble_Snapshots.framework",
-				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble_Snapshots.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OrderPlaceSdk_Tests/Pods-OrderPlaceSdk_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		727020DA52F7B262478F7AB8 /* [CP] Check Pods Manifest.lock */ = {
@@ -489,7 +453,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
