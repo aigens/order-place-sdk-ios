@@ -55,7 +55,6 @@ public class OrderPlace {
         
         orderVC.url = url;
         orderVC.options = options;
-        
         self.OPDelegate = orderVC
         
         caller.present(controller, animated: true, completion: nil)
@@ -69,11 +68,9 @@ public class OrderPlace {
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
         
         let orderVC = controller.topViewController as! OrderViewController;
-        
         orderVC.url = url;
         orderVC.options = options;
         orderVC.extraServices = services;
-
         self.OPDelegate = orderVC
         
         caller.present(controller, animated: true, completion: nil)

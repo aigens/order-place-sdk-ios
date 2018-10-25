@@ -19,12 +19,12 @@ class ViewController: UIViewController {
     @IBAction func openClicked(_ sender: Any) {
         
         //let url = "https://aigens-sdk-demo.firebaseapp.com/";
-        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
+//        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
 //        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
         
         
         //url = "http://192.168.86.52:8100/";
-        
+        let url = "https://test.order.place/#/court-store-list/5175539845300224";
         //var services = [GpsService()]
         
         let options = ["features": "gps,scan,alipay"];

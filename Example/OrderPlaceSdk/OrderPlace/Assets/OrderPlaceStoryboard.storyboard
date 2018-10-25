@@ -12,7 +12,7 @@
         <!--Order View Controller-->
         <scene sceneID="XzI-cy-pOO">
             <objects>
-                <viewController id="paw-ot-egZ" customClass="OrderViewController" customModule="testNewSdkSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="paw-ot-egZ" customClass="OrderViewController" customModule="OrderPlaceSdk_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fmh-lC-050"/>
                         <viewControllerLayoutGuide type="bottom" id="7s4-lF-lIa"/>
@@ -23,7 +23,16 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qc-uW-f0J">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZR3-1M-W2a">
+                                        <rect key="frame" x="177" y="50" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.30810408480000001" green="1" blue="0.92116053630000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ZR3-1M-W2a" firstAttribute="top" secondItem="8Qc-uW-f0J" secondAttribute="top" constant="50" id="4sc-3q-qFR"/>
+                                    <constraint firstItem="ZR3-1M-W2a" firstAttribute="centerX" secondItem="8Qc-uW-f0J" secondAttribute="centerX" id="aLZ-Ig-nxP"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -42,6 +51,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="ZR3-1M-W2a" id="U7r-ci-c0z"/>
                         <outlet property="viewContainer" destination="8Qc-uW-f0J" id="ifd-2Z-qzK"/>
                     </connections>
                 </viewController>
@@ -52,7 +62,7 @@
         <!--Scanner View Controller-->
         <scene sceneID="pn4-t0-k9s">
             <objects>
-                <viewController storyboardIdentifier="ScannerViewController" id="RX8-tE-inH" customClass="ScannerViewController" customModule="testNewSdkSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScannerViewController" id="RX8-tE-inH" customClass="ScannerViewController" customModule="OrderPlaceSdk_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IPy-1N-N8F"/>
                         <viewControllerLayoutGuide type="bottom" id="JmP-j7-eAY"/>
