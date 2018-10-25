@@ -21,7 +21,6 @@
 		5275F8A32179B573007248AB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8A22179B573007248AB /* CFNetwork.framework */; };
 		5275F8A52179B57C007248AB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8A42179B57C007248AB /* CoreMotion.framework */; };
 		5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F8FF2179C53A007248AB /* OrderPlace.swift */; };
-		5275F90F2179C53B007248AB /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		5275F9102179C53B007248AB /* ConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9012179C53A007248AB /* ConfigService.swift */; };
 		5275F9122179C53B007248AB /* AlipayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9042179C53A007248AB /* AlipayService.swift */; };
 		5275F9132179C53B007248AB /* ScannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9062179C53A007248AB /* ScannerService.swift */; };
@@ -30,6 +29,7 @@
 		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
+		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -435,6 +435,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */,
 				5275F9152179C53B007248AB /* CallbackHandler.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */,
@@ -442,7 +443,6 @@
 				5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
-				5275F90F2179C53B007248AB /* OrderViewController.swift in Sources */,
 				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
 				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,

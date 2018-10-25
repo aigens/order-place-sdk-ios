@@ -11,10 +11,12 @@ import WebKit
 
 public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
     var url: String!;
     var options: [String: Any]!;
+    private var showNavigationBar: Bool = false;
 
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
@@ -26,7 +28,6 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     @IBAction func exitClicked(_ sender: Any) {
-
         print("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
@@ -36,10 +37,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        if (navigationController != nil) {
+            navigationController?.delegate = self;
+        }
+        automaticallyAdjustsScrollViewInsets = false
+        
         print("OrderViewController viewDidLoad2")
         print("options", self.options)
-
-        automaticallyAdjustsScrollViewInsets = false
 
         let webConfiguration = WKWebViewConfiguration()
 
@@ -59,58 +63,30 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
 
         webConfiguration.userContentController = userContentController
-
-
         let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
         self.webView = WKWebView (frame: customFrame, configuration: webConfiguration)
-
         self.webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         webView.translatesAutoresizingMaskIntoConstraints = false
-
-        print(customFrame)
-
-        self.viewContainer.addSubview(webView)
-
-
         webView.uiDelegate = self
         webView.navigationDelegate = self;
+        
+        print(customFrame)
+        
+        self.viewContainer.addSubview(webView)
+        self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
 
+        
         if(self.url != nil) {
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
             webView.load(myRequest)
             print("loading url")
+        } else {
+            showNavigationBar = true;
+            stopIndicator()
         }
 
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    // 在请求开始加载之前调用，决定是否跳转
-    //    - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
-    //    {
-    //    // itunes跳转链接需要单独处理
-    //    if ([[navigationAction.request.URL host] isEqualToString:@"itunes.apple.com"] &&
-    //    [[UIApplication sharedApplication] openURL:navigationAction.request.URL]) {
-    //    decisionHandler(WKNavigationActionPolicyCancel);
-    //    return;
-    //    }
-    //    decisionHandler(WKNavigationActionPolicyAllow);
-    //    }
-
-
 
     func addService(service: OrderPlaceService, controller: WKUserContentController) {
         let serviceName = service.getServiceName();
@@ -202,9 +178,24 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             decisionHandler(WKNavigationActionPolicy.allow)
         }
     }
-
+    
+    public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        //print("didCommit url:-- \(webView.url?.host)")
+        if let host = webView.url?.host, host.contains("order.place") {
+            setNavigationBar(hidden: true)
+        } else {
+            setNavigationBar(hidden: false)
+        }
+        startIndicator()
+    }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("finish url");
+        //print("finish url:\(webView.url?.absoluteString)")
+        stopIndicator()
+    }
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        //print("didFail url:\(webView.url?.absoluteString)")
+        setNavigationBar(hidden: false)
+        stopIndicator()
     }
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -290,9 +281,29 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
+    private func setNavigationBar(hidden:Bool) {
+        self.navigationController?.setNavigationBarHidden(hidden, animated: false)
+    }
+    private func startIndicator() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    private func stopIndicator() {
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+    }
 
 
 }
+extension OrderViewController: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let isHidden = viewController.isKind(of: OrderViewController.self) && !showNavigationBar
+        //print("viewController: \(viewController) \(isHidden)")
+        navigationController.setNavigationBarHidden(isHidden, animated: false)
+    }
+}
+
 extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
 
@@ -312,7 +323,7 @@ extension OrderViewController: OrderPlaceDelegate {
                 AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
                     print("processAuth_V2Result result:\(resultDict)")
                     if let dictResult = resultDict, let result = dictResult["result"] as? String {
-                            print("processAuth_V2 Result result ->:\(result)")
+                        print("processAuth_V2 Result result ->:\(result)")
                     }
 
                 })
@@ -330,7 +341,7 @@ extension OrderViewController: OrderPlaceDelegate {
                     if let dictResult = resultDict, let result = dictResult["result"] as? String {
                         print("processAuth_V2 Result result ->:\(result)")
                     }
-                    
+
                 })
 
             }
@@ -341,4 +352,6 @@ extension OrderViewController: OrderPlaceDelegate {
     }
 
 }
+
+
 
