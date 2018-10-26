@@ -41,7 +41,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             navigationController?.delegate = self;
         }
         automaticallyAdjustsScrollViewInsets = false
-        
+
         print("OrderViewController viewDidLoad2")
         print("options", self.options)
 
@@ -69,13 +69,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
         webView.navigationDelegate = self;
-        
+
         print(customFrame)
-        
+
         self.viewContainer.addSubview(webView)
         self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
 
-        
+
         if(self.url != nil) {
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
@@ -120,7 +120,6 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         }
 
-
     }
 
     func makeService(feature: String) -> OrderPlaceService! {
@@ -131,12 +130,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return GpsService()
 
         case "alipay":
-            return AlipayService()
-
+            return AlipayService(options);
         case "scan":
-            let scan = ScannerService()
-            scan.options = options
-            return scan;
+            return ScannerService(options);
         default:
             break;
         }
@@ -178,7 +174,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             decisionHandler(WKNavigationActionPolicy.allow)
         }
     }
-    
+
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         //print("didCommit url:-- \(webView.url?.host)")
         if let host = webView.url?.host, host.contains("order.place") {
@@ -281,8 +277,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
-    private func setNavigationBar(hidden:Bool) {
+
+    private func setNavigationBar(hidden: Bool) {
         self.navigationController?.setNavigationBarHidden(hidden, animated: false)
     }
     private func startIndicator() {

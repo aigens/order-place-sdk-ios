@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         let url = "https://test.order.place/#/court-store-list/5175539845300224";
         //var services = [GpsService()]
         
-        let options = ["features": "gps,scan,alipay"];
+        let options = ["features": "gps,scan,alipay","alipayScheme": "alipaySchemes123"];
         
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
         OrderPlace.openUrl(caller: self, url: url, options:options);

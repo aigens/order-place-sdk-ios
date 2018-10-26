@@ -11,11 +11,23 @@ import UIKit
 class AlipayService: OrderPlaceService {
 
     static public let SERVICE_NAME: String = "AlipayService"
-    static public let appScheme: String = "alipaySchemes123"
-    
+    /// default alipaySchemes123
+    static public var appScheme: String = "alipaySchemes123"
+
     var payResultCallback: CallbackHandler? = nil
 
+    var options: [String: Any]?
+    
+    init(_ options: [String: Any]) {
+        super.init()
+        self.options = options;
+        if let appScheme = self.options!["alipayScheme"] as? String {
+            AlipayService.appScheme = appScheme
+        }
+    }
+
     override func initialize() {
+
     }
 
     override func getServiceName() -> String {

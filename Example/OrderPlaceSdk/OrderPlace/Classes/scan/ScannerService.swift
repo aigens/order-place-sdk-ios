@@ -17,6 +17,11 @@ class ScannerService: OrderPlaceService {
     override func initialize() {
 
     }
+    
+    init(_ options: [String: Any]) {
+        super.init()
+        self.options = options;
+    }
 
     override func getServiceName() -> String {
         return "ScannerService"
