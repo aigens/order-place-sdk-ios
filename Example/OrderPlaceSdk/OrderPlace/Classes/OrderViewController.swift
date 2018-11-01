@@ -153,8 +153,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         AlipaySDK.defaultService().payUrlOrder(urlOrder, fromScheme: AlipayService.appScheme) { [weak self](dict) in
             print("payWithUrlOrder dict:\(dict)")
-            if let dictResult = dict, let _ = dictResult["isProcessUrlPay"] as? Bool, let urlStr = dictResult["returnUrl"] as? String {
-                self?.loadWithUrlStr(urlStr: urlStr)
+            guard let dictResult = dict else { return }
+            if let isProcessUrlPay = dictResult[AnyHashable("isProcessUrlPay")] as? String, let urlStr = dictResult[AnyHashable("returnUrl")] as? String {
+                if isProcessUrlPay == "1" {
+                    self?.loadWithUrlStr(urlStr: urlStr)
+                }
             }
         }
 
