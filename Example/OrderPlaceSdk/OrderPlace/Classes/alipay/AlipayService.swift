@@ -63,7 +63,7 @@ class AlipayService: OrderPlaceService {
     private func payOrder(body: NSDictionary, callback: CallbackHandler?) {
 
         // call back 是wap 支付的结果, 钱包支付的结果要在app delegate 中写
-        AlipaySDK.defaultService().payOrder(body.value(forKey: "orderStr") as? String ?? "", fromScheme: AlipayService.appScheme) { (result) in
+        AlipaySDK.defaultService().payOrder(body.value(forKey: "orderStringAlipay") as? String ?? "", fromScheme: AlipayService.appScheme) { (result) in
             print("payOrder result:\(result)")
 
             callback?.success(response: result)
