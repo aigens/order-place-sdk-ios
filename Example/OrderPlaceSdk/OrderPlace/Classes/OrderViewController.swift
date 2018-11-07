@@ -128,7 +128,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         case "gps":
             return GpsService()
-
+        case "applepay":
+            return ApplepayService(options);
         case "alipay":
             return AlipayService(options);
         case "scan":

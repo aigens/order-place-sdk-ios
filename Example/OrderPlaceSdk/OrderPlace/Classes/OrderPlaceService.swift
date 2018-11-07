@@ -30,4 +30,13 @@ public class OrderPlaceService: NSObject {
     func generateResultObject(_ value: Any) -> [String: Any] {
         return ["result": value]
     }
+
+    func showAlert(_ title: String?, _ message: String) {
+        guard vc != nil else { return }
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+
+        }))
+        vc.present(alertController, animated: true, completion: nil)
+    }
 }

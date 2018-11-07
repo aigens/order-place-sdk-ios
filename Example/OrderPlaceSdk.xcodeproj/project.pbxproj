@@ -29,6 +29,7 @@
 		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
+		52A7AA282190162000F5A2B4 /* ApplepayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A7AA272190162000F5A2B4 /* ApplepayService.swift */; };
 		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		050486A825AED2C4BBD9DD4E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		520296C7219285C7000085FF /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
 		5275F8882179B448007248AB /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		5275F8892179B449007248AB /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		5275F8902179B51C007248AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -76,6 +78,7 @@
 		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
+		52A7AA272190162000F5A2B4 /* ApplepayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplepayService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		5275F8FE2179C53A007248AB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				52A7AA262190160500F5A2B4 /* applepay */,
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
 				5275F9012179C53A007248AB /* ConfigService.swift */,
@@ -185,9 +189,18 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		52A7AA262190160500F5A2B4 /* applepay */ = {
+			isa = PBXGroup;
+			children = (
+				52A7AA272190162000F5A2B4 /* ApplepayService.swift */,
+			);
+			path = applepay;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				520296C7219285C7000085FF /* OrderPlaceSdk_Example.entitlements */,
 				5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for OrderPlaceSdk */,
@@ -341,6 +354,11 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 36RXHYW79N;
 						LastSwiftMigration = 0920;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
+						};
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -440,6 +458,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */,
 				5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */,
+				52A7AA282190162000F5A2B4 /* ApplepayService.swift in Sources */,
 				5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
@@ -531,7 +550,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -577,7 +596,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -591,6 +610,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -600,7 +620,7 @@
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -615,6 +635,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -624,7 +645,7 @@
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
