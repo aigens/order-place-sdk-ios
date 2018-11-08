@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OrderPlaceSdk'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'OrderPlaceSdk Alpha.'
 
 # This description is used to generate tags and improve search results.
@@ -30,15 +30,23 @@ OrderPlaceSdk for embed Mobile Ordering into your apps.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'OrderPlaceSdk/Classes/**/*'
-  
-  s.resource_bundles = {
-      'OrderPlaceSdk' => ['OrderPlaceSdk/Assets/**/*.{storyboard,xib}']
-  }
+#s.source_files = 'OrderPlaceSdk/Classes/**/*'
+
+#s.resource_bundles = {
+#     'OrderPlaceSdk' => ['OrderPlaceSdk/Assets/**/*.{storyboard,xib}']
+# }
+
+  s.ios.vendored_frameworks = 'OrderPlaceSdk/frameworks/AlipaySDK.framework','OrderPlaceSdk/frameworks/OrderPlaceSDK.framework'
+  s.resources = ['OrderPlaceSdk/Assets/AlipaySDK.bundle']
 
   s.swift_version = '4.1'
 
+  s.static_framework = true
+
+  s.frameworks = 'CoreTelephony', 'SystemConfiguration', 'QuartzCore', 'CoreText', 'CoreGraphics', 'UIKit', 'Foundation', 'CFNetwork', 'CoreMotion' , 'AVFoundation'
+  s.libraries = 'z', 'c++'
+
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit', 'MapKit'
+  # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
