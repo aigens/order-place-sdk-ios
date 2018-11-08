@@ -24,7 +24,7 @@ OrderPlaceSdk for embed Mobile Ordering into your apps.
   s.homepage         = 'https://github.com/aigens/order-place-sdk-ios'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Peter Liu' => 'peter.liu@aigens.com' }
+  s.author           = { 'Peter Liu' => 'peter.liu@aigens.com', 'Peijue Chen' => '13286953452@126.com' }
   s.source           = { :git => 'https://github.com/aigens/order-place-sdk-ios.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
