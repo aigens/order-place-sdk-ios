@@ -29,6 +29,21 @@
 		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
+		52B933A621992EC500FCBE10 /* NetsPayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B933A521992EC500FCBE10 /* NetsPayService.swift */; };
+		52B933B22199354900FCBE10 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AB2199354800FCBE10 /* MBProgressHUD.framework */; };
+		52B933B82199356C00FCBE10 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AA2199354800FCBE10 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933BA2199356C00FCBE10 /* Caishen.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AC2199354900FCBE10 /* Caishen.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933BC2199356C00FCBE10 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933A92199354800FCBE10 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933BE2199356C00FCBE10 /* ENETSLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AE2199354900FCBE10 /* ENETSLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933C02199356C00FCBE10 /* MBProgressHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AB2199354800FCBE10 /* MBProgressHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933C22199356C00FCBE10 /* Presentr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AD2199354900FCBE10 /* Presentr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B933C42199356C00FCBE10 /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AF2199354900FCBE10 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		52B934C2219D5BAF00FCBE10 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AA2199354800FCBE10 /* Alamofire.framework */; };
+		52B934C3219D5BAF00FCBE10 /* Caishen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AC2199354900FCBE10 /* Caishen.framework */; };
+		52B934C4219D5BAF00FCBE10 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933A92199354800FCBE10 /* CryptoSwift.framework */; };
+		52B934C5219D5BAF00FCBE10 /* ENETSLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AE2199354900FCBE10 /* ENETSLib.framework */; };
+		52B934C6219D5BAF00FCBE10 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AD2199354900FCBE10 /* Presentr.framework */; };
+		52B934C7219D5BAF00FCBE10 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B933AF2199354900FCBE10 /* SwiftyJSON.framework */; };
 		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -48,6 +63,26 @@
 			remoteInfo = OrderPlaceSdk;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		52B933C52199356C00FCBE10 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				52B933BE2199356C00FCBE10 /* ENETSLib.framework in Embed Frameworks */,
+				52B933C22199356C00FCBE10 /* Presentr.framework in Embed Frameworks */,
+				52B933BC2199356C00FCBE10 /* CryptoSwift.framework in Embed Frameworks */,
+				52B933BA2199356C00FCBE10 /* Caishen.framework in Embed Frameworks */,
+				52B933C42199356C00FCBE10 /* SwiftyJSON.framework in Embed Frameworks */,
+				52B933C02199356C00FCBE10 /* MBProgressHUD.framework in Embed Frameworks */,
+				52B933B82199356C00FCBE10 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		050486A825AED2C4BBD9DD4E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -76,6 +111,14 @@
 		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
+		52B933A521992EC500FCBE10 /* NetsPayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetsPayService.swift; sourceTree = "<group>"; };
+		52B933A92199354800FCBE10 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = "<group>"; };
+		52B933AA2199354800FCBE10 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Alamofire.framework; sourceTree = "<group>"; };
+		52B933AB2199354800FCBE10 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = "<group>"; };
+		52B933AC2199354900FCBE10 /* Caishen.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Caishen.framework; sourceTree = "<group>"; };
+		52B933AD2199354900FCBE10 /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Presentr.framework; sourceTree = "<group>"; };
+		52B933AE2199354900FCBE10 /* ENETSLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ENETSLib.framework; sourceTree = "<group>"; };
+		52B933AF2199354900FCBE10 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +142,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B934C2219D5BAF00FCBE10 /* Alamofire.framework in Frameworks */,
+				52B934C3219D5BAF00FCBE10 /* Caishen.framework in Frameworks */,
+				52B934C4219D5BAF00FCBE10 /* CryptoSwift.framework in Frameworks */,
+				52B934C5219D5BAF00FCBE10 /* ENETSLib.framework in Frameworks */,
+				52B933B22199354900FCBE10 /* MBProgressHUD.framework in Frameworks */,
+				52B934C6219D5BAF00FCBE10 /* Presentr.framework in Frameworks */,
+				52B934C7219D5BAF00FCBE10 /* SwiftyJSON.framework in Frameworks */,
 				5275F8A52179B57C007248AB /* CoreMotion.framework in Frameworks */,
 				5275F8A32179B573007248AB /* CFNetwork.framework in Frameworks */,
 				5275F8A12179B569007248AB /* Foundation.framework in Frameworks */,
@@ -129,6 +179,7 @@
 		5275F8872179B402007248AB /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				52B933A82199353000FCBE10 /* NetspayFramework */,
 				5275F8FD2179C53A007248AB /* OrderPlace */,
 				5275F8882179B448007248AB /* AlipaySDK.bundle */,
 				5275F8892179B449007248AB /* AlipaySDK.framework */,
@@ -148,6 +199,7 @@
 		5275F8FE2179C53A007248AB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				52B933A421992E7000FCBE10 /* netsapay */,
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
 				5275F9012179C53A007248AB /* ConfigService.swift */,
@@ -183,6 +235,28 @@
 				5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		52B933A421992E7000FCBE10 /* netsapay */ = {
+			isa = PBXGroup;
+			children = (
+				52B933A521992EC500FCBE10 /* NetsPayService.swift */,
+			);
+			path = netsapay;
+			sourceTree = "<group>";
+		};
+		52B933A82199353000FCBE10 /* NetspayFramework */ = {
+			isa = PBXGroup;
+			children = (
+				52B933AA2199354800FCBE10 /* Alamofire.framework */,
+				52B933AC2199354900FCBE10 /* Caishen.framework */,
+				52B933A92199354800FCBE10 /* CryptoSwift.framework */,
+				52B933AE2199354900FCBE10 /* ENETSLib.framework */,
+				52B933AB2199354800FCBE10 /* MBProgressHUD.framework */,
+				52B933AD2199354900FCBE10 /* Presentr.framework */,
+				52B933AF2199354900FCBE10 /* SwiftyJSON.framework */,
+			);
+			path = NetspayFramework;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -298,6 +372,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
+				52B933C52199356C00FCBE10 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -443,6 +518,7 @@
 				5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
+				52B933A621992EC500FCBE10 /* NetsPayService.swift in Sources */,
 				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
 				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
@@ -589,18 +665,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BA70002BDD5955EEBE371429 /* Pods-OrderPlaceSdk_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OrderPlaceSdk",
+					"$(PROJECT_DIR)/OrderPlaceSdk/NetspayFramework",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.OrderPlaceSdk-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -613,18 +692,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72809CBB793C3FE10084D2BE /* Pods-OrderPlaceSdk_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OrderPlaceSdk",
+					"$(PROJECT_DIR)/OrderPlaceSdk/NetspayFramework",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.OrderPlaceSdk-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;

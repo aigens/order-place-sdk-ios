@@ -8,8 +8,15 @@
 import Foundation
 import UIKit
 import WebKit
-
+import ENETSLib
 public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+
+    private let GPSFEATURE: String = "gps"
+    private let NETSPAYFEATURE: String = "netspay"
+    private let ALIPAYFEATUR: String = "alipay"
+    private let SCANFEATUR: String = "scan"
+
+
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
@@ -126,12 +133,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         switch(feature) {
 
-        case "gps":
+        case GPSFEATURE:
             return GpsService()
-
-        case "alipay":
+        case NETSPAYFEATURE:
+            return NetsPayService(options);
+        case ALIPAYFEATUR:
             return AlipayService(options);
-        case "scan":
+        case SCANFEATUR:
             return ScannerService(options);
         default:
             break;
@@ -307,7 +315,7 @@ extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
 
         // for alipay  host
-        if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options["features"] as? String, features.contains("alipay") {
+        if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options["features"] as? String, features.contains(ALIPAYFEATUR) {
             // wallet pay
             // if SDK is not available, will open alipay APP to pay, then need to pass the payment result back //to development kit
             if url.host == "safepay" {
@@ -344,9 +352,14 @@ extension OrderViewController: OrderPlaceDelegate {
                 })
 
             }
-
-
         }
+
+
+        /// netspay
+        if self.options != nil, let features = self.options["features"] as? String, features.contains(NETSPAYFEATURE), let appDelegate = app.delegate {
+            _ = PaymentRequestManager.handleOpenURL(appDelegate: appDelegate, url: url)
+        }
+
 
     }
 
