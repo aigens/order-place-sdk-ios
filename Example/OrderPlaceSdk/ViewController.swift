@@ -23,16 +23,17 @@ class ViewController: UIViewController {
     }
     @IBAction func openClicked(_ sender: Any) {
         
-        let url = "https://aigens-sdk-demo.firebaseapp.com/";
+        var url = "https://aigens-sdk-demo.firebaseapp.com/";
         
-        //url = "http://192.168.86.52:8100/";
+        url = "https://aigens-octopus-demo.firebaseapp.com/";
         
         //var services = [GpsService()]
+        var services = [NativeOePayService()];
         
         let options = ["features": "gps,scan"];
         
-        //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
-        OrderPlace.openUrl(caller: self, url: url, options:options);
+        OrderPlace.openUrl(caller: self, url: url, options:options, services: services);
+        //OrderPlace.openUrl(caller: self, url: url, options:options);
     }
     
     @IBAction func scanClicked(_ sender: Any) {

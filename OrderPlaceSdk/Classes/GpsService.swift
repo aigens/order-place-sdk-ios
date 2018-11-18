@@ -16,11 +16,11 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
     var listenCb: CallbackHandler!;
     var lastCb: CallbackHandler!;
 
-    override func getServiceName() -> String{
+    override open func getServiceName() -> String{
         return "GpsService";
     }
     
-    override func initialize(){
+    override open func initialize(){
         
         self.lm = CLLocationManager()
         self.lm.delegate = self
@@ -30,7 +30,7 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
         
     }
     
-    override func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
+    override open func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
         
         print("GpsService", method, body)
         
