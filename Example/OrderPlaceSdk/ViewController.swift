@@ -23,11 +23,11 @@ class ViewController: UIViewController {
 //        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
         
         
-        //url = "http://192.168.86.52:8100/";
-        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        let url = "http://192.168.0.254:8100/";
+//      ®  let url = "https://test.order.place/#/court-store-list/5175539845300224";
         //var services = [GpsService()]
         
-        let options = ["features": "gps,scan,alipay","alipayScheme": "alipaySchemes123"];
+        let options = ["features": "gps,scan,alipay,wechatpay","alipayScheme": "alipaySchemes123"];
         
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
         OrderPlace.openUrl(caller: self, url: url, options:options);

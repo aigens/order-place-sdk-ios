@@ -10,58 +10,66 @@ import UIKit
 import WebKit
 
 public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
-
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
     var url: String!;
     var options: [String: Any]!;
     private var showNavigationBar: Bool = false;
-
+    
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
-
-
+    
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style2")
         super.init(coder: aDecoder)
     }
-
+    
     @IBAction func exitClicked(_ sender: Any) {
         print("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
+        self.serciceMap.removeAll()
     }
-
+    
+    deinit {
+        print("order view controller deinit")
+    }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if (navigationController != nil) {
             navigationController?.delegate = self;
         }
         automaticallyAdjustsScrollViewInsets = false
-
-        print("OrderViewController viewDidLoad2")
-        print("options", self.options)
-
+        
+        let version = WXApi.getVersion()
+        debugPrint("WXApi version: \(version)")
+        debugPrint("OrderViewController viewDidLoad2")
+        debugPrint("options", self.options)
+        
         let webConfiguration = WKWebViewConfiguration()
-
+        
         let userContentController = WKUserContentController()
-
+        
         let configService = ConfigService()
         configService.options = self.options;
+        configService.clickedExit = { [weak self] in
+            self?.serciceMap.removeAll()
+        }
         self.addService(service: configService, controller: userContentController)
-
+        
         self.addFeatures(controller: userContentController)
-
+        
         if(self.extraServices != nil) {
             for service in self.extraServices {
                 self.addService(service: service, controller: userContentController)
             }
         }
-
-
+        
+        
         webConfiguration.userContentController = userContentController
         let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
         self.webView = WKWebView (frame: customFrame, configuration: webConfiguration)
@@ -69,13 +77,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
         webView.navigationDelegate = self;
-
+        
         print(customFrame)
-
+        
         self.viewContainer.addSubview(webView)
         self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
-
-
+        
+        
         if(self.url != nil) {
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
@@ -85,60 +93,63 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             showNavigationBar = true;
             stopIndicator()
         }
-
+        
     }
-
+    
     func addService(service: OrderPlaceService, controller: WKUserContentController) {
         let serviceName = service.getServiceName();
         self.serciceMap[serviceName] = service;
         service.vc = self;
         service.initialize()
-
-        controller.add(self, name: serviceName)
+        //controller.add(self, name: serviceName)
+        
+        controller.add(WKScriptMsgHandler(scriptDelegate: self), name: serviceName)
     }
-
+    
     func addFeatures(controller: WKUserContentController) {
-
+        
         if(self.options == nil) {
             return;
         }
-
+        
         let features = self.options["features"] as? String;
-
+        
         if(features == nil) {
             return;
         }
-
+        
         let fs = features!.split(separator: ",")
-
+        
         for f in fs {
-
+            
             let service = self.makeService(feature: String(f))
             if(service != nil) {
                 self.addService(service: service!, controller: controller)
             }
-
+            
         }
-
+        
     }
-
+    
     func makeService(feature: String) -> OrderPlaceService! {
-
+        
         switch(feature) {
-
+            
         case "gps":
             return GpsService()
-
+            
         case "alipay":
             return AlipayService(options);
         case "scan":
             return ScannerService(options);
+        case "wechatpay":
+            return WechatPayService();
         default:
             break;
         }
-
+        
         return nil;
-
+        
     }
     private func loadWithUrlStr(urlStr: String) {
         print("urlStr url:\(urlStr)");
@@ -148,9 +159,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             self.webView.load(webRequest)
         }
     }
-
+    
     private func payWithUrlOrder(urlOrder: String) {
-
+        
         AlipaySDK.defaultService().payUrlOrder(urlOrder, fromScheme: AlipayService.appScheme) { [weak self](dict) in
             print("payWithUrlOrder dict:\(dict)")
             guard let dictResult = dict else { return }
@@ -160,10 +171,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                 }
             }
         }
-
+        
     }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
+        
         if let url = webView.url?.absoluteString {
             let orderInfo = AlipaySDK.defaultService().fetchOrderInfo(fromH5PayUrl: url)
             if orderInfo != nil, orderInfo!.count > 0 {
@@ -172,12 +183,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             } else {
                 decisionHandler(WKNavigationActionPolicy.allow)
             }
-
+            
         } else {
             decisionHandler(WKNavigationActionPolicy.allow)
         }
     }
-
+    
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         //print("didCommit url:-- \(webView.url?.host)")
         if let host = webView.url?.host, host.contains("order.place") {
@@ -196,11 +207,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         setNavigationBar(hidden: false)
         stopIndicator()
     }
-
+    
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-
+        
         print("message", message.body)
-
+        
         /*
          if("ConfigService" == message.name){
          
@@ -221,47 +232,47 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         } else {
             print("service not registered", serviceName)
         }
-
+        
     }
-
+    
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping () -> Void) {
-
+                        completionHandler: @escaping () -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             completionHandler()
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
-
+    
+    
     public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (Bool) -> Void) {
-
+                        completionHandler: @escaping (Bool) -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-
+        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             completionHandler(true)
         }))
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(false)
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
-
+    
+    
     public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (String?) -> Void) {
-
+                        completionHandler: @escaping (String?) -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .actionSheet)
-
+        
         alertController.addTextField { (textField) in
             textField.text = defaultText
         }
-
+        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             if let text = alertController.textFields?.first?.text {
                 completionHandler(text)
@@ -269,18 +280,18 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                 completionHandler(defaultText)
             }
         }))
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(nil)
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
+    
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-
+    
     private func setNavigationBar(hidden: Bool) {
         self.navigationController?.setNavigationBarHidden(hidden, animated: false)
     }
@@ -292,8 +303,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
     }
-
-
+    
+    
 }
 extension OrderViewController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -305,51 +316,58 @@ extension OrderViewController: UINavigationControllerDelegate {
 
 extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
-
+        
         // for alipay  host
         if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options["features"] as? String, features.contains("alipay") {
             // wallet pay
             // if SDK is not available, will open alipay APP to pay, then need to pass the payment result back //to development kit
             if url.host == "safepay" {
-
+                
                 //The merchant’s APP may be killed by the system while processing payment in alipay APP, //then the callback will fail. Please handle the return result of standbyCallback.
                 AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDict) in
                     print("wallet pay callback result:\(resultDict)")
                     alipayService.payResultCallback?.success(response: resultDict)
                 })
-
+                
                 // 授权跳转支付宝钱包进行支付，处理支付结果
                 AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
                     print("processAuth_V2Result result:\(resultDict)")
                     if let dictResult = resultDict, let result = dictResult["result"] as? String {
                         print("processAuth_V2 Result result ->:\(result)")
                     }
-
+                    
                 })
-
+                
             } else if url.host == "platformapi" { //Alipay wallet express login authorization returns authCode
                 AlipaySDK.defaultService().processAuthResult(url, standbyCallback: { (resultDict) in
                     //The merchant’s APP may be killed by the system while processing payment in alipay //APP, then the callback will fail. Please handle the return result of standbyCallback.
                     print("wallet pay callback result:\(resultDict)")
                     alipayService.payResultCallback?.success(response: resultDict)
                 })
-
+                
                 // 授权跳转支付宝钱包进行支付，处理支付结果
                 AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
                     print("processAuth_V2Result result:\(resultDict)")
                     if let dictResult = resultDict, let result = dictResult["result"] as? String {
                         print("processAuth_V2 Result result ->:\(result)")
                     }
-
+                    
                 })
-
+                
             }
-
-
+            
+            
         }
-
+        
+        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options["features"] as? String, features.contains("wechatpay") {
+            let wxapiManager = WXApiManager.sharedManager
+            wxapiManager.payResultCallback = wechatPayService.payResultCallback
+            WXApi.handleOpen(url, delegate: wxapiManager)
+            
+        }
+        
     }
-
+    
 }
 
 
