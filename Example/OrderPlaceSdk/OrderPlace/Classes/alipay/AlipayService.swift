@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import WebKit
+@objc public protocol AlipayDelegate: AnyObject {
+    func AlipayOrder(body: NSDictionary, callback: CallbackHandler?)
+    func AlipayGetVersion(callback: CallbackHandler?)
+    func AlipayApplicationOpenUrl(_ app: UIApplication, url: URL)
+    func AlipayFetchOrderInfo(url: String, alipayScheme: String) -> Bool
+    var AliapyWebView: WKWebView? { get set }
+}
 
 class AlipayService: OrderPlaceService {
+
+    // We don't need weak here, because we are the delegate of run time get.
+    var alipayDelegate: AlipayDelegate? = nil
 
     static public let SERVICE_NAME: String = "AlipayService"
     /// default alipaySchemes123
@@ -17,7 +28,7 @@ class AlipayService: OrderPlaceService {
     var payResultCallback: CallbackHandler? = nil
 
     var options: [String: Any]?
-    
+
     init(_ options: [String: Any]) {
         super.init()
         self.options = options;
@@ -39,6 +50,7 @@ class AlipayService: OrderPlaceService {
         switch method {
         case "requestPay":
             payResultCallback = callback
+            body.setValue(AlipayService.appScheme, forKey: "alipayScheme")
             payOrder(body: body, callback: callback)
             break;
         case "getAlipaySdkVersion":
@@ -51,32 +63,31 @@ class AlipayService: OrderPlaceService {
 
     private func getVersion(callback: CallbackHandler?) {
 
-        if let version = AlipaySDK.currentVersion(AlipaySDK())() {
-            //print("version:\(version)")
-            let dict = ["alipaySdkVersion": version]
-            callback?.success(response: dict)
+        if let del = alipayDelegate {
+            del.AlipayGetVersion(callback: callback)
         }
+
+//        if let version = AlipaySDK.currentVersion(AlipaySDK())() {
+//            let dict = ["alipaySdkVersion": version]
+//            callback?.success(response: dict)
+//        }
 
     }
 
     // wap pay
     private func payOrder(body: NSDictionary, callback: CallbackHandler?) {
+        debugPrint(" alipay body:\(body)")
+
+        if let del = alipayDelegate {
+            del.AlipayOrder(body: body, callback: callback)
+        }
+
 
         // call back 是wap 支付的结果, 钱包支付的结果要在app delegate 中写
-        AlipaySDK.defaultService().payOrder(body.value(forKey: "orderStringAlipay") as? String ?? "", fromScheme: AlipayService.appScheme) { (result) in
-            print("payOrder result:\(result)")
-
-            callback?.success(response: result)
-
-            /*
-            guard let resultDict = (result as? [String: Any]) else { return }
-            if let status = resultDict["resultStatus"] as? String, status == "9000" {
-                callback?.success(response: resultDict)
-            } else {
-
-            }
-             */
-
-        }
+//        AlipaySDK.defaultService().payOrder(body.value(forKey: "orderStringAlipay") as? String ?? "", fromScheme: AlipayService.appScheme) { (result) in
+//            print("payOrder result:\(result)")
+//            callback?.success(response: result)
+//
+//        }
     }
 }

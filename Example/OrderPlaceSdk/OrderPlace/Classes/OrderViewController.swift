@@ -11,6 +11,20 @@ import WebKit
 
 public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
+    private let FEATURES = "features"
+    private let ORDER_PLACE = "order.place"
+    private let ALIPAYSCHEME = "alipayScheme"
+    private let ALIPAY = "alipay"
+    private let SCAN = "scan"
+    private let WECHATPAY = "wechatpay"
+    private let GPS = "gps"
+
+    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
+//    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
+
+    private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceSdk_Example."
+//    private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceWechatPaySDK."
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
@@ -31,8 +45,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         print("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
+        self.serciceMap.removeAll()
     }
 
+    deinit {
+        print("order view controller deinit")
+    }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +60,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
         automaticallyAdjustsScrollViewInsets = false
 
-        print("OrderViewController viewDidLoad2")
-        print("options", self.options)
+        debugPrint("OrderViewController viewDidLoad2")
+        debugPrint("options: ", self.options)
 
         let webConfiguration = WKWebViewConfiguration()
 
@@ -51,6 +69,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         let configService = ConfigService()
         configService.options = self.options;
+        configService.clickedExit = { [weak self] in
+            self?.serciceMap.removeAll()
+        }
         self.addService(service: configService, controller: userContentController)
 
         self.addFeatures(controller: userContentController)
@@ -93,8 +114,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         self.serciceMap[serviceName] = service;
         service.vc = self;
         service.initialize()
+        //controller.add(self, name: serviceName)
 
-        controller.add(self, name: serviceName)
+        controller.add(WKScriptMsgHandler(scriptDelegate: self), name: serviceName)
     }
 
     func addFeatures(controller: WKUserContentController) {
@@ -103,7 +125,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return;
         }
 
-        let features = self.options["features"] as? String;
+        let features = self.options[FEATURES] as? String;
 
         if(features == nil) {
             return;
@@ -126,13 +148,24 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         switch(feature) {
 
-        case "gps":
+        case GPS:
             return GpsService()
 
-        case "alipay":
-            return AlipayService(options);
-        case "scan":
+        case ALIPAY:
+            let alipayService = AlipayService(options)
+            // 最后要保持名字为 framework 的名字
+            if let delegate = NSClassFromString(ORDER_PLACE_ALIPAY_SDK + "AlipayExecutor") as? NSObject.Type {
+                alipayService.alipayDelegate = delegate.init() as? AlipayDelegate
+            }
+            return alipayService
+        case SCAN:
             return ScannerService(options);
+        case WECHATPAY:
+            var wechat = WechatPayService();
+            if let delegate = NSClassFromString(ORDER_PLACE_WECHATPAY_SDK + "WechatExecutor") as? NSObject.Type {
+                wechat = WechatPayService(delegate.init() as? WeChatPayDelegate)
+            }
+            return wechat
         default:
             break;
         }
@@ -140,47 +173,32 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         return nil;
 
     }
-    private func loadWithUrlStr(urlStr: String) {
-        print("urlStr url:\(urlStr)");
-        guard let url = URL(string: urlStr) else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            let webRequest = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 30.0)
-            self.webView.load(webRequest)
-        }
-    }
 
-    private func payWithUrlOrder(urlOrder: String) {
-
-        AlipaySDK.defaultService().payUrlOrder(urlOrder, fromScheme: AlipayService.appScheme) { [weak self](dict) in
-            print("payWithUrlOrder dict:\(dict)")
-            guard let dictResult = dict else { return }
-            if let isProcessUrlPay = dictResult[AnyHashable("isProcessUrlPay")] as? String, let urlStr = dictResult[AnyHashable("returnUrl")] as? String {
-                if isProcessUrlPay == "1" {
-                    self?.loadWithUrlStr(urlStr: urlStr)
-                }
-            }
-        }
-
-    }
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
         if let url = webView.url?.absoluteString {
-            let orderInfo = AlipaySDK.defaultService().fetchOrderInfo(fromH5PayUrl: url)
-            if orderInfo != nil, orderInfo!.count > 0 {
-                self.payWithUrlOrder(urlOrder: orderInfo!)
-                decisionHandler(WKNavigationActionPolicy.cancel)
+
+            if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(ALIPAY), let del = alipayService.alipayDelegate, let options = self.options, let alipayScheme = options[ALIPAYSCHEME] as? String {
+                del.AliapyWebView = webView
+                let legalOrderInfo = del.AlipayFetchOrderInfo(url: url, alipayScheme: alipayScheme)
+                if legalOrderInfo {
+                    decisionHandler(WKNavigationActionPolicy.cancel)
+                } else {
+                    decisionHandler(WKNavigationActionPolicy.allow)
+                }
             } else {
                 decisionHandler(WKNavigationActionPolicy.allow)
             }
-
         } else {
             decisionHandler(WKNavigationActionPolicy.allow)
         }
+
+
     }
 
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         //print("didCommit url:-- \(webView.url?.host)")
-        if let host = webView.url?.host, host.contains("order.place") {
+        if let host = webView.url?.host, host.contains(ORDER_PLACE) {
             setNavigationBar(hidden: true)
         } else {
             setNavigationBar(hidden: false)
@@ -307,44 +325,19 @@ extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
 
         // for alipay  host
-        if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options["features"] as? String, features.contains("alipay") {
-            // wallet pay
-            // if SDK is not available, will open alipay APP to pay, then need to pass the payment result back //to development kit
-            if url.host == "safepay" {
+        if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(ALIPAY) {
 
-                //The merchant’s APP may be killed by the system while processing payment in alipay APP, //then the callback will fail. Please handle the return result of standbyCallback.
-                AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDict) in
-                    print("wallet pay callback result:\(resultDict)")
-                    alipayService.payResultCallback?.success(response: resultDict)
-                })
-
-                // 授权跳转支付宝钱包进行支付，处理支付结果
-                AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
-                    print("processAuth_V2Result result:\(resultDict)")
-                    if let dictResult = resultDict, let result = dictResult["result"] as? String {
-                        print("processAuth_V2 Result result ->:\(result)")
-                    }
-
-                })
-
-            } else if url.host == "platformapi" { //Alipay wallet express login authorization returns authCode
-                AlipaySDK.defaultService().processAuthResult(url, standbyCallback: { (resultDict) in
-                    //The merchant’s APP may be killed by the system while processing payment in alipay //APP, then the callback will fail. Please handle the return result of standbyCallback.
-                    print("wallet pay callback result:\(resultDict)")
-                    alipayService.payResultCallback?.success(response: resultDict)
-                })
-
-                // 授权跳转支付宝钱包进行支付，处理支付结果
-                AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
-                    print("processAuth_V2Result result:\(resultDict)")
-                    if let dictResult = resultDict, let result = dictResult["result"] as? String {
-                        print("processAuth_V2 Result result ->:\(result)")
-                    }
-
-                })
-
+            if let del = alipayService.alipayDelegate {
+                del.AlipayApplicationOpenUrl(app, url: url)
             }
 
+        }
+
+        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(WECHATPAY) {
+
+            if let del = wechatPayService.weChatPayDelegate {
+                del.wechatApplicationOpenUrl(app, url: url)
+            }
 
         }
 

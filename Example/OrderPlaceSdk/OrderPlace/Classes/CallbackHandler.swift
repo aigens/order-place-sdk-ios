@@ -9,14 +9,14 @@ import Foundation
 import UIKit
 import WebKit
 
-public class CallbackHandler {
+@objc public class CallbackHandler: NSObject {
 
-    public var cc: WKUserContentController!;
-    public var callback: String!;
-    public var webView: WKWebView!;
+    @objc public var cc: WKUserContentController!;
+    @objc public var callback: String!;
+    @objc public var webView: WKWebView!;
 
 
-    public func success(response: Any) {
+    @objc public func success(response: Any) {
 
         print("response:\(response)")
         if(callback == nil) {
