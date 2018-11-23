@@ -31,30 +31,29 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var url: String!;
     var options: [String: Any]!;
     private var showNavigationBar: Bool = false;
-
+    
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
-
-
+    
     public required init?(coder aDecoder: NSCoder) {
         print("init coder style2")
         super.init(coder: aDecoder)
     }
-
+    
     @IBAction func exitClicked(_ sender: Any) {
         print("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
         self.serciceMap.removeAll()
     }
-
+    
     deinit {
         print("order view controller deinit")
     }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if (navigationController != nil) {
             navigationController?.delegate = self;
         }
@@ -64,25 +63,25 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         debugPrint("options: ", self.options)
 
         let webConfiguration = WKWebViewConfiguration()
-
+        
         let userContentController = WKUserContentController()
-
+        
         let configService = ConfigService()
         configService.options = self.options;
         configService.clickedExit = { [weak self] in
             self?.serciceMap.removeAll()
         }
         self.addService(service: configService, controller: userContentController)
-
+        
         self.addFeatures(controller: userContentController)
-
+        
         if(self.extraServices != nil) {
             for service in self.extraServices {
                 self.addService(service: service, controller: userContentController)
             }
         }
-
-
+        
+        
         webConfiguration.userContentController = userContentController
         let customFrame = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: self.viewContainer.frame.size.width, height: self.viewContainer.frame.size.height))
         self.webView = WKWebView (frame: customFrame, configuration: webConfiguration)
@@ -90,13 +89,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
         webView.navigationDelegate = self;
-
+        
         print(customFrame)
-
+        
         self.viewContainer.addSubview(webView)
         self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
-
-
+        
+        
         if(self.url != nil) {
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
@@ -106,9 +105,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             showNavigationBar = true;
             stopIndicator()
         }
-
+        
     }
-
+    
     func addService(service: OrderPlaceService, controller: WKUserContentController) {
         let serviceName = service.getServiceName();
         self.serciceMap[serviceName] = service;
@@ -118,9 +117,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         controller.add(WKScriptMsgHandler(scriptDelegate: self), name: serviceName)
     }
-
+    
     func addFeatures(controller: WKUserContentController) {
-
+        
         if(self.options == nil) {
             return;
         }
@@ -130,22 +129,22 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if(features == nil) {
             return;
         }
-
+        
         let fs = features!.split(separator: ",")
-
+        
         for f in fs {
-
+            
             let service = self.makeService(feature: String(f))
             if(service != nil) {
                 self.addService(service: service!, controller: controller)
             }
-
+            
         }
-
+        
     }
-
+    
     func makeService(feature: String) -> OrderPlaceService! {
-
+        
         switch(feature) {
 
         case GPS:
@@ -169,13 +168,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         default:
             break;
         }
-
+        
         return nil;
-
+        
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
+        
         if let url = webView.url?.absoluteString {
 
             if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(ALIPAY), let del = alipayService.alipayDelegate, let options = self.options, let alipayScheme = options[ALIPAYSCHEME] as? String {
@@ -195,7 +194,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
 
     }
-
+    
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
         //print("didCommit url:-- \(webView.url?.host)")
         if let host = webView.url?.host, host.contains(ORDER_PLACE) {
@@ -214,11 +213,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         setNavigationBar(hidden: false)
         stopIndicator()
     }
-
+    
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-
+        
         print("message", message.body)
-
+        
         /*
          if("ConfigService" == message.name){
          
@@ -239,47 +238,47 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         } else {
             print("service not registered", serviceName)
         }
-
+        
     }
-
+    
     public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping () -> Void) {
-
+                        completionHandler: @escaping () -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             completionHandler()
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
-
+    
+    
     public func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (Bool) -> Void) {
-
+                        completionHandler: @escaping (Bool) -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
-
+        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             completionHandler(true)
         }))
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(false)
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
-
+    
+    
     public func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo,
-        completionHandler: @escaping (String?) -> Void) {
-
+                        completionHandler: @escaping (String?) -> Void) {
+        
         let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .actionSheet)
-
+        
         alertController.addTextField { (textField) in
             textField.text = defaultText
         }
-
+        
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
             if let text = alertController.textFields?.first?.text {
                 completionHandler(text)
@@ -287,18 +286,18 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                 completionHandler(defaultText)
             }
         }))
-
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
             completionHandler(nil)
         }))
-
+        
         present(alertController, animated: true, completion: nil)
     }
-
+    
     public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-
+    
     private func setNavigationBar(hidden: Bool) {
         self.navigationController?.setNavigationBarHidden(hidden, animated: false)
     }
@@ -310,8 +309,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
     }
-
-
+    
+    
 }
 extension OrderViewController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -323,7 +322,7 @@ extension OrderViewController: UINavigationControllerDelegate {
 
 extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
-
+        
         // for alipay  host
         if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(ALIPAY) {
 
@@ -340,9 +339,16 @@ extension OrderViewController: OrderPlaceDelegate {
             }
 
         }
-
+        
+        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options["features"] as? String, features.contains("wechatpay") {
+            let wxapiManager = WXApiManager.sharedManager
+            wxapiManager.payResultCallback = wechatPayService.payResultCallback
+            WXApi.handleOpen(url, delegate: wxapiManager)
+            
+        }
+        
     }
-
+    
 }
 
 

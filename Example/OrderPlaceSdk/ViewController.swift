@@ -23,8 +23,8 @@ class ViewController: UIViewController {
 //        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
         
         
-//        let url = "http://192.168.0.254:8100/";
-        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        let url = "http://192.168.0.254:8100/";
+//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
 //        let url = "https://www.baidu.com/"
         //var services = [GpsService()]
         

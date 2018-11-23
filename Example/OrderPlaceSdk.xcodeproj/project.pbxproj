@@ -195,6 +195,7 @@
 		5275F8872179B402007248AB /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				5261901921A3EEAF001B96E9 /* WeChatSDK1.8.3 */,
 				5275F8FD2179C53A007248AB /* OrderPlace */,
 			);
 			name = Example;
