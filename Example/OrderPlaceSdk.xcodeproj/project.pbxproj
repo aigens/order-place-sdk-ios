@@ -195,7 +195,6 @@
 		5275F8872179B402007248AB /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				5261901921A3EEAF001B96E9 /* WeChatSDK1.8.3 */,
 				5275F8FD2179C53A007248AB /* OrderPlace */,
 			);
 			name = Example;
@@ -216,13 +215,13 @@
 			isa = PBXGroup;
 			children = (
 				52618F4121A28E49001B96E9 /* wechatPay */,
-				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
-				5275F9002179C53A007248AB /* OrderViewController.swift */,
-				5275F9012179C53A007248AB /* ConfigService.swift */,
 				5275F9032179C53A007248AB /* alipay */,
 				5275F9052179C53A007248AB /* scan */,
 				5275F9072179C53A007248AB /* GpsService.swift */,
 				5275F9082179C53A007248AB /* CallbackHandler.swift */,
+				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
+				5275F9002179C53A007248AB /* OrderViewController.swift */,
+				5275F9012179C53A007248AB /* ConfigService.swift */,
 				5275F9092179C53A007248AB /* ScannerViewController.swift */,
 				5275F90A2179C53A007248AB /* OrderPlaceService.swift */,
 				5261905221A46447001B96E9 /* WKScriptMsgHandler.swift */,
