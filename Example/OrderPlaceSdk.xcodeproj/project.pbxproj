@@ -39,6 +39,7 @@
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
 		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
+		52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F8410421ABD75600579EE4 /* ApplepayService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -97,6 +98,7 @@
 		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
+		52F8410421ABD75600579EE4 /* ApplepayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplepayService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				5275F9032179C53A007248AB /* alipay */,
 				5275F9052179C53A007248AB /* scan */,
 				5275F9072179C53A007248AB /* GpsService.swift */,
+				52F8410321ABD75600579EE4 /* applepay */,
 				5275F9082179C53A007248AB /* CallbackHandler.swift */,
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
@@ -251,6 +254,14 @@
 				5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		52F8410321ABD75600579EE4 /* applepay */ = {
+			isa = PBXGroup;
+			children = (
+				52F8410421ABD75600579EE4 /* ApplepayService.swift */,
+			);
+			path = applepay;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -520,6 +531,7 @@
 				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
 				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
 				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
+				52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */,
 				526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
 			);

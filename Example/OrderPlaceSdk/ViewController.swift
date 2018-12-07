@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 //        let url = "https://www.baidu.com/"
         //var services = [GpsService()]
         
+        // "appleMerchantIdentifier": "merchant.aigens.test" , -> support apple pay need set
         let options = ["features": "gps,scan,alipay,wechatpay","alipayScheme": "alipaySchemes123"];
         
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
