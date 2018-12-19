@@ -21,7 +21,7 @@ class AlipayService: OrderPlaceService {
     // We don't need weak here, because we are the delegate of run time get.
     var alipayDelegate: AlipayDelegate? = nil
 
-    static public let SERVICE_NAME: String = "AlipayService"
+    static public var SERVICE_NAME: String = "AlipayService"
     /// default alipaySchemes123
     static public var appScheme: String = "alipaySchemes123"
 
@@ -42,7 +42,13 @@ class AlipayService: OrderPlaceService {
     }
 
     override func getServiceName() -> String {
-        return AlipayService.SERVICE_NAME
+        if let features = self.options?["features"] as? String {
+            let fs = features.split(separator: ",");
+            if (fs.contains("alipayhk")) {
+                AlipayService.SERVICE_NAME = "AlipayHKService";
+            }
+        }
+        return AlipayService.SERVICE_NAME;
     }
 
     // body: params
@@ -50,7 +56,10 @@ class AlipayService: OrderPlaceService {
         switch method {
         case "requestPay":
             payResultCallback = callback
-            body.setValue(AlipayService.appScheme, forKey: "alipayScheme")
+            print("body:\(body)")
+            if let alipayScheme = body.value(forKey: "alipayScheme") as? String {
+                AlipayService.appScheme = alipayScheme;
+            }
             payOrder(body: body, callback: callback)
             break;
         case "getAlipaySdkVersion":

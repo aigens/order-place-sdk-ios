@@ -11,13 +11,13 @@ import UIKit
 class ScannerService: OrderPlaceService {
     private let scanVCId = "ScannerViewControllerNav"
     private var scanCallback: CallbackHandler? = nil;
-    
+
     var options: [String: Any]!;
-    
+
     override func initialize() {
 
     }
-    
+
     init(_ options: [String: Any]) {
         super.init()
         self.options = options;
@@ -37,21 +37,23 @@ class ScannerService: OrderPlaceService {
             break;
         }
     }
-    
+
     func scan(callback: CallbackHandler?) {
-        guard let NavController = OrderPlace.makeViewController(vcId: scanVCId) as? UINavigationController, let scanVC = NavController.topViewController as? ScannerViewController else {return}
+        guard let NavController = OrderPlace.makeViewController(vcId: scanVCId) as? UINavigationController, let scanVC = NavController.topViewController as? ScannerViewController else { return }
         scanVC.options = options;
         scanVC.SVDelegate = self;
         vc.present(NavController, animated: true, completion: nil)
     }
-    
-    
+
+
 }
 
-extension ScannerService : ScannerViewDelegate {
+extension ScannerService: ScannerViewDelegate {
     func scannerReulst(result: String) {
         print("result:\(result)")
-        guard let callback = scanCallback else {return}
-        callback.success(response: generateResultObject(true))
+        guard let callback = scanCallback else { return }
+        var resultData = Dictionary<String, Any>()
+        resultData["data"] = result;
+        callback.success(response: resultData)
     }
 }

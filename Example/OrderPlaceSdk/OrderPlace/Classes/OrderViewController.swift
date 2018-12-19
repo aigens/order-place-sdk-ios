@@ -15,6 +15,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let ORDER_PLACE = "order.place"
     private let ALIPAYSCHEME = "alipayScheme"
     private let ALIPAY = "alipay"
+    private let ALIPAY_HK = "alipayhk"
     private let SCAN = "scan"
     private let APPLE_PAY = "applepay"
     private let WECHATPAY = "wechatpay"
@@ -151,12 +152,15 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         case GPS:
             return GpsService()
 
+        case ALIPAY_HK:
+            fallthrough
         case ALIPAY:
             let alipayService = AlipayService(options)
             // 最后要保持名字为 framework 的名字
             if let delegate = NSClassFromString(ORDER_PLACE_ALIPAY_SDK + "AlipayExecutor") as? NSObject.Type {
                 alipayService.alipayDelegate = delegate.init() as? AlipayDelegate
             }
+            print("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
             return alipayService
         case SCAN:
             return ScannerService(options);
@@ -227,6 +231,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
          self.configService.handleMessage(method: "back", body: message.body, callback: nil);
          
          }*/
+        
+        print("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
+        print("jadd self.serciceMap:\(self.serciceMap)");
+        
         let serviceName = message.name;
         let service = self.serciceMap[serviceName];
         if(service != nil) {
@@ -323,6 +331,12 @@ extension OrderViewController: UINavigationControllerDelegate {
     }
 }
 
+extension OrderViewController: ScannerDelegate {
+    public func scannerApplicationOpenUrl(_ app: UIApplication, url: URL) {
+        applicationOpenUrl(app, url: url)
+    }
+}
+
 extension OrderViewController: OrderPlaceDelegate {
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
 
@@ -343,12 +357,12 @@ extension OrderViewController: OrderPlaceDelegate {
 
         }
 
-        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options["features"] as? String, features.contains("wechatpay") {
-            let wxapiManager = WXApiManager.sharedManager
-            wxapiManager.payResultCallback = wechatPayService.payResultCallback
-            WXApi.handleOpen(url, delegate: wxapiManager)
-
-        }
+//        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options["features"] as? String, features.contains("wechatpay") {
+//            let wxapiManager = WXApiManager.sharedManager
+//            wxapiManager.payResultCallback = wechatPayService.payResultCallback
+//            WXApi.handleOpen(url, delegate: wxapiManager)
+//
+//        }
 
     }
 

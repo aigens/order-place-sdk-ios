@@ -75,7 +75,6 @@ protocol OrderPlaceDelegate: AnyObject {
 
         caller.present(controller, animated: true, completion: nil)
 
-
         openUrl(caller: caller, url: url, options: options)
 
     }
@@ -85,9 +84,8 @@ protocol OrderPlaceDelegate: AnyObject {
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
 
         let scanVC = controller.topViewController as! ScannerViewController;
-
         scanVC.options = options;
-
+        self.OPDelegate = ScannerManager.shared;
         caller.present(controller, animated: true, completion: nil)
 
     }

@@ -87,13 +87,24 @@ extension AlipayExecutor: AlipayDelegate {
 
             //The merchant’s APP may be killed by the system while processing payment in alipay APP, //then the callback will fail. Please handle the return result of standbyCallback.
             AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { [weak self] (resultDict) in
-                print("wallet pay callback result:\(resultDict)")
-                self?.alipayResultCallback?.success(response: resultDict)
+                print("safepay wallet pay callback result:\(resultDict)")
+                guard let dictResult = resultDict else { return }
+                var response = Dictionary<String, Any>()
+                if let resultStatus = dictResult[AnyHashable("resultStatus")] as? String {
+                    response["resultStatus"] = resultStatus;
+                }
+                if let result = dictResult[AnyHashable("result")] as? String {
+                    response["result"] = result;
+                }
+                if let memo = dictResult[AnyHashable("memo")] as? String {
+                    response["memo"] = memo;
+                }
+                self?.alipayResultCallback?.success(response: response)
             })
 
             // 授权跳转支付宝钱包进行支付，处理支付结果
             AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
-                print("processAuth_V2Result result:\(resultDict)")
+                print("safepay processAuth_V2Result result:\(resultDict)")
                 if let dictResult = resultDict, let result = dictResult["result"] as? String {
                     print("processAuth_V2 Result result ->:\(result)")
                 }
@@ -103,13 +114,13 @@ extension AlipayExecutor: AlipayDelegate {
         } else if url.host == "platformapi" { //Alipay wallet express login authorization returns authCode
             AlipaySDK.defaultService().processAuthResult(url, standbyCallback: { [weak self] (resultDict) in
                 //The merchant’s APP may be killed by the system while processing payment in alipay //APP, then the callback will fail. Please handle the return result of standbyCallback.
-                print("wallet pay callback result:\(resultDict)")
-                self?.alipayResultCallback?.success(response: resultDict)
+                print("platformapi wallet pay callback result:\(resultDict)")
+//                self?.alipayResultCallback?.success(response: resultDict)
             })
 
             // 授权跳转支付宝钱包进行支付，处理支付结果
             AlipaySDK.defaultService().processAuth_V2Result(url, standbyCallback: { (resultDict) in
-                print("processAuth_V2Result result:\(resultDict)")
+                print("platformapi processAuth_V2Result result:\(resultDict)")
                 if let dictResult = resultDict, let result = dictResult["result"] as? String {
                     print("processAuth_V2 Result result ->:\(result)")
                 }

@@ -8,21 +8,21 @@
 import Foundation
 import WebKit
 
-public class OrderPlaceService: NSObject {
+open class OrderPlaceService: NSObject {
 
     public var vc: UIViewController!;
 
-    func getServiceName() -> String {
+    open func getServiceName() -> String {
         preconditionFailure("This method getServiceName must be overridden")
         //return "";
     }
 
-    func initialize() {
+    open func initialize() {
 
 
     }
 
-    func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
+    open func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
         preconditionFailure("This method handleMessage must be overridden")
         //return;
     }
