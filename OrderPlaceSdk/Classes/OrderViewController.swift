@@ -38,6 +38,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         print("OrderViewController viewDidLoad2")
         print("options", self.options)
         
+        automaticallyAdjustsScrollViewInsets = false
+        
         let webConfiguration = WKWebViewConfiguration()
         
         let userContentController = WKUserContentController()

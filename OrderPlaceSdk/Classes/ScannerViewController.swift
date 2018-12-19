@@ -22,7 +22,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
         
-        let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
+        
+        // swift 3.0
+        let videoCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        // swift 4.0
+        //let videoCaptureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         let videoInput: AVCaptureDeviceInput
         
         do {
@@ -45,7 +50,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             //metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.pdf417]
-            metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+            
+            // swift 3.0
+            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+
+            // swift 4.0
+//            metadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
         } else {
             failed()
             return
@@ -53,7 +63,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession);
         previewLayer.frame = view.layer.bounds;
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill;
+        
+        // swift 3.0
+        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        
+        // swift 4.0
+        //previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill;
         view.layer.addSublayer(previewLayer);
         
         captureSession.startRunning();

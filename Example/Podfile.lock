@@ -1,5 +1,5 @@
 PODS:
-  - OrderPlaceSdk (0.1.3)
+  - OrderPlaceSdk (0.2.7)
 
 DEPENDENCIES:
   - OrderPlaceSdk (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  OrderPlaceSdk: e2dbc74e87759d7b4536c9d0f60560c15bc7f4e6
+  OrderPlaceSdk: 751cdbbabcedd0f19f71d7b3e18aafae6f1e17c4
 
 PODFILE CHECKSUM: 5779806915bc5ea8593dfa344d9126b7d5e56d58
 
