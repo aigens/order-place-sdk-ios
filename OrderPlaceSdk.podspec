@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OrderPlaceSdk'
-  s.version          = '0.2.5'
+  s.version          = '0.2.6'
   s.summary          = 'OrderPlaceSdk Alpha.'
 
 # This description is used to generate tags and improve search results.
@@ -36,7 +36,7 @@ OrderPlaceSdk for embed Mobile Ordering into your apps.
       'OrderPlaceSdk' => ['OrderPlaceSdk/Assets/**/*.{storyboard,xib}']
   }
 
-  s.swift_version = '4.1'
+  s.swift_version = '3.3'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'MapKit'
