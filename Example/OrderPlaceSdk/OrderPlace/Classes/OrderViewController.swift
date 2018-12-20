@@ -220,6 +220,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         setNavigationBar(hidden: false)
         stopIndicator()
     }
+    
+    public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        //print("didFailProvisionalNavigation url:\(webView.url?.absoluteString)")
+        setNavigationBar(hidden: false)
+        stopIndicator()
+    }
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 

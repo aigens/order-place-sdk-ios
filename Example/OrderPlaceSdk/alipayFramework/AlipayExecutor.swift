@@ -93,12 +93,14 @@ extension AlipayExecutor: AlipayDelegate {
                 if let resultStatus = dictResult[AnyHashable("resultStatus")] as? String {
                     response["resultStatus"] = resultStatus;
                 }
-                if let result = dictResult[AnyHashable("result")] as? String {
-                    response["result"] = result;
-                }
+//                if let result = dictResult[AnyHashable("result")] as? String {
+//                    response["result"] = result;
+//                }
+                
                 if let memo = dictResult[AnyHashable("memo")] as? String {
                     response["memo"] = memo;
                 }
+                print("response:\(response)")
                 self?.alipayResultCallback?.success(response: response)
             })
 

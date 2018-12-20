@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     
     @IBAction func scanClicked(_ sender: Any) {
         
-        let options = ["features": "gps,scan,wechatpayhk,wechatpay,alipay,alipayhk","alipayScheme": "alipaySchemes123"];
+        let options = ["features": "gps,scan,wechatpayhk,alipayhk","alipayScheme": "alipaySchemes123"];
         
         OrderPlace.scan(caller: self, options:options);
     }
