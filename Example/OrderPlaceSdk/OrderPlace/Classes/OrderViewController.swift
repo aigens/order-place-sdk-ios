@@ -203,7 +203,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-        //print("didCommit url:-- \(webView.url?.host)")
+//        print("didCommit url:-- \(webView.url?.host)")
         if let host = webView.url?.host, host.contains(ORDER_PLACE) {
             setNavigationBar(hidden: true)
         } else {
@@ -212,20 +212,25 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         startIndicator()
     }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        //print("finish url:\(webView.url?.absoluteString)")
+//        print("finish url:\(webView.url?.absoluteString)")
         stopIndicator()
     }
+    
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        //print("didFail url:\(webView.url?.absoluteString)")
+//        print("didFail url:\(webView.url?.absoluteString)--\(error)")
         setNavigationBar(hidden: false)
         stopIndicator()
     }
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        //print("didFailProvisionalNavigation url:\(webView.url?.absoluteString)")
+        
+//        print("didFailProvisionalNavigation url:\(webView.url?.absoluteString) \(error)")
+        showAlert(title: "Error", message: error.localizedDescription, OKHandler: nil)
         setNavigationBar(hidden: false)
         stopIndicator()
     }
+    
+    
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
@@ -340,6 +345,14 @@ extension OrderViewController: UINavigationControllerDelegate {
 extension OrderViewController: ScannerDelegate {
     public func scannerApplicationOpenUrl(_ app: UIApplication, url: URL) {
         applicationOpenUrl(app, url: url)
+    }
+}
+
+extension OrderViewController {
+    public func showAlert(title:String?,message:String?,OKHandler: ((UIAlertAction) -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert);
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: OKHandler));
+        present(alertController, animated: true, completion: nil)
     }
 }
 
