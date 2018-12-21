@@ -19,6 +19,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let SCAN = "scan"
     private let APPLE_PAY = "applepay"
     private let WECHATPAY = "wechatpay"
+    private let WECHATPAY_HK = "wechatpayhk"
     private let GPS = "gps"
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
@@ -164,10 +165,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return alipayService
         case SCAN:
             return ScannerService(options);
+        case WECHATPAY_HK:
+            fallthrough
         case WECHATPAY:
-            var wechat = WechatPayService();
+            var wechat = WechatPayService(options);
             if let delegate = NSClassFromString(ORDER_PLACE_WECHATPAY_SDK + "WechatExecutor") as? NSObject.Type {
-                wechat = WechatPayService(delegate.init() as? WeChatPayDelegate)
+                wechat = WechatPayService(options,delegate.init() as? WeChatPayDelegate)
             }
             return wechat
         case APPLE_PAY:

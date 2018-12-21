@@ -15,17 +15,27 @@ import UIKit
 }
 
 class WechatPayService: OrderPlaceService {
-    static public let SERVICE_NAME: String = "WeChatPayService"
+    static public var SERVICE_NAME: String = "WeChatPayService"
 
     var payResultCallback: CallbackHandler? = nil
     // We don't need weak here, because we are the delegate of run time get.
     var weChatPayDelegate: WeChatPayDelegate? = nil
 
-    init(_ weChatPayDelegate: WeChatPayDelegate? = nil) {
+    var options: [String: Any]?
+    init(_ options: [String: Any], _ weChatPayDelegate: WeChatPayDelegate? = nil) {
+        self.options = options;
         self.weChatPayDelegate = weChatPayDelegate
     }
 
     override func getServiceName() -> String {
+        
+        if let features = self.options?["features"] as? String {
+            let fs = features.split(separator: ",");
+            if (fs.contains("wechatpayhk")) {
+                AlipayService.SERVICE_NAME = "WeChatPayHKService";
+            }
+        }
+        
         return WechatPayService.SERVICE_NAME
     }
 
