@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5220ECE521F17A4B00026ED5 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5220ECE421F17A4B00026ED5 /* DrawView.swift */; };
+		5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5220ECF321F1B23700026ED5 /* BridgePasskit.m */; };
 		52618F3621A261B7001B96E9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52618F3521A261B7001B96E9 /* Security.framework */; };
 		52618F3821A26266001B96E9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52618F3721A26266001B96E9 /* libsqlite3.0.tbd */; };
 		52618F4321A28EAB001B96E9 /* WechatPayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52618F4221A28EAB001B96E9 /* WechatPayService.swift */; };
@@ -63,6 +65,8 @@
 /* Begin PBXFileReference section */
 		050486A825AED2C4BBD9DD4E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5220ECE421F17A4B00026ED5 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
+		5220ECF321F1B23700026ED5 /* BridgePasskit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgePasskit.m; sourceTree = "<group>"; };
 		5257397921CBA0AA00D026E0 /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
 		52618F3521A261B7001B96E9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		52618F3721A26266001B96E9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -231,6 +235,7 @@
 				5275F9092179C53A007248AB /* ScannerViewController.swift */,
 				5275F90A2179C53A007248AB /* OrderPlaceService.swift */,
 				5261905221A46447001B96E9 /* WKScriptMsgHandler.swift */,
+				5220ECE421F17A4B00026ED5 /* DrawView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 		52F8410321ABD75600579EE4 /* applepay */ = {
 			isa = PBXGroup;
 			children = (
+				5220ECF321F1B23700026ED5 /* BridgePasskit.m */,
 				52F8410421ABD75600579EE4 /* ApplepayService.swift */,
 			);
 			path = applepay;
@@ -543,7 +549,9 @@
 				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
 				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
 				52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */,
+				5220ECE521F17A4B00026ED5 /* DrawView.swift in Sources */,
 				526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */,
+				5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,7 +638,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -676,7 +684,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

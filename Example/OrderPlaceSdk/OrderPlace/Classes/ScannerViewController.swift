@@ -21,7 +21,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var previewLayer: AVCaptureVideoPreviewLayer!
     var options: [String: Any]!
     var url: String!
+    
+    private var minView:UIView!
+    private var reticleView:UIView!
+    
+    private let buildReticleColor = UIColor(red: 0.86, green: 0.56, blue: 0.43, alpha: 0.50);
+    private let minViewColor = UIColor(red: 0.96, green: 0.46, blue: 0.10, alpha: 1.00);
 
+//    private let RETICLE_SIZE: CGFloat = 500.0;
+    private let RETICLE_OFFSET: CGFloat = 60.0;
+    private let RETICLE_ALPHA: CGFloat = 0.4;
+    private let RETICLE_WIDTH: CGFloat = 2.0;
+    private let MINVIEW_WIDTH: CGFloat = 2.0;
+    private let SCREEN_HEIGHT = UIScreen.main.bounds.height;
+    private let SCREEN_WIDTH = UIScreen.main.bounds.width;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -71,7 +85,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.layer.insertSublayer(previewLayer, at: 0)
 
         captureSession.startRunning();
+        
+        addReticleView();
     }
+    
+    
 
     @IBAction func doneClicked(_ sender: Any) {
 
@@ -148,7 +166,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (SVDelegate == nil && code.starts(with: "http")) { // from scan order.place
             self.url = code
             self.performSegue(withIdentifier: "Scan2Order", sender: self)
-        } else {  // from ionic scan service
+        } else { // from ionic scan service
             SVDelegate?.scannerReulst(result: code)
             dismiss(animated: true, completion: nil)
         }
@@ -202,3 +220,86 @@ extension ScannerViewController: UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(isHidden, animated: false)
     }
 }
+
+extension ScannerViewController {
+
+    private func addReticleView() {
+        guard let reticleImage = buildReticleImage() else {return;}
+        
+        let reticleView = UIImageView(image: reticleImage);
+  
+        let minAxis: CGFloat = min(SCREEN_HEIGHT, SCREEN_WIDTH);
+        let rectArea = CGRect(x: CGFloat(0.5 * (SCREEN_WIDTH - minAxis)), y: CGFloat(0.5 * (SCREEN_HEIGHT - minAxis)), width: minAxis, height: minAxis);
+        reticleView.frame = rectArea;
+        reticleView.isOpaque = false
+        reticleView.contentMode = .scaleAspectFit
+        reticleView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin,.flexibleTopMargin];
+        if let midImage = buildMinBar() {
+            let minView = UIImageView(image:midImage);
+            minView.isOpaque = false
+            minView.contentMode = .scaleAspectFit
+            minView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin,.flexibleTopMargin];
+            minView.frame = CGRect(x: RETICLE_OFFSET + (RETICLE_WIDTH * 0.5), y: RETICLE_OFFSET + (RETICLE_WIDTH * 0.5), width: (SCREEN_WIDTH - 2 * RETICLE_OFFSET - RETICLE_WIDTH), height: MINVIEW_WIDTH);
+            self.minView = minView;
+            reticleView.addSubview(minView)
+        }
+        self.reticleView = reticleView;
+        reticleView.clipsToBounds = true;
+        view.addSubview(reticleView);
+        
+  
+        addDrawView(rectArea);
+        
+        beginScanAnimation();
+    }
+    
+    private func addDrawView(_ rectArea:CGRect) {
+        let drawView = DrawView(frame: UIScreen.main.bounds)
+        var blankF = rectArea
+        blankF.origin.x += RETICLE_OFFSET;
+        blankF.origin.y += RETICLE_OFFSET;
+        blankF.size.height = SCREEN_WIDTH - 2 * RETICLE_OFFSET;
+        blankF.size.width = SCREEN_WIDTH - 2 * RETICLE_OFFSET;
+        drawView.blankFramework = blankF;
+        view.insertSubview(drawView, at: 1)
+    }
+    
+    private func beginScanAnimation() {
+        if (minView == nil || reticleView == nil) {return}
+        self.minView.frame.origin.y = RETICLE_OFFSET + (RETICLE_WIDTH * 0.5);
+        self.view.layoutIfNeeded();
+        UIView.animate(withDuration: 2.0) {
+            UIView.setAnimationRepeatCount(Float(CGFloat.greatestFiniteMagnitude))
+            self.minView.frame.origin.y = self.reticleView.frame.size.height - self.RETICLE_OFFSET - self.RETICLE_WIDTH;
+            self.view.layoutIfNeeded();
+        }
+        
+    }
+    private func buildMinBar() -> UIImage? {
+        var result: UIImage? = nil;
+
+        UIGraphicsBeginImageContext(CGSize(width: SCREEN_WIDTH, height: MINVIEW_WIDTH))
+        let context = UIGraphicsGetCurrentContext()
+        context?.setStrokeColor(minViewColor.cgColor)
+        context?.setLineWidth(RETICLE_WIDTH)
+        context?.stroke(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: MINVIEW_WIDTH))
+        result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return result;
+    }
+    
+    private func buildReticleImage() -> UIImage? {
+        var result: UIImage? = nil;
+        UIGraphicsBeginImageContext(CGSize(width: SCREEN_WIDTH, height: SCREEN_WIDTH))
+        let context = UIGraphicsGetCurrentContext()
+        context?.setStrokeColor(buildReticleColor.cgColor);
+        context?.setLineWidth(RETICLE_WIDTH)
+        context?.stroke(CGRect(x: RETICLE_OFFSET, y: RETICLE_OFFSET, width: SCREEN_WIDTH - 2 * RETICLE_OFFSET, height: SCREEN_WIDTH - 2 * RETICLE_OFFSET))
+        result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result;
+    }
+
+}
+

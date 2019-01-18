@@ -15,8 +15,30 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
     }
+    
+    private func forLPTest() {
+        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        var member = [String: Any]()
+        
+        member["memberId"] = "123456"
+        member["session"] = "ABCDEF" //same as session
+        member["source"] = "lp"
+        member["language"] = "zh" //en,zh,zh-cn
+        member["name"] = "Optional Name" //Optional (with actual data)
+        member["gender"] = "M" //Optional (with actual data)
+        member["age"] = 25 //Optional (with actual data)
+        member["phone"] = "65448231" //Optional (with actual data)
+        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member] as [String : Any];
+        
+        OrderPlace.openUrl(caller: self, url: url, options:options);
+    }
 
     @IBAction func openClicked(_ sender: Any) {
+        
+        forLPTest()
+        return;
+        
         
         //let url = "https://aigens-sdk-demo.firebaseapp.com/";
 //        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
@@ -27,6 +49,7 @@ class ViewController: UIViewController {
 //        let url = "https://www.baidu.com/";
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
         let url = "https://aigens-sdk-demo.firebaseapp.com"
+//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
         //var services = [GpsService()]
         
         // "appleMerchantIdentifier": "merchant.aigens.test" , -> support apple pay need set

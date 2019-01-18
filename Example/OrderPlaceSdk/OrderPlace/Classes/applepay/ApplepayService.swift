@@ -8,7 +8,7 @@
 
 import UIKit
 import PassKit
-import AddressBookUI
+import AddressBook
 class ApplepayService: OrderPlaceService {
     public var options: [String: Any]?
 
@@ -80,7 +80,7 @@ class ApplepayService: OrderPlaceService {
                 label: 'My Fashion Company',
                 amount: 53.98
             }],
-     
+
         shippingMethods: [
             {
                 identifier: 'NextDay',
@@ -100,16 +100,16 @@ class ApplepayService: OrderPlaceService {
                 detail: 'Arrive by 5pm this Saturday.',
                 amount: 6.99
             }],
-     
+
         merchantIdentifier: 'merchant.apple.test',  // Need to pass?
-     
+
         currencyCode: 'HKD',
         countryCode: 'HK',
         billingAddressRequirement: 'none', // none/all/postcode/email/phone
         shippingAddressRequirement: 'none', // none/all/postcode/email/phone
         shippingType: 'shipping'  // shipping/delivery/store/service
      }
-     
+
      */
     private func makePaymentRequest(_ body: NSDictionary, _ callback: CallbackHandler?) {
         print("apple pay body:\(body) callback:\(callback)")
@@ -207,7 +207,7 @@ class ApplepayService: OrderPlaceService {
      }]
             }
      }
-     
+
      */
     private func shippingMethodsFromBody(_ body: NSDictionary) -> [PKShippingMethod] {
         var methods: [PKShippingMethod] = []
@@ -391,14 +391,14 @@ extension ApplepayService: PKPaymentAuthorizationViewControllerDelegate {
          - key : "paymentMethodDisplayName"
          - value : "ChinaUnionPay 7647"
          */
-        
+
 //        let paymentData =  String(data: payment.token.paymentData, encoding: .utf8);
-        
+
         let response = formatPaymentForApplication(payment)
         payResultCallback?.success(response: response)
 
     }
-    
+
 //    @available(iOS 11.0, *)
 //    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Swift.Void) {
 //        print("payment:\(payment)")
