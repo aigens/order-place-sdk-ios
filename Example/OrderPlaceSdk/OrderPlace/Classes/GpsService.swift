@@ -32,7 +32,7 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
     
     override public func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
         
-        print("GpsService", method, body)
+        JJPrint("GpsService:\(method)--:\(body)")
         
         switch method{
             case "listenUpdate":
@@ -60,7 +60,7 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
         
         self.lm.startUpdatingLocation()
         
-        print("started location updates")
+        JJPrint("started location updates")
     }
     
     func getLastLocation(callback: CallbackHandler?){
@@ -68,7 +68,7 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
         self.lastCb = callback;
         self.lm.startUpdatingLocation()
         
-        print("started get location")
+        JJPrint("started get location")
         
     }
     
@@ -82,7 +82,7 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
-        print("locations", locations)
+        JJPrint("locations:\(locations)")
         
         for loc in locations{
             
@@ -115,6 +115,6 @@ public class GpsService: OrderPlaceService, CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error){
         
-        print("location failed")
+        JJPrint("location failed")
     }
 }

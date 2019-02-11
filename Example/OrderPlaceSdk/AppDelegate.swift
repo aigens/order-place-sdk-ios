@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        OrderPlace.application(application, didFinishLaunchingWithOptions: launchOptions)
         WechatExecutor.application(application, didFinishLaunchingWithOptions: launchOptions)
+
         return true
     }
     

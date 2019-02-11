@@ -112,7 +112,7 @@ class ApplepayService: OrderPlaceService {
 
      */
     private func makePaymentRequest(_ body: NSDictionary, _ callback: CallbackHandler?) {
-        print("apple pay body:\(body) callback:\(callback)")
+        JJPrint("apple pay body:\(body) callback:\(callback)")
         guard canMakePayments() else { return }
 
         completion = nil
@@ -213,7 +213,7 @@ class ApplepayService: OrderPlaceService {
         var methods: [PKShippingMethod] = []
         if let tempMethods = body.value(forKey: "shippingMethods") as? Array<Dictionary<String, Any>> {
             for tempMethod in tempMethods {
-                print("payment method:\(tempMethod)")
+                JJPrint("payment method:\(tempMethod)")
                 let method = PKShippingMethod()
                 if let lable = tempMethod["label"] as? String, let amount = tempMethod["amount"], let decimalValue = (amount as AnyObject).decimalValue {
                     let amountNumber = NSDecimalNumber(decimal: decimalValue)
@@ -247,7 +247,7 @@ class ApplepayService: OrderPlaceService {
         var items: [PKPaymentSummaryItem] = []
         if let tempItems = body.value(forKey: "items") as? Array<Dictionary<String, Any>> {
             for item in tempItems {
-//                print("payment item:\(item)")
+//                JJPrint("payment item:\(item)")
                 if let lable = item["label"] as? String, let amount = item["amount"], let decimalValue = (amount as AnyObject).decimalValue {
                     let amountNumber = NSDecimalNumber(decimal: decimalValue)
                     let newItem = PKPaymentSummaryItem(label: lable, amount: amountNumber)
@@ -401,7 +401,7 @@ extension ApplepayService: PKPaymentAuthorizationViewControllerDelegate {
 
 //    @available(iOS 11.0, *)
 //    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Swift.Void) {
-//        print("payment:\(payment)")
+//        JJPrint("payment:\(payment)")
 //    }
 
     /*

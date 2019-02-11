@@ -25,7 +25,7 @@ protocol OrderPlaceDelegate: AnyObject {
 
         let podBundle = Bundle(for: OrderPlace.self)
 
-        print("podBundle", podBundle.bundlePath)
+        JJPrint("podBundle", podBundle.bundlePath)
 
         let bundleURL = podBundle.url(forResource: "OrderPlaceSdk", withExtension: "bundle")
 
@@ -37,7 +37,7 @@ protocol OrderPlaceDelegate: AnyObject {
 
         let storyboard = UIStoryboard(name: "OrderPlaceStoryboard", bundle: bundle)
 
-        print("storyboard", storyboard)
+        JJPrint("storyboard:\(storyboard)")
 
         let controller = storyboard.instantiateViewController(withIdentifier: vcId);
 
@@ -48,7 +48,7 @@ protocol OrderPlaceDelegate: AnyObject {
 
     @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any]) {
 
-        print("open url")
+        JJPrint("open url")
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
 
         let orderVC = controller.topViewController as! OrderViewController;
@@ -63,7 +63,7 @@ protocol OrderPlaceDelegate: AnyObject {
 
     @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any], services: Array<OrderPlaceService>) {
 
-        print("open url")
+        JJPrint("open url")
 
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
 

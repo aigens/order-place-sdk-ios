@@ -50,7 +50,7 @@ class ScannerService: OrderPlaceService {
 
 extension ScannerService: ScannerViewDelegate {
     func scannerReulst(result: String) {
-        print("result:\(result)")
+        JJPrint("result:\(result)")
         guard let callback = scanCallback else { return }
         var resultData = Dictionary<String, Any>()
         resultData["data"] = result;

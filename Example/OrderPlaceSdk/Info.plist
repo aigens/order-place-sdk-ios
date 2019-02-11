@@ -83,6 +83,10 @@
 	<string>Scan QR</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Current Location</string>
+	<key>StripeLivePublishableKey</key>
+	<string>pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H</string>
+	<key>StripeTestPublishableKey</key>
+	<string>pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -20,7 +20,7 @@ class ConfigService: OrderPlaceService {
 
     override func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {
 
-        print("ConfigService2", method, body)
+        JJPrint("ConfigService2:\(method) :\(body)")
 
         switch method {
         case "back":
@@ -57,7 +57,7 @@ class ConfigService: OrderPlaceService {
 
         let value = UserDefaults.standard.object(forKey: name)
 
-        print("getPref", name, value as Any)
+        JJPrint("getPref:\(name)--:\(value as Any )")
 
 
         callback?.success(response: value as Any)
@@ -69,7 +69,7 @@ class ConfigService: OrderPlaceService {
 
         let value = self.options;
 
-        print("getParams2", value as Any)
+        JJPrint("getParams2:\(value as Any )")
 
         callback?.success(response: value as Any)
 
@@ -87,8 +87,7 @@ class ConfigService: OrderPlaceService {
     func putPreference(pref: String, name: String, value: Any, callback: CallbackHandler?) {
 
         UserDefaults.standard.set(value, forKey: name)
-
-        print("putPreference", name, value)
+        JJPrint("putPreference:\(name)--:\(value)")
 
     }
 

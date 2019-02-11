@@ -14,7 +14,7 @@ import UIKit
         super.init()
     }
 
-    @objc public static func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    @objc public static func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         if let dictArray = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [Dictionary<String, Any>] {
             for dicts in dictArray {
                 if let dict = dicts["CFBundleURLName"] as? String, dict == "weixin", let arrayCFBundleURLSchemes = dicts["CFBundleURLSchemes"] as? [String], let weixinURLSchemes = arrayCFBundleURLSchemes.first {

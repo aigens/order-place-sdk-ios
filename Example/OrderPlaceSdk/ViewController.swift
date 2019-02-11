@@ -8,6 +8,27 @@
 
 import UIKit
 
+/**  params
+ features:[String:String]
+ {
+ gps,
+ scan,
+ wechatpayhk,
+ alipayhk,
+ applepay,
+ cardIO,
+ stripeApple
+ 
+ }
+
+ alipayScheme:String
+ appleMerchantIdentifier:String
+ member:[String:Any]
+ stripePublishableKey:String
+ showNavigationBar:Bool
+ isDebug:Bool
+ 
+ */
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -29,15 +50,24 @@ class ViewController: UIViewController {
         member["age"] = 25 //Optional (with actual data)
         member["phone"] = "65448231" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member] as [String : Any];
+        let options = ["features": "gps,scan,alipayhk,applepay,stripeApple","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"showNavigationBar": false,"isDebug":true] as [String : Any];
+        /// "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         
         OrderPlace.openUrl(caller: self, url: url, options:options);
+    }
+    
+    private func testCardIOScan() {
+//        let cardIO = CardIOExecutor()
+//        cardIOExecutor = cardIO;
+//        cardIO.testScan();
+        
     }
 
     @IBAction func openClicked(_ sender: Any) {
         
-        forLPTest()
-        return;
+//        forLPTest()
+//        testCardIOScan();
+//        return;
         
         
         //let url = "https://aigens-sdk-demo.firebaseapp.com/";
@@ -48,14 +78,14 @@ class ViewController: UIViewController {
 //        let url = "http://192.168.86.25:8101/#/court-store-list/5175539845300224";
 //        let url = "https://www.baidu.com/";
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
-        let url = "https://aigens-sdk-demo.firebaseapp.com"
+//        let url = "https://aigens-sdk-demo.firebaseapp.com"
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        let url = "http://192.168.0.254:8100"
         //var services = [GpsService()]
         
         // "appleMerchantIdentifier": "merchant.aigens.test" , -> support apple pay need set
         // alipay
 //        let options = ["features": "gps,scan,alipayhk,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay"];
-        
         
         var member = [String: Any]()
         member["memberId"] = "200063"
@@ -67,7 +97,10 @@ class ViewController: UIViewController {
         member["age"] = 17 //Optional (with actual data)
         member["phone"] = "94952850" //Optional (with actual data)
         member["email"] = "him.lam@aigens.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,wechatpayhk,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member] as [String : Any];
+        let options = ["features": "gps,scan,wechatpayhk,alipayhk,applepay,cardIO,stripeApple","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true] as [String : Any];
+        // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
+        // merchant.com.aigens.pay
+        // merchant.aigens.test
         
 
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
@@ -85,10 +118,11 @@ class ViewController: UIViewController {
         member["age"] = 17 //Optional (with actual data)
         member["phone"] = "94952850" //Optional (with actual data)
         member["email"] = "him.lam@aigens.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,wechatpayhk,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member] as [String : Any];
+        let options = ["features": "gps,scan,wechatpayhk,alipayhk,applepay,cardIO,stripeApple","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true] as [String : Any];
+        // "stripePublishableKey": "pk_test_Qz98hi2rnymhXsjWGfplG5dc"
         
         OrderPlace.scan(caller: self, options:options);
     }
     
+    
 }
-

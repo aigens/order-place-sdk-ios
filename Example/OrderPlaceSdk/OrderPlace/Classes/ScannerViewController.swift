@@ -93,14 +93,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     @IBAction func doneClicked(_ sender: Any) {
 
-        print("exit clicked2")
+        JJPrint("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
     }
 
     func failed() {
 
-        print("failed")
+        JJPrint("failed")
 
         let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -143,7 +143,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
 
-        print("metadataOutput")
+        JJPrint("metadataOutput")
 
         captureSession.stopRunning()
 
@@ -160,7 +160,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
 
     func found(code: String) {
-        print(code)
+        JJPrint(code)
 
 
         if (SVDelegate == nil && code.starts(with: "http")) { // from scan order.place
@@ -197,9 +197,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
     }
 
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait

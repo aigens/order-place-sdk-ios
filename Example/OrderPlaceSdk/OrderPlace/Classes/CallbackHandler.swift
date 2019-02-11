@@ -18,7 +18,7 @@ import WebKit
 
     @objc public func success(response: Any) {
 
-        print("response:\(response)")
+        JJPrint("response:\(response)")
         if(callback == nil) {
             return;
         }
@@ -34,13 +34,13 @@ import WebKit
                 }
             }
         } catch {
-            print("json serialization error")
+            JJPrint("json serialization error")
         }
 
         let scriptSource = callback + "('" + str + "')"
 
-        print("callback", callback)
-        print("script", scriptSource)
+        JJPrint("callback", callback)
+        JJPrint("script", scriptSource)
 
         self.webView.evaluateJavaScript(scriptSource)
     }

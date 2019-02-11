@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52147DC3221106AB008EAEAF /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52147DC2221106AB008EAEAF /* PassKit.framework */; };
+		52147DC5221106B6008EAEAF /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52147DC4221106B6008EAEAF /* AddressBook.framework */; };
 		5220ECE521F17A4B00026ED5 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5220ECE421F17A4B00026ED5 /* DrawView.swift */; };
 		5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5220ECF321F1B23700026ED5 /* BridgePasskit.m */; };
+		5229D5D32202F166008EBD29 /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5229D5D22202F166008EBD29 /* Stripe.framework */; };
 		52618F3621A261B7001B96E9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52618F3521A261B7001B96E9 /* Security.framework */; };
 		52618F3821A26266001B96E9 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 52618F3721A26266001B96E9 /* libsqlite3.0.tbd */; };
 		52618F4321A28EAB001B96E9 /* WechatPayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52618F4221A28EAB001B96E9 /* WechatPayService.swift */; };
 		5261905321A46447001B96E9 /* WKScriptMsgHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5261905221A46447001B96E9 /* WKScriptMsgHandler.swift */; };
 		526190F721A65D57001B96E9 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 526190F221A65D57001B96E9 /* README.txt */; };
-		526190F821A65D57001B96E9 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526190F421A65D57001B96E9 /* libWeChatSDK.a */; };
 		526190F921A65D57001B96E9 /* WechatExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526190F521A65D57001B96E9 /* WechatExecutor.swift */; };
 		526190FA21A65D57001B96E9 /* WXApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526190F621A65D57001B96E9 /* WXApiManager.swift */; };
 		526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526190FC21A65DF0001B96E9 /* AlipayExecutor.swift */; };
@@ -41,6 +43,17 @@
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
 		527DD56521C256B50065D5E7 /* ScannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527DD56421C256B50065D5E7 /* ScannerManager.swift */; };
+		52863E0A21F7105F00090D24 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0921F7105F00090D24 /* Accelerate.framework */; };
+		52863E0C21F7106600090D24 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0B21F7106600090D24 /* AudioToolbox.framework */; };
+		52863E0E21F7106C00090D24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0D21F7106C00090D24 /* AVFoundation.framework */; };
+		52863E1021F7107A00090D24 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0F21F7107A00090D24 /* CoreMedia.framework */; };
+		52863E1221F7108200090D24 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E1121F7108200090D24 /* CoreVideo.framework */; };
+		52863E1421F7108E00090D24 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E1321F7108E00090D24 /* MobileCoreServices.framework */; };
+		52863E1621F7109500090D24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E1521F7109500090D24 /* OpenGLES.framework */; };
+		52863E1C21F7137000090D24 /* CardIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52863E1B21F7137000090D24 /* CardIOService.swift */; };
+		52863E1E21F714EA00090D24 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526190F421A65D57001B96E9 /* libWeChatSDK.a */; };
+		52B71BFC220039EE0084C608 /* StripeAppleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B71BFB220039EE0084C608 /* StripeAppleService.swift */; };
+		52B71C00220041080084C608 /* StripeExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B71BFF220041080084C608 /* StripeExecutor.swift */; };
 		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
 		52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F8410421ABD75600579EE4 /* ApplepayService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
@@ -62,12 +75,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		521ED782220155FE00C14DE2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		050486A825AED2C4BBD9DD4E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52147DC2221106AB008EAEAF /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		52147DC4221106B6008EAEAF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		521ED9A1220185F300C14DE2 /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
 		5220ECE421F17A4B00026ED5 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		5220ECF321F1B23700026ED5 /* BridgePasskit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgePasskit.m; sourceTree = "<group>"; };
-		5257397921CBA0AA00D026E0 /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
+		5229D5D22202F166008EBD29 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Stripe.framework; sourceTree = "<group>"; };
 		52618F3521A261B7001B96E9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		52618F3721A26266001B96E9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		52618F4221A28EAB001B96E9 /* WechatPayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatPayService.swift; sourceTree = "<group>"; };
@@ -105,6 +134,28 @@
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
 		527DD56421C256B50065D5E7 /* ScannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerManager.swift; sourceTree = "<group>"; };
+		52863E0921F7105F00090D24 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		52863E0B21F7106600090D24 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		52863E0D21F7106C00090D24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		52863E0F21F7107A00090D24 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		52863E1121F7108200090D24 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		52863E1321F7108E00090D24 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		52863E1521F7109500090D24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		52863E1B21F7137000090D24 /* CardIOService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardIOService.swift; sourceTree = "<group>"; };
+		52863E1F21F715A900090D24 /* CardIOView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOView.h; sourceTree = "<group>"; };
+		52863E2021F715A900090D24 /* libopencv_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_core.a; sourceTree = "<group>"; };
+		52863E2121F715A900090D24 /* libopencv_imgproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopencv_imgproc.a; sourceTree = "<group>"; };
+		52863E2221F715A900090D24 /* CardIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIO.h; sourceTree = "<group>"; };
+		52863E2321F715A900090D24 /* CardIOUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOUtilities.h; sourceTree = "<group>"; };
+		52863E2421F715A900090D24 /* CardIOCreditCardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOCreditCardInfo.h; sourceTree = "<group>"; };
+		52863E2521F715AA00090D24 /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
+		52863E2621F715AA00090D24 /* CardIODetectionMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIODetectionMode.h; sourceTree = "<group>"; };
+		52863E2721F715AA00090D24 /* CardIOPaymentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewControllerDelegate.h; sourceTree = "<group>"; };
+		52863E2821F715AA00090D24 /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
+		52863E2921F715AA00090D24 /* CardIOViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOViewDelegate.h; sourceTree = "<group>"; };
+		52863E2D21F715E300090D24 /* CardIOExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardIOExecutor.swift; sourceTree = "<group>"; };
+		52B71BFB220039EE0084C608 /* StripeAppleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeAppleService.swift; sourceTree = "<group>"; };
+		52B71BFF220041080084C608 /* StripeExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeExecutor.swift; sourceTree = "<group>"; };
 		52F8410421ABD75600579EE4 /* ApplepayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplepayService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,17 +180,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52147DC5221106B6008EAEAF /* AddressBook.framework in Frameworks */,
+				52147DC3221106AB008EAEAF /* PassKit.framework in Frameworks */,
+				52863E1E21F714EA00090D24 /* libWeChatSDK.a in Frameworks */,
+				52618F3621A261B7001B96E9 /* Security.framework in Frameworks */,
+				5275F8992179B549007248AB /* QuartzCore.framework in Frameworks */,
+				52863E1621F7109500090D24 /* OpenGLES.framework in Frameworks */,
+				52863E1421F7108E00090D24 /* MobileCoreServices.framework in Frameworks */,
+				5275F8A12179B569007248AB /* Foundation.framework in Frameworks */,
+				52863E1221F7108200090D24 /* CoreVideo.framework in Frameworks */,
+				52863E1021F7107A00090D24 /* CoreMedia.framework in Frameworks */,
+				5275F89D2179B557007248AB /* CoreGraphics.framework in Frameworks */,
+				52863E0E21F7106C00090D24 /* AVFoundation.framework in Frameworks */,
+				52863E0C21F7106600090D24 /* AudioToolbox.framework in Frameworks */,
+				5229D5D32202F166008EBD29 /* Stripe.framework in Frameworks */,
+				52863E0A21F7105F00090D24 /* Accelerate.framework in Frameworks */,
 				52618F3821A26266001B96E9 /* libsqlite3.0.tbd in Frameworks */,
 				5261910021A6812B001B96E9 /* AlipaySDK.framework in Frameworks */,
-				52618F3621A261B7001B96E9 /* Security.framework in Frameworks */,
-				526190F821A65D57001B96E9 /* libWeChatSDK.a in Frameworks */,
 				5275F8A52179B57C007248AB /* CoreMotion.framework in Frameworks */,
 				5275F8A32179B573007248AB /* CFNetwork.framework in Frameworks */,
-				5275F8A12179B569007248AB /* Foundation.framework in Frameworks */,
 				5275F89F2179B560007248AB /* UIKit.framework in Frameworks */,
-				5275F89D2179B557007248AB /* CoreGraphics.framework in Frameworks */,
 				5275F89B2179B54E007248AB /* CoreText.framework in Frameworks */,
-				5275F8992179B549007248AB /* QuartzCore.framework in Frameworks */,
 				5275F8972179B53D007248AB /* CoreTelephony.framework in Frameworks */,
 				5275F8952179B531007248AB /* SystemConfiguration.framework in Frameworks */,
 				5275F8932179B529007248AB /* libz.tbd in Frameworks */,
@@ -212,6 +273,8 @@
 		5275F8FD2179C53A007248AB /* OrderPlace */ = {
 			isa = PBXGroup;
 			children = (
+				52B71BF5220038DD0084C608 /* stripeFramework */,
+				52863DF821F70F6200090D24 /* CardIO */,
 				526190FB21A65DD1001B96E9 /* alipayFramework */,
 				526190EE21A65D57001B96E9 /* WechatFramework */,
 				5275F8FE2179C53A007248AB /* Classes */,
@@ -223,6 +286,8 @@
 		5275F8FE2179C53A007248AB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				52B71BF4220038B50084C608 /* stripe-apple */,
+				52863E1A21F7133900090D24 /* cardIO */,
 				52618F4121A28E49001B96E9 /* wechatPay */,
 				5275F9032179C53A007248AB /* alipay */,
 				5275F9052179C53A007248AB /* scan */,
@@ -265,6 +330,60 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		52863DF821F70F6200090D24 /* CardIO */ = {
+			isa = PBXGroup;
+			children = (
+				52863E1D21F713AD00090D24 /* framework */,
+				52863E2D21F715E300090D24 /* CardIOExecutor.swift */,
+			);
+			name = CardIO;
+			path = OrderPlaceSdk/CardIO;
+			sourceTree = SOURCE_ROOT;
+		};
+		52863E1A21F7133900090D24 /* cardIO */ = {
+			isa = PBXGroup;
+			children = (
+				52863E1B21F7137000090D24 /* CardIOService.swift */,
+			);
+			path = cardIO;
+			sourceTree = "<group>";
+		};
+		52863E1D21F713AD00090D24 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				52863E2221F715A900090D24 /* CardIO.h */,
+				52863E2421F715A900090D24 /* CardIOCreditCardInfo.h */,
+				52863E2621F715AA00090D24 /* CardIODetectionMode.h */,
+				52863E2521F715AA00090D24 /* CardIOPaymentViewController.h */,
+				52863E2721F715AA00090D24 /* CardIOPaymentViewControllerDelegate.h */,
+				52863E2321F715A900090D24 /* CardIOUtilities.h */,
+				52863E1F21F715A900090D24 /* CardIOView.h */,
+				52863E2921F715AA00090D24 /* CardIOViewDelegate.h */,
+				52863E2821F715AA00090D24 /* libCardIO.a */,
+				52863E2021F715A900090D24 /* libopencv_core.a */,
+				52863E2121F715A900090D24 /* libopencv_imgproc.a */,
+			);
+			path = framework;
+			sourceTree = "<group>";
+		};
+		52B71BF4220038B50084C608 /* stripe-apple */ = {
+			isa = PBXGroup;
+			children = (
+				52B71BFB220039EE0084C608 /* StripeAppleService.swift */,
+			);
+			path = "stripe-apple";
+			sourceTree = "<group>";
+		};
+		52B71BF5220038DD0084C608 /* stripeFramework */ = {
+			isa = PBXGroup;
+			children = (
+				5229D5D22202F166008EBD29 /* Stripe.framework */,
+				52B71BFF220041080084C608 /* StripeExecutor.swift */,
+			);
+			name = stripeFramework;
+			path = OrderPlaceSdk/stripeFramework;
+			sourceTree = SOURCE_ROOT;
+		};
 		52F8410321ABD75600579EE4 /* applepay */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,7 +396,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				5257397921CBA0AA00D026E0 /* OrderPlaceSdk_Example.entitlements */,
+				521ED9A1220185F300C14DE2 /* OrderPlaceSdk_Example.entitlements */,
 				5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for OrderPlaceSdk */,
@@ -360,6 +479,15 @@
 		A2F9398A79F9DE5206E56727 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52147DC4221106B6008EAEAF /* AddressBook.framework */,
+				52147DC2221106AB008EAEAF /* PassKit.framework */,
+				52863E1521F7109500090D24 /* OpenGLES.framework */,
+				52863E1321F7108E00090D24 /* MobileCoreServices.framework */,
+				52863E1121F7108200090D24 /* CoreVideo.framework */,
+				52863E0F21F7107A00090D24 /* CoreMedia.framework */,
+				52863E0D21F7106C00090D24 /* AVFoundation.framework */,
+				52863E0B21F7106600090D24 /* AudioToolbox.framework */,
+				52863E0921F7105F00090D24 /* Accelerate.framework */,
 				52618F3721A26266001B96E9 /* libsqlite3.0.tbd */,
 				52618F3521A261B7001B96E9 /* Security.framework */,
 				5275F8A42179B57C007248AB /* CoreMotion.framework */,
@@ -390,6 +518,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
+				521ED782220155FE00C14DE2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -433,6 +562,7 @@
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 36RXHYW79N;
 						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 1;
@@ -454,6 +584,15 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
+				"zh-Hans",
+				ja,
+				nb,
+				es,
+				it,
+				fr,
+				fi,
+				nl,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
@@ -537,6 +676,7 @@
 				52618F4321A28EAB001B96E9 /* WechatPayService.swift in Sources */,
 				52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */,
 				526190F921A65D57001B96E9 /* WechatExecutor.swift in Sources */,
+				52B71C00220041080084C608 /* StripeExecutor.swift in Sources */,
 				5275F9152179C53B007248AB /* CallbackHandler.swift in Sources */,
 				5261905321A46447001B96E9 /* WKScriptMsgHandler.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
@@ -547,10 +687,12 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				5275F9122179C53B007248AB /* AlipayService.swift in Sources */,
 				5275F9132179C53B007248AB /* ScannerService.swift in Sources */,
+				52B71BFC220039EE0084C608 /* StripeAppleService.swift in Sources */,
 				5275F9142179C53B007248AB /* GpsService.swift in Sources */,
 				52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */,
 				5220ECE521F17A4B00026ED5 /* DrawView.swift in Sources */,
 				526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */,
+				52863E1C21F7137000090D24 /* CardIOService.swift in Sources */,
 				5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
 			);
@@ -699,20 +841,25 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OrderPlaceSdk",
 					"$(PROJECT_DIR)/OrderPlaceSdk/alipayFramework",
+					"$(PROJECT_DIR)/OrderPlaceSdk/stripeFramework",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OrderPlaceSdk/WechtSDK1.8.2",
 					"$(PROJECT_DIR)/OrderPlaceSdk/WeChatSDK1.8.3",
 					"$(PROJECT_DIR)/OrderPlaceSdk/WechatFramework/WeChatSDK1.8.3",
+					"$(PROJECT_DIR)/OrderPlaceSdk/CardIO",
+					"$(PROJECT_DIR)/OrderPlaceSdk/CardIO/framework",
 				);
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (
@@ -721,6 +868,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -735,20 +883,24 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36RXHYW79N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OrderPlaceSdk",
 					"$(PROJECT_DIR)/OrderPlaceSdk/alipayFramework",
+					"$(PROJECT_DIR)/OrderPlaceSdk/stripeFramework",
 				);
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/OrderPlaceSdk";
 				INFOPLIST_FILE = OrderPlaceSdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OrderPlaceSdk/WechtSDK1.8.2",
 					"$(PROJECT_DIR)/OrderPlaceSdk/WeChatSDK1.8.3",
 					"$(PROJECT_DIR)/OrderPlaceSdk/WechatFramework/WeChatSDK1.8.3",
+					"$(PROJECT_DIR)/OrderPlaceSdk/CardIO",
+					"$(PROJECT_DIR)/OrderPlaceSdk/CardIO/framework",
 				);
 				MODULE_NAME = ExampleApp;
 				OTHER_LDFLAGS = (
@@ -757,6 +909,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

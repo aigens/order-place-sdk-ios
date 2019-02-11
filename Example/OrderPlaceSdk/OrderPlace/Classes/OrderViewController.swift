@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import WebKit
-
+var isDebug = false;
 public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
     private let FEATURES = "features"
@@ -21,12 +21,22 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let WECHATPAY = "wechatpay"
     private let WECHATPAY_HK = "wechatpayhk"
     private let GPS = "gps"
+    private let CARD_IO = "cardIO"
+    private let STRIPE_APPLE = "stripeApple"
+    private let SHOW_NAVIGATION_BAR = "showNavigationBar";
+    private let ISDEBUG = "isDebug";
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
 
     private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceWechatPaySDK."
+    
+    private let ORDER_PLACE_CARD_IO_SDK = "OrderPlaceSdk_Example.";
+//    private let ORDER_PLACE_CARD_IO_SDK = "OrderPlaceCardIOSDK.";
+    
+    private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceSdk_Example.";
+//        private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceStripeAppleSDK.";
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
@@ -39,31 +49,38 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var extraServices: Array<OrderPlaceService>!;
 
     public required init?(coder aDecoder: NSCoder) {
-        print("init coder style2")
+        JJPrint("init coder style2")
         super.init(coder: aDecoder)
     }
 
     @IBAction func exitClicked(_ sender: Any) {
-        print("exit clicked2")
+        JJPrint("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
         self.navigationController?.dismiss(animated: true)
         self.serciceMap.removeAll()
     }
 
     deinit {
-        print("order view controller deinit")
+        JJPrint("order view controller deinit")
     }
 
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        if self.options != nil , let showNavBar = self.options![SHOW_NAVIGATION_BAR] as? Bool {
+            showNavigationBar = showNavBar
+        }
+        
+        if self.options != nil , let isdebug = self.options![ISDEBUG] as? Bool {
+            isDebug = isdebug
+        }
         if (navigationController != nil) {
             navigationController?.delegate = self;
         }
         automaticallyAdjustsScrollViewInsets = false
 
-        debugPrint("OrderViewController viewDidLoad2")
-        debugPrint("options: ", self.options)
+        JJPrint("OrderViewController viewDidLoad2")
+        JJPrint("options:\( self.options)")
 
         let webConfiguration = WKWebViewConfiguration()
 
@@ -93,7 +110,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.uiDelegate = self
         webView.navigationDelegate = self;
 
-        print(customFrame)
+        JJPrint(customFrame)
 
         self.viewContainer.addSubview(webView)
         self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
@@ -103,7 +120,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
             webView.load(myRequest)
-            print("loading url")
+            JJPrint("loading url")
         } else {
             showNavigationBar = true;
             stopIndicator()
@@ -161,7 +178,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             if let delegate = NSClassFromString(ORDER_PLACE_ALIPAY_SDK + "AlipayExecutor") as? NSObject.Type {
                 alipayService.alipayDelegate = delegate.init() as? AlipayDelegate
             }
-            print("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
+            JJPrint("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
             return alipayService
         case SCAN:
             return ScannerService(options);
@@ -175,6 +192,20 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return wechat
         case APPLE_PAY:
             return ApplepayService(options);
+        case CARD_IO:
+            var cardIOService = CardIOService();
+            if let delegate = NSClassFromString(ORDER_PLACE_CARD_IO_SDK + "CardIOExecutor") as? NSObject.Type {
+                cardIOService = CardIOService(delegate.init() as? cardIODelegate)
+            }
+            return cardIOService;
+        case STRIPE_APPLE:
+            var stripeAppleService:StripeAppleService;
+            if let delegate = NSClassFromString(ORDER_PLACE_STRIPE_APPLE_SDK + "StripeExecutor") as? NSObject.Type {
+                stripeAppleService = StripeAppleService(options,delegate.init() as? StripeAppleDelegate)
+            } else {
+              stripeAppleService = StripeAppleService(options);
+            }
+            return stripeAppleService;
         default:
             break;
         }
@@ -206,28 +237,31 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-//        print("didCommit url:-- \(webView.url?.host)")
+//        JJPrint("didCommit url:-- \(webView.url?.host)")
         if let host = webView.url?.host, host.contains(ORDER_PLACE) {
-            setNavigationBar(hidden: true)
+            //setNavigationBar(hidden: true)
+            
+            setNavigationBar(hidden: !showNavigationBar)
+
         } else {
             setNavigationBar(hidden: false)
         }
         startIndicator()
     }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        print("finish url:\(webView.url?.absoluteString)")
+//        JJPrint("finish url:\(webView.url?.absoluteString)")
         stopIndicator()
     }
     
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-//        print("didFail url:\(webView.url?.absoluteString)--\(error)")
+//        JJPrint("didFail url:\(webView.url?.absoluteString)--\(error)")
         setNavigationBar(hidden: false)
         stopIndicator()
     }
     
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         
-//        print("didFailProvisionalNavigation url:\(webView.url?.absoluteString) \(error)")
+//        JJPrint("didFailProvisionalNavigation url:\(webView.url?.absoluteString) \(error)")
         showAlert(title: "Error", message: error.localizedDescription, OKHandler: nil)
         setNavigationBar(hidden: false)
         stopIndicator()
@@ -237,7 +271,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
-        print("message", message.body)
+        JJPrint("message:\( message.body)")
 
         /*
          if("ConfigService" == message.name){
@@ -246,8 +280,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
          
          }*/
         
-        print("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
-        print("jadd self.serciceMap:\(self.serciceMap)");
+        JJPrint("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
+        JJPrint("jadd self.serciceMap:\(self.serciceMap)");
         
         let serviceName = message.name;
         let service = self.serciceMap[serviceName];
@@ -261,7 +295,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             handler.cc = userContentController;
             service?.handleMessage(method: method, body: body, callback: handler)
         } else {
-            print("service not registered", serviceName)
+            JJPrint("service not registered", serviceName)
         }
 
     }
@@ -340,7 +374,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 extension OrderViewController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let isHidden = viewController.isKind(of: OrderViewController.self) && !showNavigationBar
-        //print("viewController: \(viewController) \(isHidden)")
+        //JJPrint("viewController: \(viewController) \(isHidden)")
         navigationController.setNavigationBarHidden(isHidden, animated: false)
     }
 }
@@ -390,5 +424,12 @@ extension OrderViewController: OrderPlaceDelegate {
 
 }
 
+public func JJPrint<T>(_ message:T,file:String = #file,_ func:String = #function,_ lineNumber:Int = #line){
+    
+    guard isDebug else {return}
+    let file = (file as NSString).lastPathComponent;
+    print("File:\(file):(\(lineNumber))-- \(message)");
+    
+}
 
 
