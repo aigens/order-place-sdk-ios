@@ -20,6 +20,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var options: [String: Any]!
+    
+    var closeCB: ((Any?) -> Void)? = nil
+    
+    
     var url: String!
     
     private var minView:UIView!
@@ -193,6 +197,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             let controller = segue.destination as! OrderViewController;
             controller.url = self.url;
             controller.options = self.options;
+            controller.closeCB = closeCB;
             ScannerManager.shared.scannerDelegate = controller;
         }
     }

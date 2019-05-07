@@ -25,6 +25,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let STRIPE_APPLE = "stripeApple"
     private let SHOW_NAVIGATION_BAR = "showNavigationBar";
     private let ISDEBUG = "isDebug";
+    private let DISABLE_SCROLL = "disableScroll";
+    private let ISBOUNCES = "isBounces";
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
@@ -43,8 +45,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var webView: WKWebView!;
     var url: String!;
     var options: [String: Any]!;
+    
+    var closeCB: ((Any?) -> Void)? = nil
+    
     private var showNavigationBar: Bool = false;
-
+    private var disableScroll: Bool = true;
+    private var isBounces: Bool = false;
+    
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
 
@@ -71,6 +78,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             showNavigationBar = showNavBar
         }
         
+        if self.options != nil , let disableScroll = self.options![DISABLE_SCROLL] as? Bool {
+            self.disableScroll = disableScroll
+        }
+        if self.options != nil , let bounces = self.options![ISBOUNCES] as? Bool {
+            self.isBounces = bounces
+        }
+        
+        
         if self.options != nil , let isdebug = self.options![ISDEBUG] as? Bool {
             isDebug = isdebug
         }
@@ -88,6 +103,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         let configService = ConfigService()
         configService.options = self.options;
+        configService.closeCB = closeCB;
         configService.clickedExit = { [weak self] in
             self?.serciceMap.removeAll()
         }
@@ -109,7 +125,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
         webView.navigationDelegate = self;
-
+        
+        settingScroll();
+        
         JJPrint(customFrame)
 
         self.viewContainer.addSubview(webView)
@@ -126,6 +144,27 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             stopIndicator()
         }
 
+    }
+    
+    private func settingScroll() {
+        // isScrollEnabled 與 bounces 最好不要同時set false
+        //        webView.scrollView.isScrollEnabled = false;
+        
+        automaticallyAdjustsScrollViewInsets = false
+        if #available(iOS 11.0, *) {
+            webView.scrollView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
+        }
+        
+        webView.scrollView.bounces = self.isBounces;
+        
+        if disableScroll {
+            webView.scrollView.isScrollEnabled = false;
+            webView.scrollView.delegate = self;
+        }else {
+            webView.scrollView.isScrollEnabled = true;
+            webView.scrollView.delegate = nil;
+        }
+        
     }
 
     func addService(service: OrderPlaceService, controller: WKUserContentController) {
@@ -244,7 +283,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             setNavigationBar(hidden: !showNavigationBar)
 
         } else {
-            setNavigationBar(hidden: false)
+//            setNavigationBar(hidden: false)
+            setNavigationBar(hidden: !showNavigationBar)
         }
         startIndicator()
     }
@@ -369,6 +409,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         activityIndicator.stopAnimating()
     }
 
+    public func closeKeyboard() {
+        webView.endEditing(true);
+    }
 
 }
 extension OrderViewController: UINavigationControllerDelegate {
@@ -424,6 +467,12 @@ extension OrderViewController: OrderPlaceDelegate {
 
 }
 
+extension OrderViewController:UIScrollViewDelegate {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print("scrollView...");
+        scrollView.contentOffset = CGPoint.zero;
+    }
+}
 public func JJPrint<T>(_ message:T,file:String = #file,_ func:String = #function,_ lineNumber:Int = #line){
     
     guard isDebug else {return}

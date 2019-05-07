@@ -12,6 +12,9 @@ import WebKit
 class ConfigService: OrderPlaceService {
 
     var options: [String: Any]!;
+    
+    var closeCB: ((Any?) -> Void)? = nil
+    
     override func getServiceName() -> String {
         return "ConfigService";
     }
@@ -24,7 +27,7 @@ class ConfigService: OrderPlaceService {
 
         switch method {
         case "back":
-            back();
+            back(body: body,callback: callback);
             break;
         case "getPreference":
             getPreference(pref: "default", name: body["name"] as! String, callback: callback);
@@ -38,6 +41,12 @@ class ConfigService: OrderPlaceService {
         case "putPreference":
             putPreference(pref: "default", name: body["name"] as! String, value: body["value"] as Any, callback: callback);
             break;
+        case "closeKeyboard":
+            if let vc = self.vc as? OrderViewController {
+                vc.closeKeyboard();
+                callback?.success(response: body)
+            }
+            break;
         default:
             break;
 
@@ -46,11 +55,15 @@ class ConfigService: OrderPlaceService {
 
     }
 
-    func back() {
+    func back(body: NSDictionary, callback: CallbackHandler?) {
         vc.navigationController?.dismiss(animated: true)
         if clickedExit != nil {
             clickedExit!()
         }
+        if closeCB != nil {
+           closeCB!(body);
+        }
+        callback?.success(response: body)
     }
 
     func getPreference(pref: String, name: String, callback: CallbackHandler?) {

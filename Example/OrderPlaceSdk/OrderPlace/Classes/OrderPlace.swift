@@ -46,8 +46,8 @@ protocol OrderPlaceDelegate: AnyObject {
 
     }
 
-    @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any]) {
-
+    @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any],closeCB: ((Any?) -> Void)? = nil) {
+        
         JJPrint("open url")
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
 
@@ -55,13 +55,15 @@ protocol OrderPlaceDelegate: AnyObject {
 
         orderVC.url = url;
         orderVC.options = options;
+        
+        orderVC.closeCB = closeCB;
         self.OPDelegate = orderVC
 
         caller.present(controller, animated: true, completion: nil)
 
     }
 
-    @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any], services: Array<OrderPlaceService>) {
+    @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any], services: Array<OrderPlaceService>,closeCB: ((Any?) -> Void)? = nil) {
 
         JJPrint("open url")
 
@@ -74,17 +76,19 @@ protocol OrderPlaceDelegate: AnyObject {
         self.OPDelegate = orderVC
 
         caller.present(controller, animated: true, completion: nil)
-
-        openUrl(caller: caller, url: url, options: options)
+        
+        openUrl(caller: caller, url: url, options: options, closeCB: closeCB)
+        //openUrl(caller: caller, url: url, options: options)
 
     }
 
-    @objc public static func scan(caller: UIViewController, options: [String: Any]) {
+    @objc public static func scan(caller: UIViewController, options: [String: Any],closeCB: ((Any?) -> Void)? = nil) {
 
         let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
 
         let scanVC = controller.topViewController as! ScannerViewController;
         scanVC.options = options;
+        scanVC.closeCB = closeCB;
         self.OPDelegate = ScannerManager.shared;
         caller.present(controller, animated: true, completion: nil)
 

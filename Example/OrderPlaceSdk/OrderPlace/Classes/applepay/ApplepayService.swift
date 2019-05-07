@@ -468,91 +468,93 @@ extension ApplepayService: PKPaymentAuthorizationViewControllerDelegate {
             typeCard = "error"
         }
         response["paymentMethodTypeCard"] = typeCard
-        if #available(iOS 9.0, *), let billingContact = payment.billingContact {
-            if let emailAddress = billingContact.emailAddress {
-                response["billingEmailAddress"] = emailAddress
-            }
-            if #available(iOS 9.2, *), let supplementarySubLocality = billingContact.supplementarySubLocality {
-                response["billingSupplementarySubLocality"] = supplementarySubLocality
-            }
-            if let name = billingContact.name {
-                if let givenName = name.givenName {
-                    response["billingNameFirst"] = givenName
-                }
-                if let middleName = name.middleName {
-                    response["billingNameMiddle"] = middleName
-                }
-                if let familyName = name.familyName {
-                    response["billingNameLast"] = familyName
-                }
-            }
-            if let postalAddress = billingContact.postalAddress {
-                response["billingAddressStreet"] = postalAddress.street
-                response["billingAddressCity"] = postalAddress.city
-                response["billingAddressState"] = postalAddress.state
-                response["billingPostalCode"] = postalAddress.postalCode
-                response["billingCountry"] = postalAddress.country
-                response["billingISOCountryCode"] = postalAddress.isoCountryCode
-            }
-
-            if let shippingContact = payment.shippingContact {
-                if let emailAddress = shippingContact.emailAddress {
-                    response["shippingEmailAddress"] = emailAddress
-                }
-                if let phoneNumber = shippingContact.phoneNumber {
-                    response["shippingPhoneNumber"] = phoneNumber.stringValue
-                }
-                if let name = shippingContact.name {
-                    if let givenName = name.givenName {
-                        response["shippingNameFirst"] = givenName
-                    }
-                    if let middleName = name.middleName {
-                        response["shippingNameMiddle"] = middleName
-                    }
-                    if let familyName = name.familyName {
-                        response["shippingNameLast"] = familyName
-                    }
-                }
-                if #available(iOS 9.2, *), let supplementarySubLocality = shippingContact.supplementarySubLocality {
-                    response["shippingSupplementarySubLocality"] = supplementarySubLocality
-                }
-                if let postalAddress = shippingContact.postalAddress {
-                    response["shippingAddressStreet"] = postalAddress.street
-                    response["shippingAddressCity"] = postalAddress.city
-                    response["shippingAddressState"] = postalAddress.state
-                    response["shippingPostalCode"] = postalAddress.postalCode
-                    response["shippingCountry"] = postalAddress.country
-                    response["shippingISOCountryCode"] = postalAddress.isoCountryCode
-                }
-            }
-
-        } else if #available(iOS 8.0, *) {
-            if let shippingAddress = payment.shippingAddress {
-
-                if let PersonAddressStreetKey = kABPersonAddressStreetKey as? ABPropertyID, let shippingAddressStreet = ABRecordCopyValue(shippingAddress, PersonAddressStreetKey).takeRetainedValue() as? String {
-                    response["shippingAddressStreet"] = shippingAddressStreet
-                }
-                if let PersonAddressCityKey = kABPersonAddressCityKey as? ABPropertyID, let shippingAddressCity = ABRecordCopyValue(shippingAddress, PersonAddressCityKey).takeRetainedValue() as? String {
-                    response["shippingAddressCity"] = shippingAddressCity
-                }
-                if let PersonAddressZIPKey = kABPersonAddressZIPKey as? ABPropertyID, let shippingPostalCode = ABRecordCopyValue(shippingAddress, PersonAddressZIPKey).takeRetainedValue() as? String {
-                    response["shippingPostalCode"] = shippingPostalCode
-                }
-                if let PersonAddressStateKey = kABPersonAddressStateKey as? ABPropertyID, let shippingAddressState = ABRecordCopyValue(shippingAddress, PersonAddressStateKey).takeRetainedValue() as? String {
-                    response["shippingAddressState"] = shippingAddressState
-                }
-                if let PersonAddressCountryCodeKey = kABPersonAddressCountryCodeKey as? ABPropertyID, let shippingCountry = ABRecordCopyValue(shippingAddress, PersonAddressCountryCodeKey).takeRetainedValue() as? String {
-                    response["shippingCountry"] = shippingCountry
-                }
-                if let PersonAddressCityKey = kABPersonAddressCityKey as? ABPropertyID, let shippingISOCountryCode = ABRecordCopyValue(shippingAddress, PersonAddressCityKey).takeRetainedValue() as? String {
-                    response["shippingISOCountryCode"] = shippingISOCountryCode
-                }
-                if let shippingEmailAddress = ABRecordCopyValue(shippingAddress, kABPersonEmailProperty).takeRetainedValue() as? String {
-                    response["shippingEmailAddress"] = shippingEmailAddress
-                }
-
-            }
-        }
+//        if #available(iOS 9.0, *), let billingContact = payment.billingContact {
+//            if let emailAddress = billingContact.emailAddress {
+//                response["billingEmailAddress"] = emailAddress
+//            }
+//            if #available(iOS 9.2, *), let supplementarySubLocality = billingContact.supplementarySubLocality {
+//                response["billingSupplementarySubLocality"] = supplementarySubLocality
+//            }
+//            if let name = billingContact.name {
+//                if let givenName = name.givenName {
+//                    response["billingNameFirst"] = givenName
+//                }
+//                if let middleName = name.middleName {
+//                    response["billingNameMiddle"] = middleName
+//                }
+//                if let familyName = name.familyName {
+//                    response["billingNameLast"] = familyName
+//                }
+//            }
+//            if let postalAddress = billingContact.postalAddress {
+//                response["billingAddressStreet"] = postalAddress.street
+//                response["billingAddressCity"] = postalAddress.city
+//                response["billingAddressState"] = postalAddress.state
+//                response["billingPostalCode"] = postalAddress.postalCode
+//                response["billingCountry"] = postalAddress.country
+//                response["billingISOCountryCode"] = postalAddress.isoCountryCode
+//            }
+//
+//            if let shippingContact = payment.shippingContact {
+//                if let emailAddress = shippingContact.emailAddress {
+//                    response["shippingEmailAddress"] = emailAddress
+//                }
+//                if let phoneNumber = shippingContact.phoneNumber {
+//                    response["shippingPhoneNumber"] = phoneNumber.stringValue
+//                }
+//                if let name = shippingContact.name {
+//                    if let givenName = name.givenName {
+//                        response["shippingNameFirst"] = givenName
+//                    }
+//                    if let middleName = name.middleName {
+//                        response["shippingNameMiddle"] = middleName
+//                    }
+//                    if let familyName = name.familyName {
+//                        response["shippingNameLast"] = familyName
+//                    }
+//                }
+//                if #available(iOS 9.2, *), let supplementarySubLocality = shippingContact.supplementarySubLocality {
+//                    response["shippingSupplementarySubLocality"] = supplementarySubLocality
+//                }
+//                if let postalAddress = shippingContact.postalAddress {
+//                    response["shippingAddressStreet"] = postalAddress.street
+//                    response["shippingAddressCity"] = postalAddress.city
+//                    response["shippingAddressState"] = postalAddress.state
+//                    response["shippingPostalCode"] = postalAddress.postalCode
+//                    response["shippingCountry"] = postalAddress.country
+//                    response["shippingISOCountryCode"] = postalAddress.isoCountryCode
+//                }
+//            }
+//
+//        } else if #available(iOS 8.0, *) {
+//            if let shippingAddress = payment.shippingAddress {
+//
+//                if let PersonAddressStreetKey = kABPersonAddressStreetKey as? ABPropertyID, let shippingAddressStreet = ABRecordCopyValue(shippingAddress, PersonAddressStreetKey).takeRetainedValue() as? String {
+//                    response["shippingAddressStreet"] = shippingAddressStreet
+//                }
+//                if let PersonAddressCityKey = kABPersonAddressCityKey as? ABPropertyID, let shippingAddressCity = ABRecordCopyValue(shippingAddress, PersonAddressCityKey).takeRetainedValue() as? String {
+//                    response["shippingAddressCity"] = shippingAddressCity
+//                }
+//                if let PersonAddressZIPKey = kABPersonAddressZIPKey as? ABPropertyID, let shippingPostalCode = ABRecordCopyValue(shippingAddress, PersonAddressZIPKey).takeRetainedValue() as? String {
+//                    response["shippingPostalCode"] = shippingPostalCode
+//                }
+//                if let PersonAddressStateKey = kABPersonAddressStateKey as? ABPropertyID, let shippingAddressState = ABRecordCopyValue(shippingAddress, PersonAddressStateKey).takeRetainedValue() as? String {
+//                    response["shippingAddressState"] = shippingAddressState
+//                }
+//                if let PersonAddressCountryCodeKey = kABPersonAddressCountryCodeKey as? ABPropertyID, let shippingCountry = ABRecordCopyValue(shippingAddress, PersonAddressCountryCodeKey).takeRetainedValue() as? String {
+//                    response["shippingCountry"] = shippingCountry
+//                }
+//                if let PersonAddressCityKey = kABPersonAddressCityKey as? ABPropertyID, let shippingISOCountryCode = ABRecordCopyValue(shippingAddress, PersonAddressCityKey).takeRetainedValue() as? String {
+//                    response["shippingISOCountryCode"] = shippingISOCountryCode
+//                }
+//                if let shippingEmailAddress = ABRecordCopyValue(shippingAddress, kABPersonEmailProperty).takeRetainedValue() as? String {
+//                    response["shippingEmailAddress"] = shippingEmailAddress
+//                }
+//
+//            }
+//        }
+        
+        
         return response
     }
 
