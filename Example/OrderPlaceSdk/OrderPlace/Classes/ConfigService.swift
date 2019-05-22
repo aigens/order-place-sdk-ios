@@ -12,9 +12,9 @@ import WebKit
 class ConfigService: OrderPlaceService {
 
     var options: [String: Any]!;
-    
+
     var closeCB: ((Any?) -> Void)? = nil
-    
+
     override func getServiceName() -> String {
         return "ConfigService";
     }
@@ -27,7 +27,10 @@ class ConfigService: OrderPlaceService {
 
         switch method {
         case "back":
-            back(body: body,callback: callback);
+            back(body: body, callback: callback);
+            break;
+        case "canOpenUrl":
+            canOpenUrl(body: body, callback: callback);
             break;
         case "getPreference":
             getPreference(pref: "default", name: body["name"] as! String, callback: callback);
@@ -55,13 +58,26 @@ class ConfigService: OrderPlaceService {
 
     }
 
+    func canOpenUrl(body: NSDictionary, callback: CallbackHandler?) {
+        if let url = body.value(forKey: "url") as? String,let URL = URL(string: url) {
+            let can = UIApplication.shared.canOpenURL(URL)
+            let dict = ["result":can];
+            if let open = body.value(forKey: "openUrl") as? Bool {
+                if open && can {
+                    UIApplication.shared.openURL(URL);
+                }
+            }
+            callback?.success(response: dict)
+        }
+    }
+
     func back(body: NSDictionary, callback: CallbackHandler?) {
         vc.navigationController?.dismiss(animated: true)
         if clickedExit != nil {
             clickedExit!()
         }
         if closeCB != nil {
-           closeCB!(body);
+            closeCB!(body);
         }
         callback?.success(response: body)
     }
@@ -70,7 +86,7 @@ class ConfigService: OrderPlaceService {
 
         let value = UserDefaults.standard.object(forKey: name)
 
-        JJPrint("getPref:\(name)--:\(value as Any )")
+        JJPrint("getPref:\(name)--:\(value as Any)")
 
 
         callback?.success(response: value as Any)
@@ -82,7 +98,7 @@ class ConfigService: OrderPlaceService {
 
         let value = self.options;
 
-        JJPrint("getParams2:\(value as Any )")
+        JJPrint("getParams2:\(value as Any)")
 
         callback?.success(response: value as Any)
 

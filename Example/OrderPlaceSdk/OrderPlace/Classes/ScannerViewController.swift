@@ -20,15 +20,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var options: [String: Any]!
-    
+
     var closeCB: ((Any?) -> Void)? = nil
-    
-    
+
+
     var url: String!
-    
-    private var minView:UIView!
-    private var reticleView:UIView!
-    
+
+    private var minView: UIView!
+    private var reticleView: UIView!
+
     private let buildReticleColor = UIColor(red: 0.86, green: 0.56, blue: 0.43, alpha: 0.50);
     private let minViewColor = UIColor(red: 0.96, green: 0.46, blue: 0.10, alpha: 1.00);
 
@@ -39,7 +39,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     private let MINVIEW_WIDTH: CGFloat = 2.0;
     private let SCREEN_HEIGHT = UIScreen.main.bounds.height;
     private let SCREEN_WIDTH = UIScreen.main.bounds.width;
-    
+    private var onlyScan = false;
+    var lang = "en";
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,11 +90,18 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.layer.insertSublayer(previewLayer, at: 0)
 
         captureSession.startRunning();
-        
+
         addReticleView();
+
+        if self.options != nil, let scan = self.options!["onlyScan"] as? Bool {
+            self.onlyScan = scan
+        }
+        if self.options != nil, let language = self.options!["language"] as? String {
+            self.lang = language
+        }
     }
-    
-    
+
+
 
     @IBAction func doneClicked(_ sender: Any) {
 
@@ -118,8 +126,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if (captureSession?.isRunning == false) {
             captureSession.startRunning();
         }
-    }
 
+        loopSubViewSetBtn(self.view);
+    }
+    private func loopSubViewSetBtn(_ view:UIView) {
+        for var v in view.subviews {
+            if v.isKind(of: UIButton.self)  {
+                if let button = v as? UIButton, let text = button.titleLabel?.text {
+                    if (text == "Cancel") || (text == "取消") {
+                        let t = lang == "en" ? "Cancel" : "取消";
+                        button.setTitle(t, for: .normal);
+                    }
+                }
+                return;
+            } else {
+                loopSubViewSetBtn(v)
+            }
+        }
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -155,7 +179,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             let readableObject = metadataObject as! AVMetadataMachineReadableCodeObject;
 
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: readableObject.stringValue!);
+            found(code: readableObject.stringValue ?? "");
         }
 
         //dismiss(animated: true)
@@ -166,7 +190,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     func found(code: String) {
         JJPrint(code)
 
-
+        if onlyScan && closeCB != nil {
+            let result = ["decodeResult":code];
+            closeCB?(result);
+            dismiss(animated: true, completion: nil)
+            return;
+        }
         if (SVDelegate == nil && code.starts(with: "http")) { // from scan order.place
             self.url = code
             self.performSegue(withIdentifier: "Scan2Order", sender: self)
@@ -229,21 +258,21 @@ extension ScannerViewController: UINavigationControllerDelegate {
 extension ScannerViewController {
 
     private func addReticleView() {
-        guard let reticleImage = buildReticleImage() else {return;}
-        
+        guard let reticleImage = buildReticleImage() else { return; }
+
         let reticleView = UIImageView(image: reticleImage);
-  
+
         let minAxis: CGFloat = min(SCREEN_HEIGHT, SCREEN_WIDTH);
         let rectArea = CGRect(x: CGFloat(0.5 * (SCREEN_WIDTH - minAxis)), y: CGFloat(0.5 * (SCREEN_HEIGHT - minAxis)), width: minAxis, height: minAxis);
         reticleView.frame = rectArea;
         reticleView.isOpaque = false
         reticleView.contentMode = .scaleAspectFit
-        reticleView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin,.flexibleTopMargin];
+        reticleView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleTopMargin];
         if let midImage = buildMinBar() {
-            let minView = UIImageView(image:midImage);
+            let minView = UIImageView(image: midImage);
             minView.isOpaque = false
             minView.contentMode = .scaleAspectFit
-            minView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin,.flexibleTopMargin];
+            minView.autoresizingMask = [.flexibleRightMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleTopMargin];
             minView.frame = CGRect(x: RETICLE_OFFSET + (RETICLE_WIDTH * 0.5), y: RETICLE_OFFSET + (RETICLE_WIDTH * 0.5), width: (SCREEN_WIDTH - 2 * RETICLE_OFFSET - RETICLE_WIDTH), height: MINVIEW_WIDTH);
             self.minView = minView;
             reticleView.addSubview(minView)
@@ -251,14 +280,14 @@ extension ScannerViewController {
         self.reticleView = reticleView;
         reticleView.clipsToBounds = true;
         view.addSubview(reticleView);
-        
-  
+
+
         addDrawView(rectArea);
-        
+
         beginScanAnimation();
     }
-    
-    private func addDrawView(_ rectArea:CGRect) {
+
+    private func addDrawView(_ rectArea: CGRect) {
         let drawView = DrawView(frame: UIScreen.main.bounds)
         var blankF = rectArea
         blankF.origin.x += RETICLE_OFFSET;
@@ -268,9 +297,9 @@ extension ScannerViewController {
         drawView.blankFramework = blankF;
         view.insertSubview(drawView, at: 1)
     }
-    
+
     private func beginScanAnimation() {
-        if (minView == nil || reticleView == nil) {return}
+        if (minView == nil || reticleView == nil) { return }
         self.minView.frame.origin.y = RETICLE_OFFSET + (RETICLE_WIDTH * 0.5);
         self.view.layoutIfNeeded();
         UIView.animate(withDuration: 2.0) {
@@ -278,7 +307,7 @@ extension ScannerViewController {
             self.minView.frame.origin.y = self.reticleView.frame.size.height - self.RETICLE_OFFSET - self.RETICLE_WIDTH;
             self.view.layoutIfNeeded();
         }
-        
+
     }
     private func buildMinBar() -> UIImage? {
         var result: UIImage? = nil;
@@ -290,10 +319,10 @@ extension ScannerViewController {
         context?.stroke(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: MINVIEW_WIDTH))
         result = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
+
         return result;
     }
-    
+
     private func buildReticleImage() -> UIImage? {
         var result: UIImage? = nil;
         UIGraphicsBeginImageContext(CGSize(width: SCREEN_WIDTH, height: SCREEN_WIDTH))

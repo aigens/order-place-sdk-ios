@@ -93,6 +93,19 @@ protocol OrderPlaceDelegate: AnyObject {
         caller.present(controller, animated: true, completion: nil)
 
     }
+    
+    @objc public static func scanDecode(caller: UIViewController, options: [String: Any]?,closeCB: ((Any?) -> Void)? = nil) {
+        var params : [String: Any] = options ?? [:];
+        params["onlyScan"] = true;
+        
+        let controller = makeViewController(vcId: "ScannerViewControllerNav") as! UINavigationController;
+        let scanVC = controller.topViewController as! ScannerViewController;
+        scanVC.options = params;
+        scanVC.closeCB = closeCB;
+        self.OPDelegate = ScannerManager.shared;
+        caller.present(controller, animated: true, completion: nil)
+        
+    }
 
     @objc public static func application(_ app: UIApplication, open url: URL) {
         if let del = OPDelegate {
