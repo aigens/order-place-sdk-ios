@@ -27,16 +27,18 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let ISDEBUG = "isDebug";
     private let DISABLE_SCROLL = "disableScroll";
     private let ISBOUNCES = "isBounces";
+    private let SYSTEMBROWSERPROTOCOL = "systemOpenUrl";
+    private let NAVIGATIONBAR_STYLE = "navigationbarStyle";
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
 
     private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_WECHATPAY_SDK = "OrderPlaceWechatPaySDK."
-    
+
     private let ORDER_PLACE_CARD_IO_SDK = "OrderPlaceSdk_Example.";
 //    private let ORDER_PLACE_CARD_IO_SDK = "OrderPlaceCardIOSDK.";
-    
+
     private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceSdk_Example.";
 //        private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceStripeAppleSDK.";
 
@@ -45,16 +47,18 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var webView: WKWebView!;
     var url: String!;
     var options: [String: Any]!;
-    
+
     var closeCB: ((Any?) -> Void)? = nil
-    
     private var showNavigationBar: Bool = false;
     private var disableScroll: Bool = true;
     private var isBounces: Bool = false;
-    
+
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
-
+    var systemBrowserProtocols: [String] = [];
+    var navigationbarStyle = [String: Any]();
+    let originStatusBarStyle = UIApplication.shared.statusBarStyle;
+    var originStaBarBackground: UIColor? = nil;
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
         super.init(coder: aDecoder)
@@ -74,19 +78,21 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.options != nil , let showNavBar = self.options![SHOW_NAVIGATION_BAR] as? Bool {
+        if self.options != nil, let showNavBar = self.options![SHOW_NAVIGATION_BAR] as? Bool {
             showNavigationBar = showNavBar
         }
-        
-        if self.options != nil , let disableScroll = self.options![DISABLE_SCROLL] as? Bool {
+
+        if self.options != nil, let disableScroll = self.options![DISABLE_SCROLL] as? Bool {
             self.disableScroll = disableScroll
         }
-        if self.options != nil , let bounces = self.options![ISBOUNCES] as? Bool {
+        if self.options != nil, let bounces = self.options![ISBOUNCES] as? Bool {
             self.isBounces = bounces
         }
-        
-        
-        if self.options != nil , let isdebug = self.options![ISDEBUG] as? Bool {
+        if self.options != nil, let systemBrowserProtocols = self.options![SYSTEMBROWSERPROTOCOL] as? [String] {
+            self.systemBrowserProtocols = systemBrowserProtocols;
+        }
+
+        if self.options != nil, let isdebug = self.options![ISDEBUG] as? Bool {
             isDebug = isdebug
         }
         if (navigationController != nil) {
@@ -95,7 +101,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         automaticallyAdjustsScrollViewInsets = false
 
         JJPrint("OrderViewController viewDidLoad2")
-        JJPrint("options:\( self.options)")
+        JJPrint("options:\(self.options)")
 
         let webConfiguration = WKWebViewConfiguration()
 
@@ -125,9 +131,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.uiDelegate = self
         webView.navigationDelegate = self;
-        
+
         settingScroll();
-        
+
         JJPrint(customFrame)
 
         self.viewContainer.addSubview(webView)
@@ -145,26 +151,26 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
 
     }
-    
+
     private func settingScroll() {
         // isScrollEnabled 與 bounces 最好不要同時set false
         //        webView.scrollView.isScrollEnabled = false;
-        
+
         automaticallyAdjustsScrollViewInsets = false
         if #available(iOS 11.0, *) {
             webView.scrollView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
-        
+
         webView.scrollView.bounces = self.isBounces;
-        
+
         if disableScroll {
             webView.scrollView.isScrollEnabled = false;
             webView.scrollView.delegate = self;
-        }else {
+        } else {
             webView.scrollView.isScrollEnabled = true;
             webView.scrollView.delegate = nil;
         }
-        
+
     }
 
     func addService(service: OrderPlaceService, controller: WKUserContentController) {
@@ -226,7 +232,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         case WECHATPAY:
             var wechat = WechatPayService(options);
             if let delegate = NSClassFromString(ORDER_PLACE_WECHATPAY_SDK + "WechatExecutor") as? NSObject.Type {
-                wechat = WechatPayService(options,delegate.init() as? WeChatPayDelegate)
+                wechat = WechatPayService(options, delegate.init() as? WeChatPayDelegate)
             }
             return wechat
         case APPLE_PAY:
@@ -238,11 +244,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             }
             return cardIOService;
         case STRIPE_APPLE:
-            var stripeAppleService:StripeAppleService;
+            var stripeAppleService: StripeAppleService;
             if let delegate = NSClassFromString(ORDER_PLACE_STRIPE_APPLE_SDK + "StripeExecutor") as? NSObject.Type {
-                stripeAppleService = StripeAppleService(options,delegate.init() as? StripeAppleDelegate)
+                stripeAppleService = StripeAppleService(options, delegate.init() as? StripeAppleDelegate)
             } else {
-              stripeAppleService = StripeAppleService(options);
+                stripeAppleService = StripeAppleService(options);
             }
             return stripeAppleService;
         default:
@@ -254,32 +260,58 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        JJPrint("url: navigationAction...\(navigationAction.request.url?.absoluteString)")
+        if let url = navigationAction.request.url?.absoluteString {
 
-        if let url = webView.url?.absoluteString {
+            var isSystemOpen = false;
+            var URL_S: URL!
+            if let Url = URL(string: url) {
+                URL_S = Url;
+                if systemBrowserProtocols.count > 0 {
+                    systemBrowserProtocols.forEach { (systemUrl) in
+                        if (url.starts(with: systemUrl)) {
+                            isSystemOpen = UIApplication.shared.canOpenURL(Url) ;
+                            return;
+                        }
+                    }
+                }
+            }
 
             if let alipayService = self.serciceMap[AlipayService.SERVICE_NAME] as? AlipayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(ALIPAY), let del = alipayService.alipayDelegate, let options = self.options, let alipayScheme = options[ALIPAYSCHEME] as? String {
                 del.AliapyWebView = webView
                 let legalOrderInfo = del.AlipayFetchOrderInfo(url: url, alipayScheme: alipayScheme)
                 if legalOrderInfo {
                     decisionHandler(WKNavigationActionPolicy.cancel)
-                } else {
-                    decisionHandler(WKNavigationActionPolicy.allow)
+                    return;
+                } else if isSystemOpen {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(URL_S, options: [:], completionHandler: nil);
+                    } else {
+                        UIApplication.shared.openURL(URL_S)
+                    }
+                    decisionHandler(WKNavigationActionPolicy.cancel)
+                    return;
                 }
-            } else {
-                decisionHandler(WKNavigationActionPolicy.allow)
+            } else if isSystemOpen {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(URL_S, options: [:], completionHandler: nil);
+                } else {
+                    UIApplication.shared.openURL(URL_S)
+                }
+                decisionHandler(WKNavigationActionPolicy.cancel)
+                return;
             }
-        } else {
-            decisionHandler(WKNavigationActionPolicy.allow)
         }
+        decisionHandler(WKNavigationActionPolicy.allow)
 
 
     }
 
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-//        JJPrint("didCommit url:-- \(webView.url?.host)")
+//        JJPrint("didCommit url:-- \(webView.url?.absoluteString)")
         if let host = webView.url?.host, host.contains(ORDER_PLACE) {
             //setNavigationBar(hidden: true)
-            
+
             setNavigationBar(hidden: !showNavigationBar)
 
         } else {
@@ -292,26 +324,26 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 //        JJPrint("finish url:\(webView.url?.absoluteString)")
         stopIndicator()
     }
-    
+
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
 //        JJPrint("didFail url:\(webView.url?.absoluteString)--\(error)")
         setNavigationBar(hidden: false)
         stopIndicator()
     }
-    
+
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        
-//        JJPrint("didFailProvisionalNavigation url:\(webView.url?.absoluteString) \(error)")
+
+//        JJPrint("didFailProvisionalNavigation:\(webView.url) --:\(error)")
         showAlert(title: "Error", message: error.localizedDescription, OKHandler: nil)
         setNavigationBar(hidden: false)
         stopIndicator()
     }
-    
-    
+
+
 
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
-        JJPrint("message:\( message.body)")
+        JJPrint("message:\(message.body)")
 
         /*
          if("ConfigService" == message.name){
@@ -319,10 +351,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
          self.configService.handleMessage(method: "back", body: message.body, callback: nil);
          
          }*/
-        
+
         JJPrint("jadd AlipayService.SERVICE_NAME:\(AlipayService.SERVICE_NAME)");
         JJPrint("jadd self.serciceMap:\(self.serciceMap)");
-        
+
         let serviceName = message.name;
         let service = self.serciceMap[serviceName];
         if(service != nil) {
@@ -413,7 +445,68 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         webView.endEditing(true);
     }
 
+    private func setNavigationBarStyle() {
+
+        if self.options != nil, let navigationbarStyle = self.options![NAVIGATIONBAR_STYLE] as? [String: Any] {
+            self.navigationbarStyle = navigationbarStyle;
+        }
+
+        if let backText = self.navigationbarStyle["backText"] as? String {
+            self.navigationController?.navigationItem.leftBarButtonItem?.title = backText;
+            let leftBtn = UIBarButtonItem(title: backText, style: .plain, target: self, action: #selector(exitClicked));
+            navigationItem.setLeftBarButton(leftBtn, animated: false)
+        }
+        if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
+            self.navigationController?.navigationBar.barTintColor = backgroundColor;
+        }
+
+        if let title = self.navigationbarStyle["title"] as? String {
+            let label = UILabel(frame: CGRect.zero)
+            label.backgroundColor = UIColor.clear
+            label.font = UIFont.systemFont(ofSize: 20.0)
+            label.textAlignment = .center
+            label.textColor = UIColor.blue
+            navigationItem.titleView = label
+            label.text = title
+            label.sizeToFit()
+            if let textColS = self.navigationbarStyle["textColor"] as? String, let textColor = UIColor.getHex(hex: textColS) {
+                self.navigationController?.navigationBar.tintColor = textColor;
+                label.textColor = textColor;
+            }
+        }
+
+        if let statusBarStyle = self.navigationbarStyle["statusBarStyle"] as? Int {
+            UIApplication.shared.statusBarStyle = UIStatusBarStyle(rawValue: statusBarStyle) ?? originStatusBarStyle;
+        }
+        
+        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+                self.originStaBarBackground = statusbar.backgroundColor;
+                if let backgroundColorHex = self.navigationbarStyle["statusbarBackgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
+                    statusbar.backgroundColor = backgroundColor;
+                }
+            }
+        }
+
+
+    }
+
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        setNavigationBarStyle();
+    }
+    public override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated);
+        UIApplication.shared.statusBarStyle = originStatusBarStyle;
+        
+        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+                statusbar.backgroundColor = self.originStaBarBackground;
+            }
+        }
+    }
 }
+
 extension OrderViewController: UINavigationControllerDelegate {
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let isHidden = viewController.isKind(of: OrderViewController.self) && !showNavigationBar
@@ -429,7 +522,7 @@ extension OrderViewController: ScannerDelegate {
 }
 
 extension OrderViewController {
-    public func showAlert(title:String?,message:String?,OKHandler: ((UIAlertAction) -> Void)? = nil) {
+    public func showAlert(title: String?, message: String?, OKHandler: ((UIAlertAction) -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert);
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: OKHandler));
         present(alertController, animated: true, completion: nil)
@@ -467,18 +560,31 @@ extension OrderViewController: OrderPlaceDelegate {
 
 }
 
-extension OrderViewController:UIScrollViewDelegate {
+extension OrderViewController: UIScrollViewDelegate {
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        print("scrollView...");
         scrollView.contentOffset = CGPoint.zero;
     }
 }
-public func JJPrint<T>(_ message:T,file:String = #file,_ func:String = #function,_ lineNumber:Int = #line){
-    
-    guard isDebug else {return}
+public func JJPrint<T>(_ message: T, file: String = #file, _ func: String = #function, _ lineNumber: Int = #line) {
+
+    guard isDebug else { return }
     let file = (file as NSString).lastPathComponent;
     print("File:\(file):(\(lineNumber))-- \(message)");
-    
+
 }
 
 
+extension UIColor {
+    static func getHex(hex: String) -> UIColor? {
+        guard !hex.isEmpty && hex.hasPrefix("#") else { return nil }
+        var rgbValue: UInt32 = 0
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 1
+        guard scanner.scanHexInt32(&rgbValue) else { return nil }
+        return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0,
+            blue: CGFloat((rgbValue & 0xFF)) / 255.0,
+            alpha: 1);
+    }
+}

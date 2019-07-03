@@ -8,6 +8,8 @@
 
 import UIKit
 
+// set params docs: https://docs.google.com/document/d/1YkTXzsdmWD7Q8BgLVWlekI6nyiS1wcU2Y6T2aHUKiJw/edit?usp=sharing
+
 /**  params
  features:[String:String]
  {
@@ -86,7 +88,14 @@ class ViewController: UIViewController {
 //        return;
         
         
-        let url = "https://aigens-sdk-demo.firebaseapp.com/";
+//        let url = "https://aigens-sdk-demo.firebaseapp.com/";
+        
+        
+        let url = "https://yoshinoya.order.place/#/store/200002/mode/pickup";
+        
+        
+        
+        
 //        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
 //        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
         
@@ -110,7 +119,7 @@ class ViewController: UIViewController {
         
         var member = [String: Any]()
         member["memberId"] = "200063"
-        member["session"] = "7499c956f4b1b225b14a985543c7526f" //same as session
+//        member["session"] = "7499c956f4b1b225b14a985543c7526f" //same as session
         member["source"] = "lp club"
         member["language"] = "en" //en,zh,zh-cn
         member["name"] = "Him Lam" //Optional (with actual data)
@@ -118,7 +127,21 @@ class ViewController: UIViewController {
         member["age"] = 17 //Optional (with actual data)
         member["phone"] = "94952850" //Optional (with actual data)
         member["email"] = "him.lam@aigens.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true] as [String : Any];
+        
+        var navigationbarStyle = [String: Any]();
+        navigationbarStyle["backText"] = "< 返回";
+        navigationbarStyle["title"] = "title";
+        navigationbarStyle["backgroundColor"] = "#000000";
+        navigationbarStyle["textColor"] = "#ffffff";
+        
+        //case `default` // Dark content, for use on light backgrounds
+        //case lightContent // Light content, for use on dark backgrounds
+        // please add : View controller-based status bar appearance = NO in info;
+        navigationbarStyle["statusBarStyle"] = 1;
+        navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
+//        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
+        let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle] as [String : Any];
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
         // merchant.aigens.test
