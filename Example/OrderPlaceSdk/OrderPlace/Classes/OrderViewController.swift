@@ -444,16 +444,62 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public func closeKeyboard() {
         webView.endEditing(true);
     }
+    private func getFont(index:Int,size:CGFloat = 18.0) -> UIFont?{
+        switch index {
+        case 0:
+            return UIFont.systemFont(ofSize: size);
+        case 1:
+            return UIFont.boldSystemFont(ofSize: size);
+        case 2:
+            return UIFont.italicSystemFont(ofSize: size);
+        default:
+            return nil;
+        }
+    }
 
     private func setNavigationBarStyle() {
+        
+        var titleFontStyle = [String: Any]();
+        var backFontStyle = [String: Any]();
+        var titleFont = 0;
+        var titleSize : CGFloat = 18.0;
+        var backFont = 0;
+        var backSize : CGFloat = 18.0;
+        
 
-        if self.options != nil, let navigationbarStyle = self.options![NAVIGATIONBAR_STYLE] as? [String: Any] {
+        if self.options != nil, let navigationbarStyle = self.options[NAVIGATIONBAR_STYLE] as? [String: Any] {
             self.navigationbarStyle = navigationbarStyle;
         }
-
+        
+        if self.options != nil, let tmpTitleFontStyle = self.navigationbarStyle["titleFontStyle"] as? [String: Any] {
+            titleFontStyle = tmpTitleFontStyle;
+        }
+        if self.options != nil, let tmpBackFontStyle = self.navigationbarStyle["backFontStyle"] as? [String: Any] {
+            backFontStyle = tmpBackFontStyle;
+        }
+        if let font = titleFontStyle["font"] as? Int {
+            titleFont = font;
+        }
+        if let size = titleFontStyle["size"] as? Int {
+            titleSize = CGFloat(size);
+        }
+        if let font = backFontStyle["font"] as? Int {
+            backFont = font;
+        }
+        if let size = backFontStyle["size"] as? Int {
+            backSize = CGFloat(size);
+        }
+        var textDic : [NSAttributedStringKey : Any] = [:];
+        if let font = getFont(index: backFont, size: backSize) {
+            textDic[NSAttributedStringKey.font] = font;
+        }
+        if let textColS = self.navigationbarStyle["textColor"] as? String, let textColor = UIColor.getHex(hex: textColS) {
+            textDic[NSAttributedStringKey.foregroundColor] = textColor;
+        }
         if let backText = self.navigationbarStyle["backText"] as? String {
             self.navigationController?.navigationItem.leftBarButtonItem?.title = backText;
             let leftBtn = UIBarButtonItem(title: backText, style: .plain, target: self, action: #selector(exitClicked));
+            leftBtn.setTitleTextAttributes(textDic, for: .normal);
             navigationItem.setLeftBarButton(leftBtn, animated: false)
         }
         if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
@@ -463,16 +509,20 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if let title = self.navigationbarStyle["title"] as? String {
             let label = UILabel(frame: CGRect.zero)
             label.backgroundColor = UIColor.clear
-            label.font = UIFont.systemFont(ofSize: 20.0)
+            label.font = UIFont.systemFont(ofSize: 18.0)
             label.textAlignment = .center
             label.textColor = UIColor.blue
             navigationItem.titleView = label
             label.text = title
             label.sizeToFit()
             if let textColS = self.navigationbarStyle["textColor"] as? String, let textColor = UIColor.getHex(hex: textColS) {
-                self.navigationController?.navigationBar.tintColor = textColor;
+//                self.navigationController?.navigationBar.tintColor = textColor;
                 label.textColor = textColor;
             }
+            if let font = getFont(index: titleFont, size: titleSize) {
+                label.font = font;
+            }
+            
         }
 
         if let statusBarStyle = self.navigationbarStyle["statusBarStyle"] as? Int {
@@ -498,7 +548,6 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
         UIApplication.shared.statusBarStyle = originStatusBarStyle;
-        
         if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
             if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
                 statusbar.backgroundColor = self.originStaBarBackground;

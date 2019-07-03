@@ -134,6 +134,21 @@ class ViewController: UIViewController {
         navigationbarStyle["backgroundColor"] = "#000000";
         navigationbarStyle["textColor"] = "#ffffff";
         
+        var titleFontStyle = [String: Any]();
+        titleFontStyle["size"] = 25; // default: 18
+        titleFontStyle["font"] = 1;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
+        navigationbarStyle["titleFontStyle"] = titleFontStyle;
+        
+        var backFontStyle = [String: Any]();
+        backFontStyle["size"] = 20; // default: 18
+        backFontStyle["font"] = 0;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
+        navigationbarStyle["backFontStyle"] = backFontStyle;
+//        open class func systemFont(ofSize fontSize: CGFloat) -> UIFont
+        
+//        open class func boldSystemFont(ofSize fontSize: CGFloat) -> UIFont
+        
+//        open class func italicSystemFont(ofSize fontSize: CGFloat) -> UIFont
+        
         //case `default` // Dark content, for use on light backgrounds
         //case lightContent // Light content, for use on dark backgrounds
         // please add : View controller-based status bar appearance = NO in info;
