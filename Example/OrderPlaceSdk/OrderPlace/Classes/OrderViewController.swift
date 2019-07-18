@@ -456,6 +456,18 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return nil;
         }
     }
+    private func getBackImage() -> UIImage?{
+        let podBundle = Bundle(for: OrderPlace.self)
+//        [UIImage imageNamed:@"imageView" inBundle:[NSBundle bundleForClass:self.class]
+        let image = UIImage(named: "back", in: podBundle, compatibleWith: nil);
+        print("getBackImage:\(image)")
+        return image;
+    }
+    
+    private func getBackImageWithPath(path:String) -> UIImage? {
+        let image = UIImage(contentsOfFile: path);
+        return image;
+    }
 
     private func setNavigationBarStyle() {
         
@@ -497,26 +509,53 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             textDic[NSAttributedStringKey.foregroundColor] = textColor;
         }
         if let backText = self.navigationbarStyle["backText"] as? String {
-            self.navigationController?.navigationItem.leftBarButtonItem?.title = backText;
+//            self.navigationController?.navigationItem.leftBarButtonItem?.title = backText;
             let leftBtn = UIBarButtonItem(title: backText, style: .plain, target: self, action: #selector(exitClicked));
             leftBtn.setTitleTextAttributes(textDic, for: .normal);
             navigationItem.setLeftBarButton(leftBtn, animated: false)
+        } else if let backArrow = self.navigationbarStyle["backArrow"] as? Bool {
+            if (backArrow) {
+                var image:UIImage? = nil;
+                if let imagePath = self.navigationbarStyle["backImagePath"] as? String {
+                    image = UIImage(contentsOfFile: imagePath);
+                } else {
+                    image = getBackImage()
+                }
+                
+                if image != nil {
+                    navigationItem.setLeftBarButton(nil, animated: false);
+                    let leftbtn = UIButton(type: .custom);
+                    leftbtn.bounds = CGRect(x: 0, y: 0, width: image!.size.width, height: image!.size.height);
+                    leftbtn.setImage(image, for: .normal);
+                    leftbtn.contentHorizontalAlignment = .left;
+                    leftbtn.contentVerticalAlignment = .center;
+                    leftbtn.imageEdgeInsets = UIEdgeInsetsMake(0, -((image!.size.width) * 0.5 - 2), 0, 0);
+                    leftbtn.addTarget(self, action: #selector(exitClicked), for: .touchUpInside);
+                    let leftBarbtn = UIBarButtonItem(customView: leftbtn);
+                    leftbtn.alpha = 1.0;
+                    leftbtn.isHidden = false;
+                    navigationItem.setLeftBarButton(leftBarbtn, animated: false)
+                }
+                
+            }
         }
         if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
             self.navigationController?.navigationBar.barTintColor = backgroundColor;
         }
 
         if let title = self.navigationbarStyle["title"] as? String {
-            let label = UILabel(frame: CGRect.zero)
+            let width = UIScreen.main.bounds.width;
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width*0.7, height: 22))
             label.backgroundColor = UIColor.clear
             label.font = UIFont.systemFont(ofSize: 18.0)
             label.textAlignment = .center
             label.textColor = UIColor.blue
             navigationItem.titleView = label
             label.text = title
-            label.sizeToFit()
+            label.numberOfLines = 1;
+            label.lineBreakMode = .byWordWrapping;
+            //JJPrint("size:\(label.frame) -:\(width*0.7)")
             if let textColS = self.navigationbarStyle["textColor"] as? String, let textColor = UIColor.getHex(hex: textColS) {
-//                self.navigationController?.navigationBar.tintColor = textColor;
                 label.textColor = textColor;
             }
             if let font = getFont(index: titleFont, size: titleSize) {
@@ -545,6 +584,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         super.viewWillAppear(animated);
         setNavigationBarStyle();
     }
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        setNavigationBarStyle();
+    }
+    
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
         UIApplication.shared.statusBarStyle = originStatusBarStyle;

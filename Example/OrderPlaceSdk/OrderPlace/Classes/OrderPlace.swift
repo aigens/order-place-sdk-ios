@@ -112,6 +112,10 @@ protocol OrderPlaceDelegate: AnyObject {
             del.applicationOpenUrl(app, url: url)
         }
     }
+    
+    @objc public static func getImagePathWithName(name:String,type:String) -> String? {
+        return Bundle.main.path(forResource: name, ofType: type);
+    }
 
 //    @objc public static func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
 
