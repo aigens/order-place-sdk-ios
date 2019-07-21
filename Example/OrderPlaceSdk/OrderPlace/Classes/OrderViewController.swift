@@ -58,7 +58,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var systemBrowserProtocols: [String] = [];
     var navigationbarStyle = [String: Any]();
     let originStatusBarStyle = UIApplication.shared.statusBarStyle;
-    var originStaBarBackground: UIColor? = nil;
+//    var originStaBarBackground: UIColor? = nil;
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
         super.init(coder: aDecoder)
@@ -570,7 +570,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
             if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
-                self.originStaBarBackground = statusbar.backgroundColor;
+//                self.originStaBarBackground = statusbar.backgroundColor;
                 if let backgroundColorHex = self.navigationbarStyle["statusbarBackgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
                     statusbar.backgroundColor = backgroundColor;
                 }
@@ -586,7 +586,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
-        setNavigationBarStyle();
+//        setNavigationBarStyle();
     }
     
     public override func viewWillDisappear(_ animated: Bool) {
@@ -594,7 +594,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         UIApplication.shared.statusBarStyle = originStatusBarStyle;
         if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
             if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
-                statusbar.backgroundColor = self.originStaBarBackground;
+//                statusbar.backgroundColor = self.originStaBarBackground;
+                statusbar.backgroundColor = .clear;
             }
         }
     }

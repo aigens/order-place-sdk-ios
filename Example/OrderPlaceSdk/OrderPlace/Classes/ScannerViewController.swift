@@ -123,6 +123,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+                statusbar.backgroundColor = .clear;
+            }
+        }
+        
         if (captureSession?.isRunning == false) {
             captureSession.startRunning();
         }
@@ -192,8 +198,11 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if onlyScan && closeCB != nil {
             let result = ["decodeResult":code];
-            closeCB?(result);
-            dismiss(animated: true, completion: nil)
+//            closeCB?(result);
+            dismiss(animated: true) {[weak self] in
+                self?.closeCB?(result)
+            }
+//            dismiss(animated: true, completion: nil)
             return;
         }
         if (SVDelegate == nil && code.starts(with: "http")) { // from scan order.place
@@ -238,6 +247,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
+
 }
 
 //extension ScannerViewController: OrderPlaceDelegate {

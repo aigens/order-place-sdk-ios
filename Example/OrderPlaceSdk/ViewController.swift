@@ -77,6 +77,10 @@ class ViewController: UIViewController {
 //        cardIO.testScan();
         
     }
+    
+    func scan() {
+        
+    }
 
     @IBAction func openClicked(_ sender: Any) {
         
@@ -92,6 +96,7 @@ class ViewController: UIViewController {
         
         
         let url = "https://yoshinoya.order.place/#/store/200002/mode/pickup";
+//        let url = "https://kiosktest.aigens.com/#/web/aigensstoretest/store/5741226267508736/station/0/time/1563434100532"
         
         
         
@@ -158,7 +163,7 @@ class ViewController: UIViewController {
         navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle] as [String : Any];
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
         // merchant.aigens.test
@@ -198,6 +203,44 @@ class ViewController: UIViewController {
         
         OrderPlace.scanDecode(caller: self, options: options) { (value) in
             print("value:\(value)")
+            
+            if let v = value as? [String: String] , let url = v["decodeResult"] as? String{
+                var member = [String: Any]()
+                member["memberId"] = "200063"
+                //        member["session"] = "7499c956f4b1b225b14a985543c7526f" //same as session
+                member["source"] = "lp club"
+                member["language"] = "en" //en,zh,zh-cn
+                member["name"] = "Him Lam" //Optional (with actual data)
+                member["gender"] = "M" //Optional (with actual data)
+                member["age"] = 17 //Optional (with actual data)
+                member["phone"] = "94952850" //Optional (with actual data)
+                member["email"] = "him.lam@aigens.com" //Optional (with actual data)
+                
+                var navigationbarStyle = [String: Any]();
+                //        navigationbarStyle["backText"] = "< 返回";
+                navigationbarStyle["backArrow"] = true;
+                navigationbarStyle["backImagePath"] = OrderPlace.getImagePathWithName(name: "back_test@2x", type: "png")
+                navigationbarStyle["title"] = "title title title title title title";
+                navigationbarStyle["backgroundColor"] = "#443532";
+                navigationbarStyle["textColor"] = "#ffffff";
+                
+                var titleFontStyle = [String: Any]();
+                titleFontStyle["size"] = 18; // default: 18
+                titleFontStyle["font"] = 1;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
+                navigationbarStyle["titleFontStyle"] = titleFontStyle;
+                
+                var backFontStyle = [String: Any]();
+                backFontStyle["size"] = 18; // default: 18
+                backFontStyle["font"] = 0;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
+                navigationbarStyle["backFontStyle"] = backFontStyle;
+                navigationbarStyle["statusBarStyle"] = 1;
+                navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
+
+                let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
+                let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle] as [String : Any];
+                
+                OrderPlace.openUrl(caller: self, url: url, options:options);
+            }
         }
         
     }
