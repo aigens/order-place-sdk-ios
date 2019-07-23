@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         member["age"] = 25 //Optional (with actual data)
         member["phone"] = "65448231" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"showNavigationBar": false,"isDebug":true] as [String : Any];
+        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":false] as [String : Any];
     
         // merchant.aigens.test
         // merchant.com.aigens.pay
@@ -95,14 +95,14 @@ class ViewController: UIViewController {
 //        let url = "https://aigens-sdk-demo.firebaseapp.com/";
         
         
-        let url = "https://yoshinoya.order.place/#/store/200002/mode/pickup";
+//        let url = "https://yoshinoya.order.place/#/store/200002/mode/pickup";
 //        let url = "https://kiosktest.aigens.com/#/web/aigensstoretest/store/5741226267508736/station/0/time/1563434100532"
         
         
         
         
 //        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
-//        let url = "http://192.168.0.249:8100/#/store/5680455227539456/mode/takeaway";
+        let url = "http://dev.order.place/#/store/5680455227539456/mode/takeaway";
         
         
 //        let url = "http://192.168.86.25:8101/#/court-store-list/5175539845300224";
@@ -163,7 +163,7 @@ class ViewController: UIViewController {
         navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle,"clearCache":true] as [String : Any];
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
         // merchant.aigens.test

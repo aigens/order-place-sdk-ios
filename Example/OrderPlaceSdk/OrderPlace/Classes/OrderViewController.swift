@@ -29,6 +29,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let ISBOUNCES = "isBounces";
     private let SYSTEMBROWSERPROTOCOL = "systemOpenUrl";
     private let NAVIGATIONBAR_STYLE = "navigationbarStyle";
+    private let CLEAR_CACHE = "clearCache";
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
@@ -59,6 +60,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var navigationbarStyle = [String: Any]();
     let originStatusBarStyle = UIApplication.shared.statusBarStyle;
 //    var originStaBarBackground: UIColor? = nil;
+    
+    var _clearCache = true;
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
         super.init(coder: aDecoder)
@@ -91,7 +94,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if self.options != nil, let systemBrowserProtocols = self.options![SYSTEMBROWSERPROTOCOL] as? [String] {
             self.systemBrowserProtocols = systemBrowserProtocols;
         }
-
+        
+        if self.options != nil, let cache = self.options![CLEAR_CACHE] as? Bool {
+            self._clearCache = cache;
+        }
+        
         if self.options != nil, let isdebug = self.options![ISDEBUG] as? Bool {
             isDebug = isdebug
         }
@@ -100,6 +107,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
         automaticallyAdjustsScrollViewInsets = false
 
+        
+        if self._clearCache {
+            self.clearCache();
+        }
+        
         JJPrint("OrderViewController viewDidLoad2")
         JJPrint("options:\(self.options)")
 
@@ -150,6 +162,42 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             stopIndicator()
         }
 
+    }
+    
+    private func clearCache() {
+        if #available(iOS 9.0, *) {
+            /*
+             在磁盘缓存上。
+             WKWebsiteDataTypeDiskCache,
+             html离线Web应用程序缓存。
+             WKWebsiteDataTypeOfflineWebApplicationCache,
+             内存缓存。
+             WKWebsiteDataTypeMemoryCache,
+             本地存储。
+             WKWebsiteDataTypeLocalStorage,
+             Cookies
+             WKWebsiteDataTypeCookies,
+             会话存储
+             WKWebsiteDataTypeSessionStorage,
+             IndexedDB数据库。
+             WKWebsiteDataTypeIndexedDBDatabases,
+             查询数据库。
+             WKWebsiteDataTypeWebSQLDatabases
+             */
+            let types = [WKWebsiteDataTypeMemoryCache, WKWebsiteDataTypeDiskCache]
+            let websiteDataTypes = Set<AnyHashable>(types)
+            let dateFrom = Date(timeIntervalSince1970: 0)
+            if let websiteDataTypes = websiteDataTypes as? Set<String> {
+                WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: dateFrom, completionHandler: {
+                    JJPrint("removeData completionHandler");
+                })
+            }
+        } else {
+//            let libraryPath = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+//            let cookiesFolderPath = libraryPath + ("/Cookies")
+//            JJPrint("\(cookiesFolderPath)")
+//            try? FileManager.default.removeItem(atPath: cookiesFolderPath)
+        }
     }
 
     private func settingScroll() {
