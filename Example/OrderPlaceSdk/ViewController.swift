@@ -45,9 +45,9 @@ class ViewController: UIViewController {
     }
     
     private func forLPTest() {
-//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        let url = "https://test.order.place/#/court-store-list/5175539845300224";
 //        let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
-        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
+//        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
         
         var member = [String: Any]()
         
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         member["age"] = 25 //Optional (with actual data)
         member["phone"] = "65448231" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":false] as [String : Any];
+        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
     
         // merchant.aigens.test
         // merchant.com.aigens.pay
@@ -87,9 +87,9 @@ class ViewController: UIViewController {
 //        testCardIOScan();
         
         
-//        forLPTest()
-//        
-//        return;
+        forLPTest()
+//
+        return;
         
         
 //        let url = "https://aigens-sdk-demo.firebaseapp.com/";
@@ -136,6 +136,7 @@ class ViewController: UIViewController {
         var navigationbarStyle = [String: Any]();
 //        navigationbarStyle["backText"] = "< 返回";
         navigationbarStyle["backArrow"] = true;
+        navigationbarStyle["useBackButton"] = true;  /// default : false , 
         navigationbarStyle["backImagePath"] = OrderPlace.getImagePathWithName(name: "back_test@2x", type: "png")
         navigationbarStyle["title"] = "title title title title title title";
         navigationbarStyle["backgroundColor"] = "#443532";

@@ -62,6 +62,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 //    var originStaBarBackground: UIColor? = nil;
     
     var _clearCache = true;
+    var _useBackButton = false;
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
         super.init(coder: aDecoder)
@@ -70,8 +71,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     @IBAction func exitClicked(_ sender: Any) {
         JJPrint("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
-        self.navigationController?.dismiss(animated: true)
-        self.serciceMap.removeAll()
+        
+        if (_useBackButton && webView.canGoBack) {
+            webView.goBack();
+        } else {
+            self.navigationController?.dismiss(animated: true)
+            self.serciceMap.removeAll()
+        }
+        
     }
 
     deinit {
@@ -536,6 +543,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
         if self.options != nil, let tmpBackFontStyle = self.navigationbarStyle["backFontStyle"] as? [String: Any] {
             backFontStyle = tmpBackFontStyle;
+        }
+        if let useBackButton = self.navigationbarStyle["useBackButton"] as? Bool {
+            self._useBackButton = useBackButton;
         }
         if let font = titleFontStyle["font"] as? Int {
             titleFont = font;
