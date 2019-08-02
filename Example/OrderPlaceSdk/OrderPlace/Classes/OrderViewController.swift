@@ -51,7 +51,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
     var closeCB: ((Any?) -> Void)? = nil
     private var showNavigationBar: Bool = false;
-    private var disableScroll: Bool = true;
+    private var disableScroll: Bool = false;
     private var isBounces: Bool = false;
 
     var serciceMap: [String: OrderPlaceService] = [:]
@@ -112,9 +112,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if (navigationController != nil) {
             navigationController?.delegate = self;
         }
-        automaticallyAdjustsScrollViewInsets = false
 
-        
         if self._clearCache {
             self.clearCache();
         }
@@ -159,13 +157,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         self.viewContainer.insertSubview(activityIndicator, aboveSubview: webView)
 
 
-        if(self.url != nil) {
+        if(url != nil && !url.isEmpty) {
             let myURL = URL(string: url)
             let myRequest = URLRequest(url: myURL!)
             webView.load(myRequest)
             JJPrint("loading url")
         } else {
             showNavigationBar = true;
+            setNavigationBar(hidden: false)
             stopIndicator()
         }
 
@@ -208,16 +207,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     private func settingScroll() {
-        // isScrollEnabled 與 bounces 最好不要同時set false
-        //        webView.scrollView.isScrollEnabled = false;
-
+        
         automaticallyAdjustsScrollViewInsets = false
-        if #available(iOS 11.0, *) {
-            webView.scrollView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
-        }
-
         webView.scrollView.bounces = self.isBounces;
-
+        
         if disableScroll {
             webView.scrollView.isScrollEnabled = false;
             webView.scrollView.delegate = self;
@@ -363,16 +356,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     public func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
-//        JJPrint("didCommit url:-- \(webView.url?.absoluteString)")
-        if let host = webView.url?.host, host.contains(ORDER_PLACE) {
-            //setNavigationBar(hidden: true)
-
-            setNavigationBar(hidden: !showNavigationBar)
-
-        } else {
-//            setNavigationBar(hidden: false)
-            setNavigationBar(hidden: !showNavigationBar)
-        }
+        setNavigationBar(hidden: !showNavigationBar)
         startIndicator()
     }
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
