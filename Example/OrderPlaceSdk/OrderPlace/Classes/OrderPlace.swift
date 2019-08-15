@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 
 protocol OrderPlaceDelegate: AnyObject {
@@ -105,6 +106,34 @@ protocol OrderPlaceDelegate: AnyObject {
         self.OPDelegate = ScannerManager.shared;
         caller.present(controller, animated: true, completion: nil)
         
+    }
+    
+    @objc public static func checkCameraPermission(callback: ((Bool) -> Void)? = nil) {
+        
+        if OrderPlace.isCameraPermissionGranted {
+            callback?(true);
+        } else {
+            AVCaptureDevice.requestAccess(for: .video) { (granted) in
+                if granted {
+                    callback?(true);
+                } else {
+                   callback?(false)
+                }
+            }
+        }
+        
+    }
+    @objc public static func openSetting() {
+        if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    private static var isCameraPermissionGranted: Bool {
+        return AVCaptureDevice.authorizationStatus(for: .video) == .authorized
     }
 
     @objc public static func application(_ app: UIApplication, open url: URL) {
