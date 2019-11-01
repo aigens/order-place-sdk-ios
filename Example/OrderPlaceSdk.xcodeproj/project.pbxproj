@@ -42,6 +42,10 @@
 		5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9092179C53A007248AB /* ScannerViewController.swift */; };
 		5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F90A2179C53A007248AB /* OrderPlaceService.swift */; };
 		5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */; };
+		52795729236A9D580033C603 /* JSInterfaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52795728236A9D580033C603 /* JSInterfaceService.swift */; };
+		52795733236BC17D0033C603 /* home@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52795730236BC17D0033C603 /* home@1x.png */; };
+		52795734236BC17D0033C603 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52795731236BC17D0033C603 /* home@2x.png */; };
+		52795735236BC17D0033C603 /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52795732236BC17D0033C603 /* home@3x.png */; };
 		527DD56521C256B50065D5E7 /* ScannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527DD56421C256B50065D5E7 /* ScannerManager.swift */; };
 		52863E0A21F7105F00090D24 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0921F7105F00090D24 /* Accelerate.framework */; };
 		52863E0C21F7106600090D24 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52863E0B21F7106600090D24 /* AudioToolbox.framework */; };
@@ -136,6 +140,10 @@
 		5275F90A2179C53A007248AB /* OrderPlaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderPlaceService.swift; sourceTree = "<group>"; };
 		5275F90D2179C53A007248AB /* OrderPlaceStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OrderPlaceStoryboard.storyboard; sourceTree = "<group>"; };
 		5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPlaceSdk_Bridging_Header.h; sourceTree = "<group>"; };
+		52795728236A9D580033C603 /* JSInterfaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSInterfaceService.swift; sourceTree = "<group>"; };
+		52795730236BC17D0033C603 /* home@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@1x.png"; sourceTree = "<group>"; };
+		52795731236BC17D0033C603 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		52795732236BC17D0033C603 /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
 		527DD56421C256B50065D5E7 /* ScannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerManager.swift; sourceTree = "<group>"; };
 		52863E0921F7105F00090D24 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		52863E0B21F7106600090D24 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -302,6 +310,7 @@
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
 				5275F9072179C53A007248AB /* GpsService.swift */,
+				52795728236A9D580033C603 /* JSInterfaceService.swift */,
 				5275F9012179C53A007248AB /* ConfigService.swift */,
 				5275F9092179C53A007248AB /* ScannerViewController.swift */,
 				5275F90A2179C53A007248AB /* OrderPlaceService.swift */,
@@ -331,6 +340,9 @@
 		5275F90B2179C53A007248AB /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				52795730236BC17D0033C603 /* home@1x.png */,
+				52795731236BC17D0033C603 /* home@2x.png */,
+				52795732236BC17D0033C603 /* home@3x.png */,
 				52E028BA22CC9B6300AC2F1C /* back@1x.png */,
 				52E028B822CC9B6200AC2F1C /* back@2x.png */,
 				52E028B922CC9B6300AC2F1C /* back@3x.png */,
@@ -591,6 +603,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				de,
@@ -620,13 +633,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				5261910121A6812B001B96E9 /* AlipaySDK.bundle in Resources */,
+				52795734236BC17D0033C603 /* home@2x.png in Resources */,
 				52E028BD22CC9B6300AC2F1C /* back@1x.png in Resources */,
+				52795733236BC17D0033C603 /* home@1x.png in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				5275F9192179C53B007248AB /* OrderPlaceStoryboard.storyboard in Resources */,
 				52E028BB22CC9B6300AC2F1C /* back@2x.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				526190F721A65D57001B96E9 /* README.txt in Resources */,
 				52E028BC22CC9B6300AC2F1C /* back@3x.png in Resources */,
+				52795735236BC17D0033C603 /* home@3x.png in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -694,6 +710,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				5275F9172179C53B007248AB /* OrderPlaceService.swift in Sources */,
 				5275F90E2179C53B007248AB /* OrderPlace.swift in Sources */,
+				52795729236A9D580033C603 /* JSInterfaceService.swift in Sources */,
 				5275F9162179C53B007248AB /* ScannerViewController.swift in Sources */,
 				526190FA21A65D57001B96E9 /* WXApiManager.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

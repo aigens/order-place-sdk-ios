@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>alipaySchemes123</string>
+				<string>cdcAlipayScheme</string>
 			</array>
 		</dict>
 		<dict>

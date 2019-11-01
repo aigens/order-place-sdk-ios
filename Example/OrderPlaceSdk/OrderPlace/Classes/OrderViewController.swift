@@ -49,6 +49,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var url: String!;
     var options: [String: Any]!;
 
+    private var closeParams: [String: Any] = ["type": ""];
     var closeCB: ((Any?) -> Void)? = nil
     private var showNavigationBar: Bool = false;
     private var disableScroll: Bool = false;
@@ -60,25 +61,39 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var navigationbarStyle = [String: Any]();
     let originStatusBarStyle = UIApplication.shared.statusBarStyle;
 //    var originStaBarBackground: UIColor? = nil;
-    
+
     var _clearCache = true;
     var _useBackButton = false;
+
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
         super.init(coder: aDecoder)
     }
 
-    @IBAction func exitClicked(_ sender: Any) {
-        JJPrint("exit clicked2")
-        //self.navigationController?.popViewController(animated: true)
-        
+    @objc private func rightClicked() {
         if (_useBackButton && webView.canGoBack) {
             webView.goBack();
         } else {
             self.navigationController?.dismiss(animated: true)
             self.serciceMap.removeAll()
+            closeParams["type"] = "Right";
+            closeCB?(closeParams)
         }
-        
+    }
+
+    @IBAction func exitClicked(_ sender: Any) {
+        JJPrint("exit clicked2")
+        //self.navigationController?.popViewController(animated: true)
+
+        if (_useBackButton && webView.canGoBack) {
+            webView.goBack();
+        } else {
+            self.navigationController?.dismiss(animated: true)
+            self.serciceMap.removeAll()
+            closeParams["type"] = "Close";
+            closeCB?(closeParams)
+        }
+
     }
 
     deinit {
@@ -101,11 +116,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if self.options != nil, let systemBrowserProtocols = self.options![SYSTEMBROWSERPROTOCOL] as? [String] {
             self.systemBrowserProtocols = systemBrowserProtocols;
         }
-        
+
         if self.options != nil, let cache = self.options![CLEAR_CACHE] as? Bool {
             self._clearCache = cache;
         }
-        
+
         if self.options != nil, let isdebug = self.options![ISDEBUG] as? Bool {
             isDebug = isdebug
         }
@@ -116,7 +131,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if self._clearCache {
             self.clearCache();
         }
-        
+
         JJPrint("OrderViewController viewDidLoad2")
         JJPrint("options:\(self.options)")
 
@@ -130,7 +145,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         configService.clickedExit = { [weak self] in
             self?.serciceMap.removeAll()
         }
+        let interfaceService = JSInterfaceService();
+        interfaceService.options = self.options;
+        interfaceService.closeCB = closeCB;
+        interfaceService.clickedExit = { [weak self] in
+            self?.serciceMap.removeAll()
+        }
         self.addService(service: configService, controller: userContentController)
+        self.addService(service: interfaceService, controller: userContentController)
 
         self.addFeatures(controller: userContentController)
 
@@ -169,7 +191,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
 
     }
-    
+
     private func clearCache() {
         if #available(iOS 9.0, *) {
             /*
@@ -207,10 +229,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     private func settingScroll() {
-        
+
         automaticallyAdjustsScrollViewInsets = false
         webView.scrollView.bounces = self.isBounces;
-        
+
         if disableScroll {
             webView.scrollView.isScrollEnabled = false;
             webView.scrollView.delegate = self;
@@ -226,6 +248,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         self.serciceMap[serviceName] = service;
         service.vc = self;
         service.initialize()
+        service.params = self.options;
         //controller.add(self, name: serviceName)
 
         controller.add(WKScriptMsgHandler(scriptDelegate: self), name: serviceName)
@@ -308,7 +331,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        JJPrint("url: navigationAction...\(navigationAction.request.url?.absoluteString)")
+        JJPrint("url: navigationAction...\(navigationAction.request.url?.absoluteString)")
         if let url = navigationAction.request.url?.absoluteString {
 
             var isSystemOpen = false;
@@ -373,7 +396,12 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
 
 //        JJPrint("didFailProvisionalNavigation:\(webView.url) --:\(error)")
-        showAlert(title: "Error", message: error.localizedDescription, OKHandler: nil)
+        if let e = error as? NSError {
+            if (e.code == NSURLErrorCancelled || e.code == -999) {
+                return;
+            }
+        }
+//        showAlert(title: "Error", message: error.localizedDescription, OKHandler: nil)
         setNavigationBar(hidden: false)
         stopIndicator()
     }
@@ -483,7 +511,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public func closeKeyboard() {
         webView.endEditing(true);
     }
-    private func getFont(index:Int,size:CGFloat = 18.0) -> UIFont?{
+    private func getFont(index: Int, size: CGFloat = 18.0) -> UIFont? {
         switch index {
         case 0:
             return UIFont.systemFont(ofSize: size);
@@ -495,33 +523,33 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             return nil;
         }
     }
-    private func getBackImage() -> UIImage?{
+    private func getImageWithName(_ name: String = "back") -> UIImage? {
         let podBundle = Bundle(for: OrderPlace.self)
 //        [UIImage imageNamed:@"imageView" inBundle:[NSBundle bundleForClass:self.class]
-        let image = UIImage(named: "back", in: podBundle, compatibleWith: nil);
-        print("getBackImage:\(image)")
+        let image = UIImage(named: name, in: podBundle, compatibleWith: nil);
+        print("getImageWith:\(image)")
         return image;
     }
-    
-    private func getBackImageWithPath(path:String) -> UIImage? {
+
+    private func getImageWithPath(_ path: String) -> UIImage? {
         let image = UIImage(contentsOfFile: path);
         return image;
     }
 
     private func setNavigationBarStyle() {
-        
+
         var titleFontStyle = [String: Any]();
         var backFontStyle = [String: Any]();
         var titleFont = 0;
-        var titleSize : CGFloat = 18.0;
+        var titleSize: CGFloat = 18.0;
         var backFont = 0;
-        var backSize : CGFloat = 18.0;
-        
+        var backSize: CGFloat = 18.0;
+
 
         if self.options != nil, let navigationbarStyle = self.options[NAVIGATIONBAR_STYLE] as? [String: Any] {
             self.navigationbarStyle = navigationbarStyle;
         }
-        
+
         if self.options != nil, let tmpTitleFontStyle = self.navigationbarStyle["titleFontStyle"] as? [String: Any] {
             titleFontStyle = tmpTitleFontStyle;
         }
@@ -543,7 +571,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if let size = backFontStyle["size"] as? Int {
             backSize = CGFloat(size);
         }
-        var textDic : [NSAttributedStringKey : Any] = [:];
+        var textDic: [NSAttributedStringKey: Any] = [:];
         if let font = getFont(index: backFont, size: backSize) {
             textDic[NSAttributedStringKey.font] = font;
         }
@@ -557,13 +585,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             navigationItem.setLeftBarButton(leftBtn, animated: false)
         } else if let backArrow = self.navigationbarStyle["backArrow"] as? Bool {
             if (backArrow) {
-                var image:UIImage? = nil;
+                var image: UIImage? = nil;
                 if let imagePath = self.navigationbarStyle["backImagePath"] as? String {
                     image = UIImage(contentsOfFile: imagePath);
                 } else {
-                    image = getBackImage()
+                    image = getImageWithName("back")
                 }
-                
+
                 if image != nil {
                     navigationItem.setLeftBarButton(nil, animated: false);
                     let leftbtn = UIButton(type: .custom);
@@ -578,8 +606,34 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                     leftbtn.isHidden = false;
                     navigationItem.setLeftBarButton(leftBarbtn, animated: false)
                 }
-                
+
             }
+        }
+        if let rightIcon = self.navigationbarStyle["rightAction"] as? Bool {
+            if rightIcon {
+                var image: UIImage? = nil;
+                if let imagePath = self.navigationbarStyle["rightImagePath"] as? String {
+                    image = UIImage(contentsOfFile: imagePath);
+                } else {
+                    image = getImageWithName("home")
+                }
+
+                if image != nil {
+//                    navigationItem.setRightBarButton(nil, animated: false);
+                    let rightbtn = UIButton(type: .custom);
+                    rightbtn.bounds = CGRect(x: 0, y: 0, width: image!.size.width, height: image!.size.height);
+                    rightbtn.setImage(image, for: .normal);
+                    rightbtn.contentHorizontalAlignment = .right;
+                    rightbtn.contentVerticalAlignment = .center;
+                    rightbtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -((image!.size.width) * 0.3));
+                    rightbtn.addTarget(self, action: #selector(rightClicked), for: .touchUpInside);
+                    let rightBarbtn = UIBarButtonItem(customView: rightbtn);
+                    rightbtn.alpha = 1.0;
+                    rightbtn.isHidden = false;
+                    navigationItem.setRightBarButton(rightBarbtn, animated: false)
+                }
+            }
+
         }
         if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
             self.navigationController?.navigationBar.barTintColor = backgroundColor;
@@ -587,7 +641,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
         if let title = self.navigationbarStyle["title"] as? String {
             let width = UIScreen.main.bounds.width;
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width*0.7, height: 22))
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: width * 0.7, height: 22))
             label.backgroundColor = UIColor.clear
             label.font = UIFont.systemFont(ofSize: 18.0)
             label.textAlignment = .center
@@ -603,13 +657,13 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             if let font = getFont(index: titleFont, size: titleSize) {
                 label.font = font;
             }
-            
+
         }
 
         if let statusBarStyle = self.navigationbarStyle["statusBarStyle"] as? Int {
             UIApplication.shared.statusBarStyle = UIStatusBarStyle(rawValue: statusBarStyle) ?? originStatusBarStyle;
         }
-        
+
         if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
             if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
 //                self.originStaBarBackground = statusbar.backgroundColor;
@@ -630,7 +684,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         super.viewDidAppear(animated);
 //        setNavigationBarStyle();
     }
-    
+
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
         UIApplication.shared.statusBarStyle = originStatusBarStyle;

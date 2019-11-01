@@ -11,6 +11,7 @@ import WebKit
 open class OrderPlaceService: NSObject {
 
     public var vc: UIViewController!;
+    public var params: Any?;
 
     open func getServiceName() -> String {
         preconditionFailure("This method getServiceName must be overridden")

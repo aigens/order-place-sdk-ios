@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         member["age"] = 25 //Optional (with actual data)
         member["phone"] = "65448231" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
-        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
+        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
     
         // merchant.aigens.test
         // merchant.com.aigens.pay
@@ -70,6 +70,66 @@ class ViewController: UIViewController {
         }
 //        OrderPlace.openUrl(caller: self, url: url, options:options,);
     }
+    
+    private func forCdcTest() {
+//        let url = "http://192.168.50.72:8102/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
+        let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
+//                let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
+        //        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
+        
+        var member = [String: Any]()
+        
+        member["memberId"] = "GUEST"
+        member["session"] = "ABCDEF" //same as session
+        member["source"] = "cdc"
+        member["language"] = "zh" //en,zh,zh-cn
+        member["name"] = "Optional Name" //Optional (with actual data)
+        member["gender"] = "M" //Optional (with actual data)
+        member["age"] = 25 //Optional (with actual data)
+        member["phone"] = "65448231" //Optional (with actual data)
+        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+        let systemOpenUrl : [String] = ["mailto:"];
+        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
+        
+        // merchant.aigens.test
+        // merchant.com.aigens.pay
+        /// "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
+        OrderPlace.openUrl(caller: self, url: url, options: options) { (result) in
+            print("result:\(result)")
+        }
+        //        OrderPlace.openUrl(caller: self, url: url, options:options,);
+    }
+    
+    
+    private func genkiTest() {
+        //        let url = "http://192.168.50.72:8102/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
+        let url = "http://192.168.50.72:8100/#/store/105118"
+        //        let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
+        //        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
+        
+        var member = [String: Any]()
+        
+        member["memberId"] = "123456"
+        member["session"] = "ABCDEF" //same as session
+        member["source"] = "cdc"
+        member["language"] = "zh" //en,zh,zh-cn
+        member["name"] = "Optional Name" //Optional (with actual data)
+        member["gender"] = "M" //Optional (with actual data)
+        member["age"] = 25 //Optional (with actual data)
+        member["phone"] = "65448231" //Optional (with actual data)
+        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+        let systemOpenUrl : [String] = ["mailto:"];
+        let options = ["features": "scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true,"systemOpenUrl":systemOpenUrl,"language": "en"] as [String : Any];
+        
+        // merchant.aigens.test
+        // merchant.com.aigens.pay
+        /// "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
+        OrderPlace.openUrl(caller: self, url: url, options: options) { (result) in
+            print("result:\(result)")
+        }
+        //        OrderPlace.openUrl(caller: self, url: url, options:options,);
+    }
+    
     
     private func testCardIOScan() {
 //        let cardIO = CardIOExecutor()
@@ -81,15 +141,45 @@ class ViewController: UIViewController {
     func scan() {
         
     }
-
+    
+     func test() {
+    
+            let url = "http://192.168.50.72:8100/#/store/105118/mode/takeaway"
+//        let url = "http://192.168.50.72:8082/home";
+            var member = [String: Any]()
+            
+            member["memberId"] = "GUEST"
+            member["session"] = "ABCDEF" //same as session
+            member["source"] = "cdc"
+            member["language"] = "zh" //en,zh,zh-cn
+            member["name"] = "Optional Name" //Optional (with actual data)
+            member["gender"] = "M" //Optional (with actual data)
+            member["age"] = 25 //Optional (with actual data)
+            member["phone"] = "65448231" //Optional (with actual data)
+            member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+        
+            let options = ["features": "gps,scan","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
+            OrderPlace.openUrl(caller: self, url: url, options: options) { (result) in
+                print("result:\(result)")
+            }
+            //        OrderPlace.openUrl(caller: self, url: url, options:options,);
+        }
+    
+    
+    
     @IBAction func openClicked(_ sender: Any) {
         
 //        testCardIOScan();
         
         
-        forLPTest()
+//        forLPTest()
+        
+        
+//        forCdcTest();
+//        test();
+//        genkiTest();
 
-        return;
+//        return;
         
         
 //        let url = "https://aigens-sdk-demo.firebaseapp.com/";
@@ -143,6 +233,8 @@ class ViewController: UIViewController {
         navigationbarStyle["title"] = "title title title title title title";
         navigationbarStyle["backgroundColor"] = "#443532";
         navigationbarStyle["textColor"] = "#ffffff";
+        navigationbarStyle["rightAction"] = true;
+        navigationbarStyle["rightImagePath"] = OrderPlace.getImagePathWithName(name: "home@2x", type: "png")
         
         var titleFontStyle = [String: Any]();
         titleFontStyle["size"] = 18; // default: 18
@@ -166,17 +258,40 @@ class ViewController: UIViewController {
         navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "target" : "_system"] as [String : Any];
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
         // merchant.aigens.test
         
 
         //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
-        OrderPlace.openUrl(caller: self, url: url, options:options);
+//        OrderPlace.openUrl(caller: self, url: url, options:options);
+        OrderPlace.openUrl(caller: self, url: url, options: options) { (params) in
+            print(" callback params:\(params)")
+        }
+    }
+    
+    func scanGenki() {
+        var member = [String: Any]()
+        
+        member["memberId"] = "123456"
+        member["session"] = "ABCDEF" //same as session
+        member["source"] = "lp"
+        member["language"] = "zh" //en,zh,zh-cn
+        member["name"] = "Optional Name" //Optional (with actual data)
+        member["gender"] = "M" //Optional (with actual data)
+        member["age"] = 25 //Optional (with actual data)
+        member["phone"] = "65448231" //Optional (with actual data)
+        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+        let options = ["features": "gps,scan,alipayhk,applepay,wechatpay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"onlyScan":true,"language": "en"] as [String : Any];
+        
     }
     
     @IBAction func scanClicked(_ sender: Any) {
+        
+        if (true) {
+            scanGenki();
+        }
 //        var member = [String: Any]()
 //        member["memberId"] = "200063"
 //        member["session"] = "7499c956f4b1b225b14a985543c7526f" //same as session
