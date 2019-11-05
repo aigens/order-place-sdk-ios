@@ -22,6 +22,8 @@
 		526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526190FC21A65DF0001B96E9 /* AlipayExecutor.swift */; };
 		5261910021A6812B001B96E9 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 526190FE21A6812B001B96E9 /* AlipaySDK.framework */; };
 		5261910121A6812B001B96E9 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 526190FF21A6812B001B96E9 /* AlipaySDK.bundle */; };
+		52744D8F236FDB1C003406AA /* MyAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52744D8C236FDB1B003406AA /* MyAlertViewController.xib */; };
+		52744D90236FDB1C003406AA /* MyAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52744D8E236FDB1C003406AA /* MyAlertViewController.m */; };
 		5275F8912179B51C007248AB /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8902179B51C007248AB /* libc++.tbd */; };
 		5275F8932179B529007248AB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8922179B528007248AB /* libz.tbd */; };
 		5275F8952179B531007248AB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5275F8942179B531007248AB /* SystemConfiguration.framework */; };
@@ -118,6 +120,9 @@
 		526190FC21A65DF0001B96E9 /* AlipayExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlipayExecutor.swift; sourceTree = "<group>"; };
 		526190FE21A6812B001B96E9 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		526190FF21A6812B001B96E9 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		52744D8C236FDB1B003406AA /* MyAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAlertViewController.xib; sourceTree = "<group>"; };
+		52744D8D236FDB1B003406AA /* MyAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertViewController.h; sourceTree = "<group>"; };
+		52744D8E236FDB1C003406AA /* MyAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertViewController.m; sourceTree = "<group>"; };
 		5275F8902179B51C007248AB /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		5275F8922179B528007248AB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5275F8942179B531007248AB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -276,6 +281,16 @@
 			path = OrderPlaceSdk/alipayFramework;
 			sourceTree = SOURCE_ROOT;
 		};
+		52744D8B236FDA91003406AA /* alert */ = {
+			isa = PBXGroup;
+			children = (
+				52744D8D236FDB1B003406AA /* MyAlertViewController.h */,
+				52744D8E236FDB1C003406AA /* MyAlertViewController.m */,
+				52744D8C236FDB1B003406AA /* MyAlertViewController.xib */,
+			);
+			path = alert;
+			sourceTree = "<group>";
+		};
 		5275F8872179B402007248AB /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +315,7 @@
 		5275F8FE2179C53A007248AB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				52744D8B236FDA91003406AA /* alert */,
 				52B71BF4220038B50084C608 /* stripe-apple */,
 				52863E1A21F7133900090D24 /* cardIO */,
 				52618F4121A28E49001B96E9 /* wechatPay */,
@@ -644,6 +660,7 @@
 				52E028BC22CC9B6300AC2F1C /* back@3x.png in Resources */,
 				52795735236BC17D0033C603 /* home@3x.png in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				52744D8F236FDB1C003406AA /* MyAlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +718,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				527DD56521C256B50065D5E7 /* ScannerManager.swift in Sources */,
+				52744D90236FDB1C003406AA /* MyAlertViewController.m in Sources */,
 				52618F4321A28EAB001B96E9 /* WechatPayService.swift in Sources */,
 				52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */,
 				526190F921A65D57001B96E9 /* WechatExecutor.swift in Sources */,

@@ -156,7 +156,13 @@ protocol OrderPlaceDelegate: AnyObject {
     }
     
     @objc public static func getImagePathWithName(name:String,type:String) -> String? {
-        return Bundle.main.path(forResource: name, ofType: type);
+        let scan = Int(UIScreen.main.scale);
+        var i = Bundle.main.path(forResource: name, ofType: type);
+        if (i == nil) {
+            let n = name + "@\(scan)x";
+            i = Bundle.main.path(forResource: n, ofType: type);
+        }
+        return i;
     }
 
 //    @objc public static func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {

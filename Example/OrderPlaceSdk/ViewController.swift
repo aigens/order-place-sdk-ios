@@ -229,12 +229,14 @@ class ViewController: UIViewController {
 //        navigationbarStyle["backText"] = "< 返回";
         navigationbarStyle["backArrow"] = true;
         navigationbarStyle["useBackButton"] = true;  /// default : false , 
-        navigationbarStyle["backImagePath"] = OrderPlace.getImagePathWithName(name: "back_test@2x", type: "png")
+        navigationbarStyle["backImagePath"] = OrderPlace.getImagePathWithName(name: "back", type: "png")
         navigationbarStyle["title"] = "title title title title title title";
-        navigationbarStyle["backgroundColor"] = "#443532";
+        navigationbarStyle["backgroundColor"] = "#000000";
         navigationbarStyle["textColor"] = "#ffffff";
         navigationbarStyle["rightAction"] = true;
-        navigationbarStyle["rightImagePath"] = OrderPlace.getImagePathWithName(name: "home@2x", type: "png")
+        navigationbarStyle["rightImagePath"] = OrderPlace.getImagePathWithName(name: "home", type: "png")
+        
+        
         
         var titleFontStyle = [String: Any]();
         titleFontStyle["size"] = 18; // default: 18
@@ -256,9 +258,21 @@ class ViewController: UIViewController {
         // please add : View controller-based status bar appearance = NO in info;
         navigationbarStyle["statusBarStyle"] = 1;
         navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
+        
+        
+        var alertStyle = [String: Any]();
+        
+        alertStyle["themeColor"] = "#ffc933";
+        alertStyle["onlyOKButton"] = false;
+        alertStyle["titleLabel"] = "Add card incomplete, are you sure to exit?";
+        alertStyle["subtitleLabel"] = "#ffc933";
+        alertStyle["backgroundCanDismiss"] = true;
+        
+        
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "target" : "_system"] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "canDismiss": false,"alertStyle" : alertStyle] as [String : Any];
+//        "target" : "_system"
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
         // merchant.aigens.test

@@ -30,6 +30,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let SYSTEMBROWSERPROTOCOL = "systemOpenUrl";
     private let NAVIGATIONBAR_STYLE = "navigationbarStyle";
     private let CLEAR_CACHE = "clearCache";
+    private let CAN_DISMISS = "canDismiss";
 
     private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceSdk_Example."
 //    private let ORDER_PLACE_ALIPAY_SDK = "OrderPlaceAlipaySDK."
@@ -54,6 +55,9 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private var showNavigationBar: Bool = false;
     private var disableScroll: Bool = false;
     private var isBounces: Bool = false;
+    private var canDismiss: Bool = true;
+    private var locale: String = "en";
+    private var alertStyle = [String: Any]();
 
     var serciceMap: [String: OrderPlaceService] = [:]
     var extraServices: Array<OrderPlaceService>!;
@@ -88,6 +92,21 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if (_useBackButton && webView.canGoBack) {
             webView.goBack();
         } else {
+            if !canDismiss {
+                if let alertController = MyAlertViewController(nibName: "MyAlertViewController", bundle: Bundle(for: OrderPlace.self)) {
+                    alertController.providesPresentationContextTransitionStyle = true;
+                    alertController.definesPresentationContext = true;
+                    alertController.modalPresentationStyle = .overCurrentContext;
+                    present(alertController, animated: false, completion: nil)
+                    alertController.configurationParameters(alertStyle) {[weak self] in
+                        self?.navigationController?.dismiss(animated: true)
+                        self?.serciceMap.removeAll()
+                        self?.closeParams["type"] = "Close";
+                        self?.closeCB?(self?.closeParams)
+                    }
+                    return;
+                }
+            }
             self.navigationController?.dismiss(animated: true)
             self.serciceMap.removeAll()
             closeParams["type"] = "Close";
@@ -120,9 +139,21 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if self.options != nil, let cache = self.options![CLEAR_CACHE] as? Bool {
             self._clearCache = cache;
         }
-
-        if self.options != nil, let isdebug = self.options![ISDEBUG] as? Bool {
-            isDebug = isdebug
+        if self.options != nil, let can = self.options![CAN_DISMISS] as? Bool {
+            self.canDismiss = can;
+        }
+        if self.options != nil, let can = self.options![CAN_DISMISS] as? Bool {
+            self.canDismiss = can;
+        }
+        if self.options != nil, let l = self.options!["language"] as? String {
+            self.locale = l;
+        }
+        if self.options != nil, let l_ = self.options!["locale"] as? String {
+            self.locale = l_;
+        }
+        if self.options != nil, let s = self.options!["alertStyle"] as? [String: Any] {
+            self.alertStyle["lang"] = self.locale;
+            self.alertStyle = s;
         }
         if (navigationController != nil) {
             navigationController?.delegate = self;
@@ -635,8 +666,22 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             }
 
         }
-        if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
-            self.navigationController?.navigationBar.barTintColor = backgroundColor;
+        if let backgroundColorHex = self.navigationbarStyle["backgroundColor"] as? String, let barColour = UIColor.getHex(hex: backgroundColorHex) {
+//            self.navigationController?.navigationBar.barTintColor = barColour;
+//            self.navigationController?.navigationBar.isTranslucent = false;
+            
+            if let barH = navigationController?.navigationBar.frame.height {
+                let statusH = UIApplication.shared.statusBarFrame.height;
+                
+                print("statusH:\(statusH) barH:\(barH)")
+                let w = UIScreen.main.bounds.size.width
+                let colourView = UIView(frame: CGRect(x: 0.0, y: -statusH, width: w, height: barH + statusH));
+                colourView.isOpaque = false;
+                colourView.alpha = 1.0;
+                colourView.backgroundColor = barColour;
+                self.navigationController?.navigationBar.layer.insertSublayer(colourView.layer, at: 1);
+            }
+
         }
 
         if let title = self.navigationbarStyle["title"] as? String {

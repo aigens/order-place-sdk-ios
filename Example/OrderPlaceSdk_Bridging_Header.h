@@ -6,5 +6,6 @@
 #import <AlipaySDK/AlipaySDK.h>
 
 #import "WXApi.h"
+#import "MyAlertViewController.h"
 //#import "CardIO.h"
 
