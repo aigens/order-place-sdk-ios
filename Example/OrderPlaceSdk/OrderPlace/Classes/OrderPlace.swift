@@ -72,6 +72,14 @@ protocol OrderPlaceDelegate: AnyObject {
         
         orderVC.closeCB = closeCB;
         self.OPDelegate = orderVC
+        
+        if let follow = options["followiOS11"] as? Bool {
+            if !follow {
+                controller.modalPresentationStyle = .fullScreen
+            }
+        } else {
+            controller.modalPresentationStyle = .fullScreen
+        }
 
         caller.present(controller, animated: true, completion: nil)
 
@@ -88,6 +96,14 @@ protocol OrderPlaceDelegate: AnyObject {
         orderVC.options = options;
         orderVC.extraServices = services;
         self.OPDelegate = orderVC
+        
+        if let follow = options["followiOS11"] as? Bool {
+            if !follow {
+                controller.modalPresentationStyle = .fullScreen
+            }
+        } else {
+            controller.modalPresentationStyle = .fullScreen
+        }
 
         caller.present(controller, animated: true, completion: nil)
         
@@ -104,6 +120,9 @@ protocol OrderPlaceDelegate: AnyObject {
         scanVC.options = options;
         scanVC.closeCB = closeCB;
         self.OPDelegate = ScannerManager.shared;
+        
+        controller.modalPresentationStyle = .fullScreen;
+        
         caller.present(controller, animated: true, completion: nil)
 
     }
@@ -116,6 +135,9 @@ protocol OrderPlaceDelegate: AnyObject {
         let scanVC = controller.topViewController as! ScannerViewController;
         scanVC.options = params;
         scanVC.closeCB = closeCB;
+        
+        controller.modalPresentationStyle = .fullScreen;
+        
         self.OPDelegate = ScannerManager.shared;
         caller.present(controller, animated: true, completion: nil)
         

@@ -201,8 +201,8 @@ class ViewController: UIViewController {
 //        let url = "https://www.baidu.com/";
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
 //        let url = "https://aigens-sdk-demo.firebaseapp.com"
-//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
-        let url = "https://scantest.aigens.com/scan?code=c3RvcmU9NTc1ODEzMDYyMTI1MTU4NCZtb2RlPXBpY2t1cCZwYWdlPWJ5b2Q=";
+        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+//        let url = "https://scantest.aigens.com/scan?code=c3RvcmU9NTc1ODEzMDYyMTI1MTU4NCZtb2RlPXBpY2t1cCZwYWdlPWJ5b2Q=";
         
 //        let url = "http://192.168.0.253:8100"
 

@@ -42,6 +42,7 @@ class ScannerService: OrderPlaceService {
         guard let NavController = OrderPlace.makeViewController(vcId: scanVCId) as? UINavigationController, let scanVC = NavController.topViewController as? ScannerViewController else { return }
         scanVC.options = options;
         scanVC.SVDelegate = self;
+        NavController.modalPresentationStyle = .fullScreen
         vc.present(NavController, animated: true, completion: nil)
     }
 
