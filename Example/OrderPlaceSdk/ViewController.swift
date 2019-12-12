@@ -201,8 +201,8 @@ class ViewController: UIViewController {
 //        let url = "https://www.baidu.com/";
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
 //        let url = "https://aigens-sdk-demo.firebaseapp.com"
-        let url = "https://test.order.place/#/court-store-list/5175539845300224";
-        
+//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+        let url = "https://scantest.aigens.com/scan?code=c3RvcmU9NTc1ODEzMDYyMTI1MTU4NCZtb2RlPXBpY2t1cCZwYWdlPWJ5b2Q=";
         
 //        let url = "http://192.168.0.253:8100"
 
@@ -231,7 +231,7 @@ class ViewController: UIViewController {
         navigationbarStyle["useBackButton"] = true;  /// default : false , 
         navigationbarStyle["backImagePath"] = OrderPlace.getImagePathWithName(name: "back", type: "png")
         navigationbarStyle["title"] = "title title title title title title";
-        navigationbarStyle["backgroundColor"] = "#000000";
+        navigationbarStyle["backgroundColor"] = "#666666";
         navigationbarStyle["textColor"] = "#ffffff";
         navigationbarStyle["rightAction"] = true;
         navigationbarStyle["rightImagePath"] = OrderPlace.getImagePathWithName(name: "home", type: "png")
@@ -239,8 +239,8 @@ class ViewController: UIViewController {
         
         
         var titleFontStyle = [String: Any]();
-        titleFontStyle["size"] = 18; // default: 18
-        titleFontStyle["font"] = 1;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
+        titleFontStyle["size"] = 22; // default: 18
+        titleFontStyle["font"] = 2;  // 0 (systemFont) / 1 (boldSystemFont) / 2 (italicSystemFont) , default: 0
         navigationbarStyle["titleFontStyle"] = titleFontStyle;
         
         var backFontStyle = [String: Any]();
@@ -271,7 +271,7 @@ class ViewController: UIViewController {
         
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "canDismiss": false,"alertStyle" : alertStyle] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "canDismiss": false,"alertStyle" : alertStyle] as [String : Any];
 //        "target" : "_system"
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay

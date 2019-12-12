@@ -123,11 +123,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
-            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
-                statusbar.backgroundColor = .clear;
+        
+        if #available(iOS 13.0, *) {
+            
+        } else {
+            if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+                if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+                    statusbar.backgroundColor = .clear;
+                }
             }
         }
+        
+        
+        
         
         if (captureSession?.isRunning == false) {
             captureSession.startRunning();

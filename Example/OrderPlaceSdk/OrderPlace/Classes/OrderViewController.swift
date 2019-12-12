@@ -68,6 +68,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
     var _clearCache = true;
     var _useBackButton = false;
+    
+    private var statusBar: UIView? = nil
 
     public required init?(coder aDecoder: NSCoder) {
         JJPrint("init coder style2")
@@ -679,7 +681,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                 colourView.isOpaque = false;
                 colourView.alpha = 1.0;
                 colourView.backgroundColor = barColour;
-                self.navigationController?.navigationBar.layer.insertSublayer(colourView.layer, at: 1);
+                if #available(iOS 13.0, *) {
+                //                self.navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:  UIColor.rgbColor(rgbValue: 0x000000), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34)]
+                    self.navigationController?.navigationBar.standardAppearance.backgroundColor = barColour
+
+                }else {
+                   self.navigationController?.navigationBar.layer.insertSublayer(colourView.layer, at: 1);
+                }
+                
             }
 
         }
@@ -691,7 +700,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             label.font = UIFont.systemFont(ofSize: 18.0)
             label.textAlignment = .center
             label.textColor = UIColor.blue
-            navigationItem.titleView = label
+            
             label.text = title
             label.numberOfLines = 1;
             label.lineBreakMode = .byWordWrapping;
@@ -702,21 +711,36 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             if let font = getFont(index: titleFont, size: titleSize) {
                 label.font = font;
             }
+            navigationItem.titleView = label
 
         }
 
         if let statusBarStyle = self.navigationbarStyle["statusBarStyle"] as? Int {
             UIApplication.shared.statusBarStyle = UIStatusBarStyle(rawValue: statusBarStyle) ?? originStatusBarStyle;
         }
-
-        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
-            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
-//                self.originStaBarBackground = statusbar.backgroundColor;
+//UIStatusBarManager
+//        UIStatusBarManager
+        if #available(iOS 13.0, *) {
+            if let f = UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame {
+                let statusBar = UIView(frame:f)
                 if let backgroundColorHex = self.navigationbarStyle["statusbarBackgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
-                    statusbar.backgroundColor = backgroundColor;
+                    statusBar.backgroundColor = backgroundColor;
                 }
+                self.statusBar = statusBar
+                UIApplication.shared.keyWindow?.addSubview(statusBar)
             }
+            
+        } else {
+            if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+                        if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+            //                self.originStaBarBackground = statusbar.backgroundColor;
+                            if let backgroundColorHex = self.navigationbarStyle["statusbarBackgroundColor"] as? String, let backgroundColor = UIColor.getHex(hex: backgroundColorHex) {
+                                statusbar.backgroundColor = backgroundColor;
+                            }
+                        }
+                    }
         }
+        
 
 
     }
@@ -733,12 +757,17 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
         UIApplication.shared.statusBarStyle = originStatusBarStyle;
-        if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
-            if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
-//                statusbar.backgroundColor = self.originStaBarBackground;
-                statusbar.backgroundColor = .clear;
-            }
+        print("viewWillDisappear....");
+        if #available(iOS 13.0, *) {
+            statusBar?.removeFromSuperview()
+        } else {
+            if let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? NSObject, let statusbar = statusBarWindow.value(forKey: "statusBar") as? UIView {
+                        if statusbar.responds(to: #selector(setter: UIView.backgroundColor)) {
+                            statusbar.backgroundColor = .clear;
+                        }
+                    }
         }
+        
     }
 }
 
@@ -804,8 +833,12 @@ extension OrderViewController: UIScrollViewDelegate {
 public func JJPrint<T>(_ message: T, file: String = #file, _ func: String = #function, _ lineNumber: Int = #line) {
 
     guard isDebug else { return }
+    #if DEBUG
     let file = (file as NSString).lastPathComponent;
     print("File:\(file):(\(lineNumber))-- \(message)");
+    #endif
+    
+    // #if #else #endif
 
 }
 

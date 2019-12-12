@@ -62,6 +62,11 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>akamaihd.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 			<key>alipay.com</key>
 			<dict>
 				<key>NSIncludesSubdomains</key>
@@ -84,26 +89,7 @@
 				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
 				<false/>
 			</dict>
-			<key>akamaihd.net</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
 			<key>api.facebook.com</key>
-			<dict/>
-			<key>fbcdn.net</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-			<key>graph.facebook.com</key>
-			<dict/>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>m.facebook.com</key>
 			<dict/>
 			<key>demo.mobiletech.com.hk</key>
 			<dict>
@@ -118,6 +104,20 @@
 				<key>NSTemporaryExceptionRequiresForwardSecrecy</key>
 				<false/>
 			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>graph.facebook.com</key>
+			<dict/>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+			<key>m.facebook.com</key>
+			<dict/>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
