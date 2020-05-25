@@ -72,8 +72,9 @@ class ViewController: UIViewController {
     }
     
     private func forCdcTest() {
-//        let url = "http://192.168.50.72:8102/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
+//        let url = "http://192.168.50.72:8103/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
         let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
+        
 //                let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
         //        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
         
@@ -86,7 +87,7 @@ class ViewController: UIViewController {
         member["name"] = "Optional Name" //Optional (with actual data)
         member["gender"] = "M" //Optional (with actual data)
         member["age"] = 25 //Optional (with actual data)
-        member["phone"] = "65448231" //Optional (with actual data)
+        member["phone"] = "65445421" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
         let systemOpenUrl : [String] = ["mailto:"];
         let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
@@ -176,6 +177,10 @@ class ViewController: UIViewController {
         
         
 //        forCdcTest();
+//        if (true) {
+//            forCdcTest();
+//            return;
+//        }
 //        test();
 //        genkiTest();
 
@@ -258,6 +263,8 @@ class ViewController: UIViewController {
         // please add : View controller-based status bar appearance = NO in info;
         navigationbarStyle["statusBarStyle"] = 1;
         navigationbarStyle["statusbarBackgroundColor"] = "#3d9be5";
+        
+        navigationbarStyle["bottomViewSafeColor"] = "#666666"
         
         
         var alertStyle = [String: Any]();

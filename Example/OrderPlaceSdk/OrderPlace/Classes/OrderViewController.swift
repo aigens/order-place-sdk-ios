@@ -44,6 +44,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceSdk_Example.";
 //        private let ORDER_PLACE_STRIPE_APPLE_SDK = "OrderPlaceStripeAppleSDK.";
 
+    @IBOutlet weak var bottomView: UIView!
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!;
@@ -741,7 +743,14 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                     }
         }
         
-
+        
+        if #available(iOS 11.0, *) {
+            if let colS = self.navigationbarStyle["bottomViewSafeColor"] as? String, let bottomViewSafeColor = UIColor.getHex(hex: colS) {
+                bottomView.isHidden = false;
+                bottomView.backgroundColor = bottomViewSafeColor;
+            }
+        }
+        
 
     }
 
