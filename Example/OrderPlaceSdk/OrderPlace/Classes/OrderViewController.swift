@@ -121,6 +121,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
 
     deinit {
         JJPrint("order view controller deinit")
+        NotificationCenter.default.removeObserver(self)
     }
 
     public override func viewDidLoad() {
@@ -224,7 +225,26 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             setNavigationBar(hidden: false)
             stopIndicator()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil);
 
+    }
+    
+    @objc private func becomeActive() {
+        print("becomeActive")
+        if (webView != nil) {
+            webView.evaluateJavaScript("AppResume()") { (c, e) in
+            }
+        }        
+    }
+    @objc private func enterBackground() {
+        print("enterBackground")
+        if (webView != nil) {
+            webView.evaluateJavaScript("AppPause()") { (c, e) in
+            }
+        }
+        
     }
 
     private func clearCache() {
