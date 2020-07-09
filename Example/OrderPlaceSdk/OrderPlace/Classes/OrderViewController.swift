@@ -88,11 +88,6 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
             closeCB?(closeParams)
         }
     }
-
-    
-    public func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
-        return .portrait
-    }
     
     @IBAction func exitClicked(_ sender: Any) {
         JJPrint("exit clicked2")
@@ -801,6 +796,10 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
         
     }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
 }
 
 extension OrderViewController: UINavigationControllerDelegate {
@@ -810,7 +809,7 @@ extension OrderViewController: UINavigationControllerDelegate {
         navigationController.setNavigationBarHidden(isHidden, animated: false)
     }
     
-    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    public func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
         return .portrait
     }
 }
