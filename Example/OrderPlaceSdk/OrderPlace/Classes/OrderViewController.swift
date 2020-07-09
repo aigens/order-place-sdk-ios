@@ -89,6 +89,11 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         }
     }
 
+    
+    public func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     @IBAction func exitClicked(_ sender: Any) {
         JJPrint("exit clicked2")
         //self.navigationController?.popViewController(animated: true)
@@ -547,9 +552,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         present(alertController, animated: true, completion: nil)
     }
 
-    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    
 
     private func setNavigationBar(hidden: Bool) {
         self.navigationController?.setNavigationBarHidden(hidden, animated: false)
@@ -805,6 +808,10 @@ extension OrderViewController: UINavigationControllerDelegate {
         let isHidden = viewController.isKind(of: OrderViewController.self) && !showNavigationBar
         //JJPrint("viewController: \(viewController) \(isHidden)")
         navigationController.setNavigationBarHidden(isHidden, animated: false)
+    }
+    
+    public override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 }
 

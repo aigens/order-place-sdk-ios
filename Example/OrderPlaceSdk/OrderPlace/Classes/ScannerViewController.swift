@@ -251,10 +251,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 //    override var prefersStatusBarHidden: Bool {
 //        return true
 //    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
+    
     
 
 }
@@ -271,6 +268,10 @@ extension ScannerViewController: UINavigationControllerDelegate {
         let isHidden = viewController.isKind(of: ScannerViewController.self)
         ///print("viewController: \(viewController) \(isHidden)")
         navigationController.setNavigationBarHidden(isHidden, animated: false)
+    }
+    
+    public func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+        return .portrait
     }
 }
 
