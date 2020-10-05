@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         member["phone"] = "65445421" //Optional (with actual data)
         member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
         let systemOpenUrl : [String] = ["mailto:"];
-        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": false,"isDebug":true,"clearCache":true] as [String : Any];
+        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": true,"isDebug":true,"clearCache":true] as [String : Any];
         
         // merchant.aigens.test
         // merchant.com.aigens.pay
@@ -177,6 +177,7 @@ class ViewController: UIViewController {
         
         
 //        forCdcTest();
+        
 //        if (true) {
 //            forCdcTest();
 //            return;
@@ -197,7 +198,7 @@ class ViewController: UIViewController {
         
         
 //        let url = "https://orderplacedemo.firebaseapp.com/#/store/5680455227539456/mode/takeaway";
-//        let url = "http://dev.order.place/#/store/5680455227539456/mode/takeaway";
+        let url = "http://dev.order.place/#/store/5680455227539456/mode/takeaway";
 //        let url = "https://genkiuatp2.aigens.com/";
 //        let url = "https://storage.googleapis.com/aigensstoretest.appspot.com/70000/ssptnc.html"
         
@@ -206,7 +207,8 @@ class ViewController: UIViewController {
 //        let url = "https://www.baidu.com/";
 //        let url = "https://test.order.place/#/court-store-list/5175539845300224";
 //        let url = "https://aigens-sdk-demo.firebaseapp.com"
-        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+//        let url = "https://test.order.place/#/court-store-list/5175539845300224";
+//        let url = "http://192.168.50.72:8101/";
 //        let url = "https://scantest.aigens.com/scan?code=c3RvcmU9NTc1ODEzMDYyMTI1MTU4NCZtb2RlPXBpY2t1cCZwYWdlPWJ5b2Q=";
         
 //        let url = "http://192.168.0.253:8100"
@@ -278,7 +280,7 @@ class ViewController: UIViewController {
         
 //        let systemOpenUrl = "octopus://,https://itunes.apple.com,https://search.itunes.apple.com";
         let systemOpenUrl : [String] = ["octopus://","https://itunes.apple.com","https://search.itunes.apple.com"];
-        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":false,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "canDismiss": false,"alertStyle" : alertStyle] as [String : Any];
+        let options = ["features": "gps,scan,wechatpay,alipayhk,applepay","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"isDebug":true,"systemOpenUrl":systemOpenUrl,"showNavigationBar":true,"navigationbarStyle": navigationbarStyle,"clearCache":true,"disableScroll": false, "canDismiss": false,"alertStyle" : alertStyle] as [String : Any];
 //        "target" : "_system"
         // "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
         // merchant.com.aigens.pay
@@ -310,9 +312,9 @@ class ViewController: UIViewController {
     
     @IBAction func scanClicked(_ sender: Any) {
         
-        if (true) {
-            scanGenki();
-        }
+//        if (true) {
+//            scanGenki();
+//        }
 //        var member = [String: Any]()
 //        member["memberId"] = "200063"
 //        member["session"] = "7499c956f4b1b225b14a985543c7526f" //same as session

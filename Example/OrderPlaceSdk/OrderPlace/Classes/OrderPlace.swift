@@ -88,6 +88,18 @@ protocol OrderPlaceDelegate: AnyObject {
     @objc public static func openUrl(caller: UIViewController, url: String, options: [String: Any], services: Array<OrderPlaceService>,closeCB: ((Any?) -> Void)? = nil) {
 
         JJPrint("open url")
+        if let target = options["target"] as? String,let Url = URL(string: url){
+            let can = UIApplication.shared.canOpenURL(Url);
+            if can && target == "_system" {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(Url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(Url)
+                }
+                return;
+            }
+            
+        }
 
         let controller = makeViewController(vcId: "OrderViewControllerNav") as! UINavigationController;
 

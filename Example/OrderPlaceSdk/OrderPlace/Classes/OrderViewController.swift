@@ -653,11 +653,20 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                     leftbtn.contentHorizontalAlignment = .left;
                     leftbtn.contentVerticalAlignment = .center;
                     leftbtn.imageEdgeInsets = UIEdgeInsetsMake(0, -((image!.size.width) * 0.5 - 2), 0, 0);
+//                    leftbtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                     leftbtn.addTarget(self, action: #selector(exitClicked), for: .touchUpInside);
+                    
+//                    leftbtn.leadingAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>, constant: <#T##CGFloat#>)
+//                    leftbtn.widthAnchor.constraint(equalToConstant: 80).isActive = true
+//                    leftbtn.heightAnchor.constraint(equalToConstant: 80).isActive = true
+                    
                     let leftBarbtn = UIBarButtonItem(customView: leftbtn);
+                    
                     leftbtn.alpha = 1.0;
                     leftbtn.isHidden = false;
                     navigationItem.setLeftBarButton(leftBarbtn, animated: false)
+                    
+                    
                 }
 
             }

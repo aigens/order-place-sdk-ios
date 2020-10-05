@@ -61,6 +61,7 @@
 		52B71BFC220039EE0084C608 /* StripeAppleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B71BFB220039EE0084C608 /* StripeAppleService.swift */; };
 		52B71C00220041080084C608 /* StripeExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B71BFF220041080084C608 /* StripeExecutor.swift */; };
 		52C0B6882181B1BD007A4BE2 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275F9002179C53A007248AB /* OrderViewController.swift */; };
+		52D206AF248E3954007442E5 /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D206AE248E3954007442E5 /* FacebookService.swift */; };
 		52E028BB22CC9B6300AC2F1C /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028B822CC9B6200AC2F1C /* back@2x.png */; };
 		52E028BC22CC9B6300AC2F1C /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028B922CC9B6300AC2F1C /* back@3x.png */; };
 		52E028BD22CC9B6300AC2F1C /* back@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028BA22CC9B6300AC2F1C /* back@1x.png */; };
@@ -102,9 +103,9 @@
 		1F2C946932A321B168E6B681 /* Pods_OrderPlaceSdk_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrderPlaceSdk_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52147DC2221106AB008EAEAF /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		52147DC4221106B6008EAEAF /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		521ED9A1220185F300C14DE2 /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
 		5220ECE421F17A4B00026ED5 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		5220ECF321F1B23700026ED5 /* BridgePasskit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgePasskit.m; sourceTree = "<group>"; };
+		52241B0A247B982C00D10F33 /* OrderPlaceSdk_Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = OrderPlaceSdk_Example.entitlements; sourceTree = "<group>"; };
 		5229D5D22202F166008EBD29 /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Stripe.framework; sourceTree = "<group>"; };
 		52618F3521A261B7001B96E9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		52618F3721A26266001B96E9 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -172,6 +173,7 @@
 		52863E2D21F715E300090D24 /* CardIOExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardIOExecutor.swift; sourceTree = "<group>"; };
 		52B71BFB220039EE0084C608 /* StripeAppleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeAppleService.swift; sourceTree = "<group>"; };
 		52B71BFF220041080084C608 /* StripeExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StripeExecutor.swift; sourceTree = "<group>"; };
+		52D206AE248E3954007442E5 /* FacebookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		52E028B822CC9B6200AC2F1C /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		52E028B922CC9B6300AC2F1C /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		52E028BA22CC9B6300AC2F1C /* back@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@1x.png"; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				5275F90A2179C53A007248AB /* OrderPlaceService.swift */,
 				5261905221A46447001B96E9 /* WKScriptMsgHandler.swift */,
 				5220ECE421F17A4B00026ED5 /* DrawView.swift */,
+				52D206AE248E3954007442E5 /* FacebookService.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -433,7 +436,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				521ED9A1220185F300C14DE2 /* OrderPlaceSdk_Example.entitlements */,
+				52241B0A247B982C00D10F33 /* OrderPlaceSdk_Example.entitlements */,
 				5275F91A2179C54F007248AB /* OrderPlaceSdk_Bridging_Header.h */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for OrderPlaceSdk */,
@@ -597,7 +600,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 36RXHYW79N;
+						DevelopmentTeam = 6N6S8L78FJ;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -742,6 +745,7 @@
 				52863E1C21F7137000090D24 /* CardIOService.swift in Sources */,
 				5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
+				52D206AF248E3954007442E5 /* FacebookService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,10 +892,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36RXHYW79N;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -910,11 +914,12 @@
 					"$(PROJECT_DIR)/OrderPlaceSdk/CardIO/framework",
 				);
 				MODULE_NAME = ExampleApp;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ichiran.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -933,9 +938,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OrderPlaceSdk_Example.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Aigens Technology Limited (36RXHYW79N)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 36RXHYW79N;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 6N6S8L78FJ;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -958,9 +963,9 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yoshinoyahk.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ichiran.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "ichiran ad hoc";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OrderPlaceSdk_Bridging_Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
