@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 //        OrderPlace.application(application, didFinishLaunchingWithOptions: launchOptions)
-        WechatExecutor.application(application, didFinishLaunchingWithOptions: launchOptions)
+        WechatExecutor.application(application, universalLink: "https://help.wechat.com/sdksample/", didFinishLaunchingWithOptions: launchOptions);
 
         return true
     }
@@ -37,6 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        OrderPlace.application(application, continue: userActivity)
+        return true
+    }
 
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 protocol ScannerDelegate: AnyObject {
     func scannerApplicationOpenUrl(_ app: UIApplication, url: URL)
+    func scannerApplication(_ app: UIApplication, continue userActivity: NSUserActivity)
 }
 
 private let scannerManager = ScannerManager();
@@ -21,6 +22,13 @@ class ScannerManager: NSObject {
 }
 
 extension ScannerManager: OrderPlaceDelegate {
+    
+    func application(_ app: UIApplication, continue userActivity: NSUserActivity) {
+        if let sDelegate = scannerDelegate {
+            sDelegate.scannerApplication(app, continue: userActivity)
+        }
+    }
+    
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
         if let sDelegate = scannerDelegate {
             sDelegate.scannerApplicationOpenUrl(app, url: url)

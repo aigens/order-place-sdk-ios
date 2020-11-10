@@ -14,12 +14,13 @@ import UIKit
         super.init()
     }
 
-    @objc public static func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+    @objc public static func application(_ application: UIApplication, universalLink: String, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         if let dictArray = Bundle.main.object(forInfoDictionaryKey: "CFBundleURLTypes") as? [Dictionary<String, Any>] {
             for dicts in dictArray {
                 if let dict = dicts["CFBundleURLName"] as? String, dict == "weixin", let arrayCFBundleURLSchemes = dicts["CFBundleURLSchemes"] as? [String], let weixinURLSchemes = arrayCFBundleURLSchemes.first {
 
-                    WXApi.registerApp(weixinURLSchemes, enableMTA: true)
+//                    WXApi.registerApp(weixinURLSchemes, enableMTA: true)
+                    WXApi.registerApp(weixinURLSchemes, universalLink: universalLink)
                     //print("weixinURLSchemes:\(weixinURLSchemes)")
                     break;
                 }
@@ -38,6 +39,7 @@ import UIKit
     }
 }
 extension WechatExecutor: WeChatPayDelegate {
+
     public func wechatPayOrder(body: NSDictionary, callback: CallbackHandler?) {
         if !WXApi.isWXAppInstalled() {
             self.showAlert(message: "Please install WeChat first.")
@@ -84,11 +86,22 @@ extension WechatExecutor: WeChatPayDelegate {
     }
 
     public func wechatGetVersion(callback: CallbackHandler?) {
-        if let version = WXApi.getVersion() {
-            let dict = ["wechatSdkVersion": version]
-            debugPrint("wechatSdkVersion:\(version)")
-            callback?.success(response: dict)
-        }
+        let version = WXApi.getVersion()
+        let dict = ["wechatSdkVersion": version]
+        debugPrint("wechatSdkVersion:\(version)")
+        callback?.success(response: dict)
+    
+//        if let version = WXApi.getVersion() {
+//            let dict = ["wechatSdkVersion": version]
+//            debugPrint("wechatSdkVersion:\(version)")
+//            callback?.success(response: dict)
+//        }
+    }
+    
+    public func isInstalled(callback: CallbackHandler?) {
+        let install = WXApi.isWXAppInstalled()
+        let dict = ["isWXAppInstalled": install];
+        callback?.success(response: dict)
     }
 
     public func wechatApplicationOpenUrl(_ app: UIApplication, url: URL) {
@@ -98,6 +111,12 @@ extension WechatExecutor: WeChatPayDelegate {
 
     }
 
+    
+    public func wechatApplication(_ app: UIApplication, continue userActivity: NSUserActivity) {
+        let wxapiManager = WXApiManager.sharedManager
+        wxapiManager.payResultCallback = payResultCallback
+        WXApi.handleOpenUniversalLink(userActivity, delegate: wxapiManager)
+    }
 
 }
 

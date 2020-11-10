@@ -11,7 +11,9 @@ import UIKit
 @objc public protocol WeChatPayDelegate: AnyObject {
     func wechatPayOrder(body: NSDictionary, callback: CallbackHandler?)
     func wechatGetVersion(callback: CallbackHandler?)
+    func isInstalled(callback: CallbackHandler?)
     func wechatApplicationOpenUrl(_ app: UIApplication, url: URL)
+    func wechatApplication(_ app: UIApplication, continue userActivity: NSUserActivity)
 }
 
 class WechatPayService: OrderPlaceService {
@@ -51,8 +53,17 @@ class WechatPayService: OrderPlaceService {
         case "registerApp":
             registerApp(body: body, callback: callback)
             break;
+        case "isWXAppInstalled":
+            isWXAppInstalled(callback)
+            break;
         default:
             break;
+        }
+    }
+    
+    private func isWXAppInstalled(_ callback: CallbackHandler?) {
+        if let del = weChatPayDelegate {
+            del.isInstalled(callback: callback)
         }
     }
     private func registerApp(body: NSDictionary, callback: CallbackHandler?) {

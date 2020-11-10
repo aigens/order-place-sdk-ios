@@ -73,31 +73,53 @@ class ViewController: UIViewController {
     
     private func forCdcTest() {
 //        let url = "http://192.168.50.72:8103/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
-        let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
+//        let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
+        let url = "http://192.168.50.72:8100/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
         
 //                let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
         //        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
         
         var member = [String: Any]()
+               member["memberId"] = "123456" //value TBD
+               member["session"] = "ABCDEF" //value TBD
+               member["source"] = "cdc"
+               member["language"] = "zh" //en,zh,zh-cn
+               member["octopusNo"] = "99993212" //(with actual data)
+               member["name"] = "Optional Name" //Optional (with actual data)
+               member["gender"] = "M" //Optional (with actual data)
+               member["age"] = 25 //Optional (with actual data)
+               member["phone"] = "87654321" //Optional (with actual data)
+               member["email"] = "membersemail@email.com" //Optional (with actual data)
+               let systemOpenUrl: [String] = ["weixinULAPI://", "weixin://"];
+                 
+               let options = ["features": "gps,scan,wechatpayhk,alipayhk","alipayScheme": "alipaySchemes123","appleMerchantIdentifier": "merchant.aigens.test","member": member, "isDebug":false, "systemOpenUrl": systemOpenUrl] as [String : Any];
+               
+               //OrderPlace.openUrl(caller: self, url: url, features:"gps,scan", services: services);
+               OrderPlace.openUrl(caller: self, url: url, options:options);
+               
         
-        member["memberId"] = "GUEST"
-        member["session"] = "ABCDEF" //same as session
-        member["source"] = "cdc"
-        member["language"] = "zh" //en,zh,zh-cn
-        member["name"] = "Optional Name" //Optional (with actual data)
-        member["gender"] = "M" //Optional (with actual data)
-        member["age"] = 25 //Optional (with actual data)
-        member["phone"] = "65445421" //Optional (with actual data)
-        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
-        let systemOpenUrl : [String] = ["mailto:"];
-        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": true,"isDebug":true,"clearCache":true] as [String : Any];
         
-        // merchant.aigens.test
-        // merchant.com.aigens.pay
-        /// "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
-        OrderPlace.openUrl(caller: self, url: url, options: options) { (result) in
-            print("result:\(result)")
-        }
+        
+//        var member = [String: Any]()
+//
+//        member["memberId"] = "GUEST"
+//        member["session"] = "ABCDEF" //same as session
+//        member["source"] = "cdc"
+//        member["language"] = "zh" //en,zh,zh-cn
+//        member["name"] = "Optional Name" //Optional (with actual data)
+//        member["gender"] = "M" //Optional (with actual data)
+//        member["age"] = 25 //Optional (with actual data)
+//        member["phone"] = "65445421" //Optional (with actual data)
+//        member["email"] = "peter.liu@gmail.com" //Optional (with actual data)
+//        let systemOpenUrl : [String] = ["mailto:"];
+//        let options = ["features": "gps,scan,alipayhk,applepay","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "merchant.com.aigens.pay","member": member,"showNavigationBar": true,"isDebug":true,"clearCache":true] as [String : Any];
+//
+//        // merchant.aigens.test
+//        // merchant.com.aigens.pay
+//        /// "stripePublishableKey": "pk_test_cxrXfdfcVnS9JOPSZ3e3FZ1H"
+//        OrderPlace.openUrl(caller: self, url: url, options: options) { (result) in
+//            print("result:\(result)")
+//        }
         //        OrderPlace.openUrl(caller: self, url: url, options:options,);
     }
     
@@ -165,9 +187,7 @@ class ViewController: UIViewController {
             }
             //        OrderPlace.openUrl(caller: self, url: url, options:options,);
         }
-    
-    
-    
+
     @IBAction func openClicked(_ sender: Any) {
         
 //        testCardIOScan();
@@ -178,10 +198,10 @@ class ViewController: UIViewController {
         
 //        forCdcTest();
         
-//        if (true) {
-//            forCdcTest();
-//            return;
-//        }
+        if (true) {
+            forCdcTest();
+            return;
+        }
 //        test();
 //        genkiTest();
 

@@ -827,6 +827,9 @@ extension OrderViewController: ScannerDelegate {
     public func scannerApplicationOpenUrl(_ app: UIApplication, url: URL) {
         applicationOpenUrl(app, url: url)
     }
+    public func scannerApplication(_ app: UIApplication, continue userActivity: NSUserActivity) {
+        application(app, continue: userActivity)
+    }
 }
 
 extension OrderViewController {
@@ -838,6 +841,16 @@ extension OrderViewController {
 }
 
 extension OrderViewController: OrderPlaceDelegate {
+    func application(_ app: UIApplication, continue userActivity: NSUserActivity) {
+        if let wechatPayService = self.serciceMap[WechatPayService.SERVICE_NAME] as? WechatPayService, self.options != nil, let features = self.options[FEATURES] as? String, features.contains(WECHATPAY) {
+
+            if let del = wechatPayService.weChatPayDelegate {
+                del.wechatApplication(app, continue: userActivity)
+            }
+
+        }
+    }
+    
     func applicationOpenUrl(_ app: UIApplication, url: URL) {
 
         // for alipay  host

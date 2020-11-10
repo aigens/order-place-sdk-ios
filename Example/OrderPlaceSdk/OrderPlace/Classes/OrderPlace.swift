@@ -15,6 +15,7 @@ protocol OrderPlaceDelegate: AnyObject {
     func applicationOpenUrl(_ app: UIApplication, url: URL)
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?)
     //@objc optional func otherFunction() //optional
+    func application(_ app: UIApplication, continue userActivity: NSUserActivity)
 }
 
 
@@ -188,6 +189,13 @@ protocol OrderPlaceDelegate: AnyObject {
             del.applicationOpenUrl(app, url: url)
         }
     }
+    
+    @objc public static func application(_ app: UIApplication, continue userActivity: NSUserActivity) {
+        if let del = OPDelegate {
+            del.application(app, continue: userActivity)
+        }
+    }
+    
     
     @objc public static func getImagePathWithName(name:String,type:String) -> String? {
         let scan = Int(UIScreen.main.scale);
