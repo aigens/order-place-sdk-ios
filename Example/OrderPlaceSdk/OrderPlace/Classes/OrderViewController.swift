@@ -29,6 +29,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     private let ISBOUNCES = "isBounces";
     private let SYSTEMBROWSERPROTOCOL = "systemOpenUrl";
     private let NAVIGATIONBAR_STYLE = "navigationbarStyle";
+    private let VIEW_STYLE = "viewStyle";
     private let CLEAR_CACHE = "clearCache";
     private let CAN_DISMISS = "canDismiss";
 
@@ -65,6 +66,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
     var extraServices: Array<OrderPlaceService>!;
     var systemBrowserProtocols: [String] = [];
     var navigationbarStyle = [String: Any]();
+    var viewStyle = [String: Any]();
     let originStatusBarStyle = UIApplication.shared.statusBarStyle;
 //    var originStaBarBackground: UIColor? = nil;
 
@@ -229,6 +231,7 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(enterBackground), name: Notification.Name.UIApplicationDidEnterBackground, object: nil);
 
+        setViewStyle();
     }
     
     @objc private func becomeActive() {
@@ -589,6 +592,31 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         return image;
     }
 
+    private func setViewStyle() {
+        if self.options != nil, let viewStyle = self.options[VIEW_STYLE] as? [String: Any] {
+            self.viewStyle = viewStyle;
+        }
+        
+        if let bg = self.viewStyle["background"] as? String, let bgColor = UIColor.getHex(hex: bg) {
+            webView.scrollView.backgroundColor = bgColor
+            let bgc = "document.body.style.backgroundColor = '" + bg + "'";
+            webView.evaluateJavaScript(bgc, completionHandler: nil)
+        }
+        
+        if let large = self.viewStyle["indicatorLarge"] as? Bool {
+            if large {
+                if #available(iOS 13.0, *) {
+                    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorView.Style.large
+                } else {
+                    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorView.Style.whiteLarge
+                }
+            }
+        }
+
+        if let color = self.viewStyle["indicatorColor"] as? String, let indicatorColor = UIColor.getHex(hex: color) {
+            activityIndicator.color = indicatorColor
+        }
+    }
     private func setNavigationBarStyle() {
 
         var titleFontStyle = [String: Any]();
@@ -602,6 +630,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         if self.options != nil, let navigationbarStyle = self.options[NAVIGATIONBAR_STYLE] as? [String: Any] {
             self.navigationbarStyle = navigationbarStyle;
         }
+        
+        
 
         if self.options != nil, let tmpTitleFontStyle = self.navigationbarStyle["titleFontStyle"] as? [String: Any] {
             titleFontStyle = tmpTitleFontStyle;

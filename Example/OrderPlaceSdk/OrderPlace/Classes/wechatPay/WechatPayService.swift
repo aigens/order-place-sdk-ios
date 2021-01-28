@@ -34,7 +34,7 @@ class WechatPayService: OrderPlaceService {
         if let features = self.options?["features"] as? String {
             let fs = features.split(separator: ",");
             if (fs.contains("wechatpayhk")) {
-                AlipayService.SERVICE_NAME = "WeChatPayHKService";
+                WechatPayService.SERVICE_NAME = "WeChatPayHKService";
             }
         }
         
