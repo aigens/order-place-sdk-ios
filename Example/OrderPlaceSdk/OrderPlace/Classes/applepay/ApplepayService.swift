@@ -15,9 +15,8 @@ class ApplepayService: OrderPlaceService {
 
     var merchantIdentifier: String? = nil
 
-    private var supportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard, PKPaymentNetwork.amex]
-    private let merchantCapabilities = PKMerchantCapability.RawValue(UInt8(PKMerchantCapability.capability3DS.rawValue) | UInt8(PKMerchantCapability.capabilityEMV.rawValue))
-
+    private var supportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard]
+    private var merchantCapabilities = PKMerchantCapability.RawValue(UInt8(PKMerchantCapability.capability3DS.rawValue))
     typealias completionBlock = (PKPaymentAuthorizationStatus) -> ()
     private var completion: completionBlock?
     private var payResultCallback: CallbackHandler? = nil
@@ -30,6 +29,18 @@ class ApplepayService: OrderPlaceService {
         if let merchantIdentifier = options["appleMerchantIdentifier"] as? String {
             self.merchantIdentifier = merchantIdentifier
         }
+        
+        if let cards = options["appleCardType"] as? [String] {
+            if cards.contains("amex") {
+                supportedPaymentNetworks.append(PKPaymentNetwork.amex)
+            }
+            if cards.contains("chinaUnion") {
+                if #available(iOS 9.2, *) {
+                    supportedPaymentNetworks.append(PKPaymentNetwork.chinaUnionPay)
+                    merchantCapabilities = PKMerchantCapability.RawValue(UInt8(PKMerchantCapability.capability3DS.rawValue) | UInt8(PKMerchantCapability.capabilityEMV.rawValue))
+                }
+            }
+        }
 
     }
 
@@ -38,9 +49,9 @@ class ApplepayService: OrderPlaceService {
     }
 
     override func initialize() {
-        if #available(iOS 9.2, *) {
-            supportedPaymentNetworks.append(PKPaymentNetwork.chinaUnionPay)
-        }
+//        if #available(iOS 9.2, *) {
+//            supportedPaymentNetworks.append(PKPaymentNetwork.chinaUnionPay)
+//        }
     }
 
     override func handleMessage(method: String, body: NSDictionary, callback: CallbackHandler?) {

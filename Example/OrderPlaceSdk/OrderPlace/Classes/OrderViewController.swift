@@ -599,6 +599,8 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
         
         if let bg = self.viewStyle["background"] as? String, let bgColor = UIColor.getHex(hex: bg) {
             webView.scrollView.backgroundColor = bgColor
+            view.backgroundColor = bgColor
+            webView.backgroundColor = bgColor
             let bgc = "document.body.style.backgroundColor = '" + bg + "'";
             webView.evaluateJavaScript(bgc, completionHandler: nil)
         }
