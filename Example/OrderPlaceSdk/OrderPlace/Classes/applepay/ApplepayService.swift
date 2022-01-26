@@ -474,6 +474,9 @@ extension ApplepayService: PKPaymentAuthorizationViewControllerDelegate {
             case PKPaymentMethodType.store:
                 typeCard = "store"
                 break;
+            default:
+                typeCard = "unknown"
+                break;
             }
         } else {
             typeCard = "error"

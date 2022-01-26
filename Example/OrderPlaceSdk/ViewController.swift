@@ -72,6 +72,33 @@ class ViewController: UIViewController {
     }
     
     private func forCdcTest() {
+        
+        if (true) {
+            let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
+            
+            
+            //        let url = "http://localhost:8100/#/store/102945/mode/takeaway";
+            
+            //                let url = "http://192.168.0.253:8100/#/court-store-list/5175539845300224";
+            var member = [String: Any]()
+            member["memberId"] = "MEM-39639-6S7S3J" //value TBD
+            member["session"] = "MEM-39639-6S7S3J" //value TBD
+            member["source"] = "cdc"
+            member["language"] = "zh" //en,zh,zh-cn
+            member["octopusNo"] = "99993212" //(with actual data)
+            member["name"] = "Optional Name" //Optional (with actual data)
+            member["gender"] = "M" //Optional (with actual data)
+            member["age"] = 25 //Optional (with actual data)
+            member["phone"] = "87654321" //Optional (with actual data)
+            member["email"] = "membersemail@email.com" //Optional (with actual data)
+            //                       let systemOpenUrl: [String] = ["weixinULAPI://", "weixin://"];
+            
+            let options = ["features": "gps,scan,applepay,alipayhk","alipayScheme": "cdcAlipayScheme","appleMerchantIdentifier": "your apple Merchant Identifier","member": member, "disableScroll":true] as [String : Any];
+            
+            OrderPlace.openUrl(caller: self, url: url, options:options);
+            
+            return
+        }
 //        let url = "http://192.168.50.72:8103/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";
 //        let url = "https://cdc-dev.order.place/#/StoreList/latitude/22.3993429/longitude/114.19149120000002"
         let url = "http://192.168.50.72:8100/#/StoreList/latitude/22.3993429/longitude/114.19149120000002";

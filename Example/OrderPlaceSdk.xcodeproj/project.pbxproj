@@ -65,6 +65,7 @@
 		52E028BB22CC9B6300AC2F1C /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028B822CC9B6200AC2F1C /* back@2x.png */; };
 		52E028BC22CC9B6300AC2F1C /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028B922CC9B6300AC2F1C /* back@3x.png */; };
 		52E028BD22CC9B6300AC2F1C /* back@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 52E028BA22CC9B6300AC2F1C /* back@1x.png */; };
+		52ECD314264CFA6A00FEFF35 /* AigensPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52ECD313264CFA6A00FEFF35 /* AigensPresentationController.swift */; };
 		52F8410521ABD75600579EE4 /* ApplepayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F8410421ABD75600579EE4 /* ApplepayService.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -177,6 +178,7 @@
 		52E028B822CC9B6200AC2F1C /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		52E028B922CC9B6300AC2F1C /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
 		52E028BA22CC9B6300AC2F1C /* back@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@1x.png"; sourceTree = "<group>"; };
+		52ECD313264CFA6A00FEFF35 /* AigensPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AigensPresentationController.swift; sourceTree = "<group>"; };
 		52F8410421ABD75600579EE4 /* ApplepayService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplepayService.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* OrderPlaceSdk_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrderPlaceSdk_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				5275F9082179C53A007248AB /* CallbackHandler.swift */,
 				5275F8FF2179C53A007248AB /* OrderPlace.swift */,
 				5275F9002179C53A007248AB /* OrderViewController.swift */,
+				52ECD313264CFA6A00FEFF35 /* AigensPresentationController.swift */,
 				5275F9072179C53A007248AB /* GpsService.swift */,
 				52795728236A9D580033C603 /* JSInterfaceService.swift */,
 				5275F9012179C53A007248AB /* ConfigService.swift */,
@@ -744,6 +747,7 @@
 				526190FD21A65DF0001B96E9 /* AlipayExecutor.swift in Sources */,
 				52863E1C21F7137000090D24 /* CardIOService.swift in Sources */,
 				5220ECF421F1B23700026ED5 /* BridgePasskit.m in Sources */,
+				52ECD314264CFA6A00FEFF35 /* AigensPresentationController.swift in Sources */,
 				5275F9102179C53B007248AB /* ConfigService.swift in Sources */,
 				52D206AF248E3954007442E5 /* FacebookService.swift in Sources */,
 			);

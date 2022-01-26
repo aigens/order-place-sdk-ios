@@ -741,15 +741,22 @@ public class OrderViewController: UIViewController, WKUIDelegate, WKNavigationDe
                 let colourView = UIView(frame: CGRect(x: 0.0, y: -statusH, width: w, height: barH + statusH));
                 colourView.isOpaque = false;
                 colourView.alpha = 1.0;
-                colourView.backgroundColor = barColour;
+                colourView.backgroundColor = barColour;                
                 if #available(iOS 13.0, *) {
-                //                self.navigationController?.navigationBar.standardAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:  UIColor.rgbColor(rgbValue: 0x000000), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34)]
-                    self.navigationController?.navigationBar.standardAppearance.backgroundColor = barColour
-
+                    if #available(iOS 15.0, *) {
+                        let appearance = UINavigationBarAppearance()
+                        appearance.configureWithOpaqueBackground()
+                        appearance.backgroundColor = barColour
+                        self.navigationController?.navigationBar.standardAppearance = appearance
+                        self.navigationController?.navigationBar.scrollEdgeAppearance = self.navigationController?.navigationBar.standardAppearance
+                        
+                        //                        self.navigationController?.navigationBar.backgroundColor = barColour
+                    } else {
+                        self.navigationController?.navigationBar.standardAppearance.backgroundColor = barColour
+                    }
                 }else {
-                   self.navigationController?.navigationBar.layer.insertSublayer(colourView.layer, at: 1);
+                    self.navigationController?.navigationBar.layer.insertSublayer(colourView.layer, at: 1);
                 }
-                
             }
 
         }
